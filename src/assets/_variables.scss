@@ -1,0 +1,28 @@
+// Color definitions
+$white: #ffffff;
+$cherry-red: #ec1115;
+$dark-red: #a60c0e;
+$orange: #f47073;
+$athens-gray: #f7f7f7;
+$darker-gray: #e5e5e5;
+$medium-gray: #aeaeb3;
+$jumbo: #85868d;
+$tuna: #343541;
+$charade: #292a33;
+$light-blue: rgba(47, 128, 237, 0.1);
+$dark-blue: #2f80ed;
+
+// UI colors
+$primary-bg: $cherry-red;
+$primary-bg-hover: $dark-red;
+$primary-brd-focus: $orange;
+$input-bg: $athens-gray;
+$input-bg-hover: $darker-gray;
+$input-bg-focus: $light-blue;
+$input-brd-focus: $dark-blue;
+$input-txt: $tuna;
+$input-pl-txt: $jumbo;
+$checkbox-brd: $medium-gray;
+
+// shadows
+$form-box-shadow: 0px 4px 22px rgba(52, 53, 65, 0.15);
