@@ -3,15 +3,16 @@ import TheHeader from "@/components/TheHeader.vue";
 </script>
 
 <template>
-  <div>
+  <div class="app">
     <TheHeader />
-  <h1>Hello</h1>
+    <main>
+      <RouterView />
+    </main>
   </div>
 </template>
 
 <style scoped lang="scss">
-h1 {
-  font-family: "Eczar";
-  color: $tuna;
+.app {
+  margin: 0 48px;
 }
 </style>

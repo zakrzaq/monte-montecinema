@@ -49,6 +49,7 @@ const buttonClick = (event: Event) => {
   @include jcc-aic;
   text-decoration: none;
   outline: none;
+  min-width: 115px;
 
   &--sml {
     padding: 5px 16px;
