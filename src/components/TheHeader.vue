@@ -6,7 +6,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
 <template>
   <header>
     <LogoImage />
-    <BaseButton button-size="reg" button-type="tertiary-rev"
+    <BaseButton button-size="reg" button-type="tertiary"
       >My Button
     </BaseButton>
   </header>

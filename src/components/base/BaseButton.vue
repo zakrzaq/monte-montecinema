@@ -77,32 +77,32 @@ const buttonClick = (event: Event) => {
 
   &--primary {
     color: $snow-white;
-    border: 2px solid $cherry-red;
-    background-color: $cherry-red;
+    border: 2px solid $primary-bg;
+    background-color: $primary-bg;
     &:hover {
-      background-color: $totem-pole;
-      border-color: $totem-pole;
+      background-color: $primary-bg-hover;
+      border-color: $primary-bg-hover;
     }
     &:focus {
-      background-color: $totem-pole;
-      border-color: $bittersweet;
+      background-color: $primary-bg-hover;
+      border-color: $primary-brd-focus;
     }
   }
 
   &--primary-rev {
-    color: $cherry-red;
-    border: 2px solid $cherry-red;
+    color: $primary-bg;
+    border: 2px solid $primary-bg;
     background-color: $snow-white;
     &:hover {
       opacity: 50%;
     }
     &:focus {
-      border-color: $bittersweet;
+      border-color: $primary-brd-focus;
     }
   }
 
   &--secondary {
-    color: $cherry-red;
+    color: $primary-bg;
     border: 2px solid $snow-white;
     background-color: $snow-white;
     &:hover {
@@ -116,26 +116,25 @@ const buttonClick = (event: Event) => {
 
   &--tertiary {
     color: $snow-white;
-    border: 2px solid $tuna;
-    background-color: $tuna;
+    border: 2px solid $tertiary-bg;
+    background-color: $tertiary-bg;
     &:hover {
-      background-color: lighten($tuna, 10%);
-      border-color: lighten($tuna, 10%);
+      opacity: 75%;
     }
     &:focus {
-      border-color: lighten($tuna, 50%);
+      border-color: $tertiary-brd-focus;
     }
   }
 
   &--tertiary-rev {
-    color: $tuna;
-    border: 2px solid $tuna;
+    color: $tertiary-bg;
+    border: 2px solid $tertiary-bg;
     background-color: $snow-white;
     &:hover {
       background-color: darken($snow-white, 10%);
     }
     &:focus {
-      border-color: lighten($tuna, 50%);
+      border-color: $tertiary-brd-focus;
     }
   }
 

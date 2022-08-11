@@ -1,8 +1,6 @@
 // Color definitions
 $snow-white: #ffffff;
 $cherry-red: #ec1115;
-$dark-red: #a60c0e;
-$orange: #f47073;
 $athens-gray: #f7f7f7;
 $darker-gray: #e5e5e5;
 $medium-gray: #aeaeb3;
@@ -12,12 +10,15 @@ $charade: #292a33;
 $light-blue: rgba(47, 128, 237, 0.1);
 $dark-blue: #2f80ed;
 $totem-pole: #a60c0e;
-$bittersweet: #f47073;
+$bitter-sweet: #f47073;
 
 // UI colors
 $primary-bg: $cherry-red;
-$primary-bg-hover: $dark-red;
-$primary-brd-focus: $orange;
+$primary-bg-hover: $totem-pole;
+$primary-brd-focus: $bitter-sweet;
+$tertiary-bg: $tuna;
+$tertiary-bg-hover: $medium-gray;
+$tertiary-brd-focus: lighten($tuna, 50%);
 $input-bg: $athens-gray;
 $input-bg-hover: $darker-gray;
 $input-bg-focus: $light-blue;
