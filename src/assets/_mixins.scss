@@ -1,12 +1,12 @@
 // FLEX
 
-@mixin jcc-aic {
+@mixin flex-vcenter-hcenter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@mixin jcc-aic-h {
+@mixin flex-vcenter-hcenter-column {
   display: flex;
   justify-content: center;
   align-items: center;

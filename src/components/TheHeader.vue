@@ -13,20 +13,22 @@ import HeaderLinks from "@/components/header/HeaderLinks.vue";
     <HeaderLinks />
     <HeaderActions />
     <RouterLink to="#">
-    <Hamburger class="hamburger" />
+      <Hamburger class="hamburger" />
     </RouterLink>
   </header>
 </template>
 
 <style scoped lang="scss">
 .header {
-  @include jcc-aic;
+  @include flex-vcenter-hcenter;
   justify-content: space-between;
   height: 112px;
+
   & .hamburger {
     @include lg {
       display: none;
     }
+
     @include md {
       display: none;
     }

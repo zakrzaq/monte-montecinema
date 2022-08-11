@@ -4,19 +4,16 @@ import BaseButton from "@/components/base/BaseButton.vue";
 
 <template>
   <div class="actions">
-    <RouterLink to="#">
-      <BaseButton button-type="secondary">Register</BaseButton>
-    </RouterLink>
-    <RouterLink to="#">
-      <BaseButton>Login</BaseButton>
-    </RouterLink>
+    <BaseButton button-type="secondary" to="#">Register</BaseButton>
+    <BaseButton to="$">Login</BaseButton>
   </div>
 </template>
 
 <style scoped lang="scss">
 .actions {
-  @include jcc-aic;
+  @include flex-vcenter-hcenter;
   gap: 24px;
+
   @include sm {
     display: none;
   }
