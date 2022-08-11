@@ -1,60 +1,52 @@
+<script setup lang="ts">
+import { computed, defineProps } from "vue";
+
+const props = defineProps({
+  buttonType: {
+    type: String,
+    default: "primary",
+  },
+  buttonSize: {
+    type: String,
+    default: "reg",
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+});
+const emit = defineEmits(["click"]);
+
+const buttonClasses = computed(() => {
+  return [
+    "button",
+    { "button--primary": props.buttonType === "primary" },
+    { "button--primary-rev": props.buttonType === "primary-rev" },
+    { "button--secondary": props.buttonType === "secondary" },
+    { "button--tertiary": props.buttonType === "tertiary" },
+    { "button--tertiary-rev": props.buttonType === "tertiary-rev" },
+    { "button--sml": props.buttonSize === "sml" },
+    { "button--reg": props.buttonSize === "reg" },
+    { "button--med": props.buttonSize === "med" },
+    { "button--lrg": props.buttonSize === "lrg" },
+  ];
+});
+
+const buttonClick = (event: Event) => {
+  emit("click", event);
+};
+</script>
+
 <template>
-  <button :disabled="disabled" :class="buttonClasses" @click="click">
+  <button :disabled="disabled" :class="buttonClasses" @click="buttonClick">
     <slot />
   </button>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "MainButton",
-  props: {
-    buttonType: {
-      type: String,
-      default: "primary",
-    },
-    buttonSize: {
-      type: String,
-      default: "reg",
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  computed: {
-    buttonClasses() {
-      return [
-        "button",
-        { "button--primary": this.buttonType === "primary" },
-        { "button--primary-rev": this.buttonType === "primary-rev" },
-        { "button--secondary": this.buttonType === "secondary" },
-        { "button--tertiary": this.buttonType === "tertiary" },
-        { "button--tertiary-rev": this.buttonType === "tertiary-rev" },
-        { "button--sml": this.buttonSize === "sml" },
-        { "button--reg": this.buttonSize === "reg" },
-        { "button--med": this.buttonSize === "med" },
-        { "button--lrg": this.buttonSize === "lrg" },
-      ];
-    },
-  },
-  methods: {
-    click(event: Event) {
-      this.$emit("click", event);
-    },
-  },
-});
-</script>
-
 <style lang="scss" scoped>
 .button {
-  font-family: "Roboto Mono", monospace;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  @include roboto-mono();
+  @include jcc-aic;
   text-decoration: none;
   outline: none;
 
@@ -89,11 +81,11 @@ export default defineComponent({
     background-color: $cherry-red;
     &:hover {
       background-color: $totem-pole;
-      border: 2px solid $totem-pole;
+      border-color: $totem-pole;
     }
     &:focus {
       background-color: $totem-pole;
-      border: 2px solid $bittersweet;
+      border-color: $bittersweet;
     }
   }
 
@@ -105,7 +97,7 @@ export default defineComponent({
       opacity: 50%;
     }
     &:focus {
-      border: 2px solid $bittersweet;
+      border-color: $bittersweet;
     }
   }
 
@@ -118,7 +110,7 @@ export default defineComponent({
     }
     &:focus {
       background-color: $snow-white;
-      border: 2px solid $bittersweet;
+      border-color: $primary-brd-focus;
     }
   }
 
@@ -150,7 +142,7 @@ export default defineComponent({
   &:disabled {
     background-color: $jumbo;
     cursor: not-allowed;
-    border: 1;
+    border: 2px solid $jumbo;
     &:hover {
       opacity: 90%;
     }

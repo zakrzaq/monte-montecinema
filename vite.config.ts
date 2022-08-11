@@ -2,7 +2,7 @@ import { fileURLToPath, URL } from "node:url";
 
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import svgLoader from 'vite-svg-loader'
+import svgLoader from "vite-svg-loader";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,11 +16,11 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-	@import "src/assets/_typography.scss";
-	@import "src/assets/_mixins.scss";
-	@import "src/assets/_variables.scss";
-	@import "src/assets/_responsive.scss";
-      `,
+	  @import "src/assets/_typography.scss";
+	  @import "src/assets/_mixins.scss";
+	  @import "src/assets/_variables.scss";
+	  @import "src/assets/_responsive.scss";
+	`,
       },
     },
   },
