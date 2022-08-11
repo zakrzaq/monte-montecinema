@@ -32,6 +32,12 @@ const navbarItemClass = (link: Link) => {
 .navbar {
   @include jcc-aic;
   height: 100%;
+  @include md {
+    display: none;
+  }
+  @include sm {
+    display: none;
+  }
 
   &__item {
     width: 140px;

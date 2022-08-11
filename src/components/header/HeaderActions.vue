@@ -17,6 +17,9 @@ import BaseButton from "@/components/base/BaseButton.vue";
 .actions {
   @include jcc-aic;
   gap: 24px;
+  @include sm {
+    display: none;
+  }
 
   .button {
     height: 48px;
