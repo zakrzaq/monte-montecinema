@@ -1,12 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TheHeader from "@/components/TheHeader.vue";
+</script>
 
 <template>
-  <h1>Hello</h1>
+  <div class="app">
+    <TheHeader />
+    <main>
+      <RouterView />
+    </main>
+  </div>
 </template>
 
 <style scoped lang="scss">
-h1 {
-  font-family: "Eczar";
-  color: $tuna;
+.app {
+  margin: 0 48px;
 }
 </style>
