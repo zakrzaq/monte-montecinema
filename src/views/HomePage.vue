@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import HeroSection from "@/components/home/HeroSection.vue";
+</script>
+
 <template>
-  <h2>Home</h2>
+  <HeroSection />
 </template>
+
+<style scoped lang="scss"></style>

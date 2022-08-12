@@ -32,3 +32,19 @@ li {
   padding: 0;
   margin: 0;
 }
+
+// UTILITY CLASSES
+
+.heading-1 {
+  @include reset-margin-padding;
+  @include eczar(normal, 600);
+  font-size: 80px;
+  line-height: 102%;
+}
+
+.paragraph {
+  @include reset-margin-padding;
+  @include roboto-mono();
+  font-size: 22px;
+  line-height: 170%;
+}

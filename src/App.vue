@@ -14,5 +14,8 @@ import TheHeader from "@/components/TheHeader.vue";
 <style scoped lang="scss">
 .app {
   margin: 0 48px;
+  @include sm {
+    margin: 0;
+  }
 }
 </style>

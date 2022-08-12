@@ -38,10 +38,8 @@ const buttonClasses = computed(() => {
     </button>
   </template>
   <template v-else>
-    <RouterLink :to="props.to">
-      <span :class="buttonClasses" @click="$emit('click', $event)">
-        <slot />
-      </span>
+    <RouterLink :to="props.to" :class="buttonClasses">
+      <slot />
     </RouterLink>
   </template>
 </template>

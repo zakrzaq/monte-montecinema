@@ -5,7 +5,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
 <template>
   <div class="actions">
     <BaseButton button-type="secondary" to="#">Register</BaseButton>
-    <BaseButton to="$">Login</BaseButton>
+    <BaseButton to="#">Login</BaseButton>
   </div>
 </template>
 
