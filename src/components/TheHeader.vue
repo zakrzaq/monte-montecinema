@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import LogoImage from "@/assets/images/logo.svg?component";
-import Hamburger from "@/assets/icons/hamburger.svg?component";
 import HeaderActions from "@/components/header/HeaderActions.vue";
 import HeaderLinks from "@/components/header/HeaderLinks.vue";
 </script>
@@ -12,9 +11,6 @@ import HeaderLinks from "@/components/header/HeaderLinks.vue";
     </RouterLink>
     <HeaderLinks />
     <HeaderActions />
-    <RouterLink to="#">
-      <Hamburger class="hamburger" />
-    </RouterLink>
   </header>
 </template>
 
