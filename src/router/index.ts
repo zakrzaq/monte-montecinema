@@ -6,8 +6,19 @@ const router = createRouter({
   routes: [
     {
       path: "/",
+      name: "HomePage",
       component: HomePage,
     },
+    {
+      path: "/movies",
+      name: "MoviesPage",
+      component: () => import("@/views/MoviesPage.vue"),
+    },
+      {
+        path: '/screenings',
+        name: 'ScreeingsPage',
+        component: () => import('@/views/ScreeningsPage.vue')
+      }
   ],
 });
 

@@ -6,8 +6,8 @@ interface Link {
 }
 
 const links: Link[] = [
-  { id: 1, title: "Movies", url: "#" },
-  { id: 2, title: "Screenings", url: "#" },
+  { id: 1, title: "Movies", url: "/movies" },
+  { id: 2, title: "Screenings", url: "/screenings" },
   { id: 3, title: "Contact Us", url: "#" },
 ];
 
@@ -23,7 +23,7 @@ const navbarItemClass = (link: Link) => {
 <template>
   <ul class="navbar">
     <li v-for="link in links" :key="link.id" :class="navbarItemClass(link)">
-      <RouterLink to="link.url">{{ link.title }}</RouterLink>
+      <RouterLink :to="link.url">{{ link.title }}</RouterLink>
     </li>
   </ul>
 </template>

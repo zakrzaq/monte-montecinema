@@ -10,3 +10,5 @@ export interface Movie {
   release_date: string;
   description: string;
 }
+
+export interface MovieList extends Array<Movie>
