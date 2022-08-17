@@ -56,3 +56,18 @@ li {
   font-size: 22px;
   line-height: 170%;
 }
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}

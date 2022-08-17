@@ -48,6 +48,7 @@ const buttonClasses = computed(() => {
 .button {
   @include roboto-mono();
   @include flex-vcenter-hcenter;
+  @include jcc-aic;
   text-decoration: none;
   outline: none;
   min-width: 115px;
@@ -104,7 +105,6 @@ const buttonClasses = computed(() => {
     &:hover {
       opacity: 50%;
     }
-
     &:focus {
       border-color: $primary-brd-focus;
     }
@@ -118,7 +118,6 @@ const buttonClasses = computed(() => {
     &:hover {
       background-color: darken($snow-white, 10%);
     }
-
     &:focus {
       background-color: $snow-white;
       border-color: $primary-brd-focus;
@@ -133,7 +132,6 @@ const buttonClasses = computed(() => {
     &:hover {
       opacity: 75%;
     }
-
     &:focus {
       border-color: $tertiary-brd-focus;
     }
@@ -147,7 +145,6 @@ const buttonClasses = computed(() => {
     &:hover {
       background-color: darken($snow-white, 10%);
     }
-
     &:focus {
       border-color: $tertiary-brd-focus;
     }
