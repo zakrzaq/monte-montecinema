@@ -5,7 +5,7 @@
 }
 
 @mixin md {
-  @media screen and (max-width:1024px) and (min-width: 651px) {
+  @media screen and (max-width: 1024px) and (min-width: 651px) {
     @content;
   }
 }
@@ -16,3 +16,8 @@
   }
 }
 
+@mixin lg-down {
+  @media screen and (max-width: 1439px) {
+    @content;
+  }
+}

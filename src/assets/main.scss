@@ -16,6 +16,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin-bottom: 50px;
 }
 
 a,
@@ -33,7 +34,14 @@ li {
   margin: 0;
 }
 
-// UTILITY CLASSES
+// OVERWRITES
+
+#app {
+  display: flex;
+  justify-content: center;
+}
+
+// UTILITY
 
 .heading-1 {
   @include reset-margin-padding;

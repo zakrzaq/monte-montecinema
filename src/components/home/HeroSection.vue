@@ -7,7 +7,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
     <div class="hero__content">
       <h1 class="heading-1">Welcome to the best cinema in Monterail</h1>
       <p class="paragraph">
-        Best movies, best experiences, best people.And all that doesn’t exist.
+        Best movies, best experiences, best people. And all that doesn’t exist.
         Yikes.
       </p>
       <BaseButton to="#" button-size="large">Book a ticket</BaseButton>
