@@ -11,4 +11,3 @@ export interface Movie {
   description: string;
 }
 
-export interface MovieList extends Array<Movie>

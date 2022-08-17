@@ -6,7 +6,7 @@ import HeaderLinks from "@/components/header/HeaderLinks.vue";
 
 <template>
   <header class="header">
-    <RouterLink to="/" class="logo">
+    <RouterLink :to="{ name: 'HomePage' }" class="logo">
       <LogoImage />
     </RouterLink>
     <HeaderLinks />

@@ -1,20 +1,18 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { getMovieList } from "@/api/movieService";
 import MovieCard from "@/components/movies/MovieCard.vue";
-
-const movieList = ref(null);
-const loading = ref(false);
-
-onMounted(async () => {
-  loading.value = true;
-  movieList.value = await getMovieList().then((loading.value = false));
-});
+import { useMovieStore } from "@/stores/movies";
+const moviesStore = useMovieStore();
 </script>
+
 <template>
-  <template v-if="!loading">
+  <template v-if="!moviesStore.loading">
     <div class="movies-list">
-      <MovieCard v-for="movie in movieList" :key="movie.id" :movie="movie" />
+      <MovieCard
+        v-for="movie in moviesStore.movieList"
+        :key="movie.id"
+        :movie="movie"
+      />
     </div>
   </template>
   <template v-else> Loading... </template>
