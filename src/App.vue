@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import TheHeader from "@/components/TheHeader.vue";
+import { useMovieStore } from "@/stores/movies";
+import { onMounted } from "vue";
+const movieStore = useMovieStore();
+onMounted(async () => {
+  movieStore.fetchMovieList();
+});
 </script>
 
 <template>

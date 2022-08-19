@@ -15,8 +15,8 @@ const categorisedMovies = computed(() => {
   return category.value === "" || category.value === "All categories"
     ? moviesStore.movieList
     : moviesStore.movieList.filter(
-        (movie) => movie.genre.name === category.value
-      );
+      (movie) => movie.genre.name === category.value
+    );
 });
 
 const filteredTitleMovives = computed(() => {
@@ -24,8 +24,8 @@ const filteredTitleMovives = computed(() => {
 
   return query.value
     ? categorisedMovies.value.filter((movie) =>
-        movie.title.toLowerCase().includes(query.value)
-      )
+      movie.title.toLowerCase().includes(query.value)
+    )
     : categorisedMovies.value;
 });
 
@@ -41,17 +41,11 @@ const selectOptions = computed(() => {
   </div>
   <div class="controls">
     <BaseInput v-model="query" input-name="search">SEARCH</BaseInput>
-    <BaseSelect v-model="category" :options="selectOptions"
-      >CATEGORY</BaseSelect
-    >
+    <BaseSelect v-model="category" :options="selectOptions">CATEGORY</BaseSelect>
   </div>
   <template v-if="!moviesStore.loading">
     <div class="movies-list">
-      <MovieCard
-        v-for="movie in filteredTitleMovives"
-        :key="movie.id"
-        :movie="movie"
-      />
+      <MovieCard v-for="movie in filteredTitleMovives" :key="movie.id" :movie="movie" />
     </div>
   </template>
   <template v-else> Loading... </template>
@@ -67,15 +61,18 @@ const selectOptions = computed(() => {
     }
   }
 }
+
 .controls {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(375px, 1fr));
   grid-template-areas: "input input select";
   gap: 40px;
+
   @include md {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "input select";
   }
+
   @include sm {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -87,6 +84,7 @@ const selectOptions = computed(() => {
     grid-area: input;
   }
 }
+
 .movies-list {
   margin-top: 24px;
   margin-bottom: 64px;

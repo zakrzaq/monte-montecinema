@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { getMovieList } from "@/api/movieService";
-import type { Movie, Genre } from "@/types/movie";
+import type { Movie } from "@/types/movie";
 
 interface RootState {
   movieList: Movie[];
@@ -17,8 +17,8 @@ export const useMovieStore = defineStore({
   },
   getters: {
     genreList(): string[] {
-      return [... new Set (this.movieList.map( movie => movie.genre.name ))]
-    }
+      return [...new Set(this.movieList.map((movie) => movie.genre.name))];
+    },
   },
   actions: {
     async fetchMovieList() {
@@ -27,10 +27,10 @@ export const useMovieStore = defineStore({
         const data = await getMovieList();
         this.movieList = data;
       } catch (err) {
-        console.error(err)
+        console.error(err);
       } finally {
         this.loading = false;
       }
     },
   },
-})
+});
