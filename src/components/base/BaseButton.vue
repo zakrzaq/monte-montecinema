@@ -23,10 +23,13 @@ const buttonClasses = computed(() => {
     { "button--secondary": props.buttonType === "secondary" },
     { "button--tertiary": props.buttonType === "tertiary" },
     { "button--tertiary-rev": props.buttonType === "tertiary-rev" },
+    { "button--breadcrumb": props.buttonType === "breadcrumb" },
+    { "button--breadcrumb-rev": props.buttonType === "breadcrumb-rev" },
     { "button--small": props.buttonSize === "small" },
     { "button--regular": props.buttonSize === "regular" },
     { "button--medium": props.buttonSize === "medium" },
     { "button--large": props.buttonSize === "large" },
+    { "button--slim": props.buttonSize === "slim" },
   ];
 });
 </script>
@@ -78,6 +81,22 @@ const buttonClasses = computed(() => {
     height: 56px;
     font-size: 18px;
     border-radius: 28px;
+  }
+
+  &--slim {
+    padding: 12px 32px;
+    gap: 12px;
+    border: 2px solid $tuna;
+    border-radius: 64px;
+  }
+
+  &--breadcrumb {
+    color: $tuna;
+    background-color: transparent;
+    &-rev {
+      border-color: transparent;
+      background-color: transparent;
+    }
   }
 
   &--primary {
