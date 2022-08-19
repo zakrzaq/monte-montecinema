@@ -1,21 +1,23 @@
 <script setup lang="ts">
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 
-const props = defineProps({
-  buttonType: {
-    type: String,
-    default: "primary",
-  },
-  buttonSize: {
-    type: String,
-    default: "reg",
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-});
-const emit = defineEmits(["click"]);
+const props = withDefaults(
+  defineProps<{
+    buttonType:
+    | "primary"
+    | "primary-rev"
+    | "secondary"
+    | "tertiary"
+    | "tertiary-rev";
+    buttonSize: "small" | "regular" | "medium" | "large";
+    to: string;
+  }>(),
+  {
+    buttonType: "primary",
+    buttonSize: "regular",
+    to: "",
+  }
+);
 
 const buttonClasses = computed(() => {
   return [
@@ -25,51 +27,57 @@ const buttonClasses = computed(() => {
     { "button--secondary": props.buttonType === "secondary" },
     { "button--tertiary": props.buttonType === "tertiary" },
     { "button--tertiary-rev": props.buttonType === "tertiary-rev" },
-    { "button--sml": props.buttonSize === "sml" },
-    { "button--reg": props.buttonSize === "reg" },
-    { "button--med": props.buttonSize === "med" },
-    { "button--lrg": props.buttonSize === "lrg" },
+    { "button--small": props.buttonSize === "small" },
+    { "button--regular": props.buttonSize === "regular" },
+    { "button--medium": props.buttonSize === "medium" },
+    { "button--large": props.buttonSize === "large" },
   ];
 });
-
-const buttonClick = (event: Event) => {
-  emit("click", event);
-};
 </script>
 
 <template>
-  <button :disabled="disabled" :class="buttonClasses" @click="buttonClick">
-    <slot />
-  </button>
+  <template v-if="!props.to">
+    <button :class="buttonClasses" @click="$emit('click', $event)">
+      <slot />
+    </button>
+  </template>
+  <template v-else>
+    <RouterLink :to="props.to" :class="buttonClasses">
+      <slot />
+    </RouterLink>
+  </template>
 </template>
 
 <style lang="scss" scoped>
 .button {
   @include roboto-mono();
-  @include jcc-aic;
+  @include flex-vcenter-hcenter;
   text-decoration: none;
   outline: none;
   min-width: 115px;
 
-  &--sml {
+  &--small {
     padding: 5px 16px;
     height: 24px;
     font-size: 14px;
     border-radius: 12px;
   }
-  &--reg {
+
+  &--regular {
     padding: 9px 24px;
     height: 32px;
     font-size: 16px;
     border-radius: 16px;
   }
-  &--med {
+
+  &--medium {
     padding: 12px 32px;
     height: 40px;
     font-size: 16px;
     border-radius: 20px;
   }
-  &--lrg {
+
+  &--large {
     padding: 19px 40px;
     height: 56px;
     font-size: 18px;
@@ -80,10 +88,12 @@ const buttonClick = (event: Event) => {
     color: $snow-white;
     border: 2px solid $primary-bg;
     background-color: $primary-bg;
+
     &:hover {
       background-color: $primary-bg-hover;
       border-color: $primary-bg-hover;
     }
+
     &:focus {
       background-color: $primary-bg-hover;
       border-color: $primary-brd-focus;
@@ -94,9 +104,11 @@ const buttonClick = (event: Event) => {
     color: $primary-bg;
     border: 2px solid $primary-bg;
     background-color: $snow-white;
+
     &:hover {
       opacity: 50%;
     }
+
     &:focus {
       border-color: $primary-brd-focus;
     }
@@ -106,9 +118,11 @@ const buttonClick = (event: Event) => {
     color: $primary-bg;
     border: 2px solid $snow-white;
     background-color: $snow-white;
+
     &:hover {
       background-color: darken($snow-white, 10%);
     }
+
     &:focus {
       background-color: $snow-white;
       border-color: $primary-brd-focus;
@@ -119,9 +133,11 @@ const buttonClick = (event: Event) => {
     color: $snow-white;
     border: 2px solid $tertiary-bg;
     background-color: $tertiary-bg;
+
     &:hover {
       opacity: 75%;
     }
+
     &:focus {
       border-color: $tertiary-brd-focus;
     }
@@ -131,9 +147,11 @@ const buttonClick = (event: Event) => {
     color: $tertiary-bg;
     border: 2px solid $tertiary-bg;
     background-color: $snow-white;
+
     &:hover {
       background-color: darken($snow-white, 10%);
     }
+
     &:focus {
       border-color: $tertiary-brd-focus;
     }
@@ -143,6 +161,7 @@ const buttonClick = (event: Event) => {
     background-color: $jumbo;
     cursor: not-allowed;
     border: 2px solid $jumbo;
+
     &:hover {
       opacity: 90%;
     }

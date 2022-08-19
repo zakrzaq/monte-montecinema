@@ -13,6 +13,15 @@ import TheHeader from "@/components/TheHeader.vue";
 
 <style scoped lang="scss">
 .app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
   margin: 0 48px;
+  max-width: 1440px;
+
+  @include sm {
+    margin: 0;
+  }
 }
 </style>

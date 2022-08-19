@@ -30,11 +30,13 @@ const navbarItemClass = (link: Link) => {
 
 <style scoped lang="scss">
 .navbar {
-  @include jcc-aic;
+  @include flex-vcenter-hcenter;
   height: 100%;
+
   @include md {
     display: none;
   }
+
   @include sm {
     display: none;
   }
@@ -42,17 +44,19 @@ const navbarItemClass = (link: Link) => {
   &__item {
     width: 140px;
     height: 100%;
-    @include jcc-aic;
+    @include flex-vcenter-hcenter;
     @include roboto(normal, 400);
     font-size: 18px;
     line-height: 21px;
     color: $jumbo;
+
     &:hover {
       @include roboto(normal, 700);
       font-size: 18px;
       line-height: 21px;
       color: #484954;
     }
+
     &--active {
       @include roboto(normal, 700);
       font-size: 18px;

@@ -1,6 +1,5 @@
 // Color definitions
 $snow-white: #ffffff;
-$cherry-red: #ec1115;
 $athens-gray: #f7f7f7;
 $darker-gray: #e5e5e5;
 $medium-gray: #aeaeb3;
@@ -9,8 +8,10 @@ $tuna: #343541;
 $charade: #292a33;
 $light-blue: rgba(47, 128, 237, 0.1);
 $dark-blue: #2f80ed;
-$totem-pole: #a60c0e;
+$wisp-pink: #fef6f6;
 $bitter-sweet: #f47073;
+$cherry-red: #ec1115;
+$totem-pole: #a60c0e;
 
 // UI colors
 $primary-bg: $cherry-red;
@@ -29,3 +30,6 @@ $checkbox-brd: $medium-gray;
 
 // shadows
 $form-box-shadow: 0px 4px 22px rgba(52, 53, 65, 0.15);
+$card-box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
+  0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
+  0px 1.59602px 5.18708px rgba(0, 0, 0, 0.0161557);
