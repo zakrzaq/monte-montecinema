@@ -22,6 +22,7 @@ import HeaderLinks from "@/components/header/HeaderLinks.vue";
 
   & .logo {
     min-width: 114px;
+
     @include sm {
       padding-left: 15px;
     }

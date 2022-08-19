@@ -1,19 +1,25 @@
 <script setup lang="ts">
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 
-const props = defineProps({
-  buttonType: {
-    type: String,
-    default: "primary",
-  },
-  buttonSize: {
-    type: String,
-    default: "regular",
-  },
-  to: {
-    type: String,
-  },
-});
+const props = withDefaults(
+  defineProps<{
+    buttonType:
+    | "primary"
+    | "primary-rev"
+    | "secondary"
+    | "tertiary"
+    | "tertiary-rev"
+    | "breadcrumb"
+    | "breadcrumb-rev";
+    buttonSize: "small" | "regular" | "medium" | "large" | "slim";
+    to: string;
+  }>(),
+  {
+    buttonType: "primary",
+    buttonSize: "regular",
+    to: "",
+  }
+);
 
 const buttonClasses = computed(() => {
   return [
@@ -93,6 +99,7 @@ const buttonClasses = computed(() => {
   &--breadcrumb {
     color: $tuna;
     background-color: transparent;
+
     &-rev {
       border-color: transparent;
       background-color: transparent;
@@ -123,6 +130,7 @@ const buttonClasses = computed(() => {
     &:hover {
       opacity: 50%;
     }
+
     &:focus {
       border-color: $primary-brd-focus;
     }
@@ -136,6 +144,7 @@ const buttonClasses = computed(() => {
     &:hover {
       background-color: darken($snow-white, 10%);
     }
+
     &:focus {
       background-color: $snow-white;
       border-color: $primary-brd-focus;
@@ -150,6 +159,7 @@ const buttonClasses = computed(() => {
     &:hover {
       opacity: 75%;
     }
+
     &:focus {
       border-color: $tertiary-brd-focus;
     }
@@ -163,6 +173,7 @@ const buttonClasses = computed(() => {
     &:hover {
       background-color: darken($snow-white, 10%);
     }
+
     &:focus {
       border-color: $tertiary-brd-focus;
     }
