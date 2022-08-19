@@ -13,7 +13,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
       <BaseButton to="#" button-size="large">Book a ticket</BaseButton>
     </div>
     <div class="hero__image">
-      <img src="@/assets/images/welcome.jpg" alt="feature image" />
+      <img src="@/assets/images/welcome.jpg" alt="Image of theatre room full of people" />
     </div>
   </div>
 </template>
@@ -23,9 +23,11 @@ import BaseButton from "@/components/base/BaseButton.vue";
   width: 100%;
   display: grid;
   grid-template: 1fr / 2fr 1fr;
+
   @include sm {
     grid-template: 1fr / 1fr;
   }
+
   @include md {
     grid-template: 1fr / 1fr;
   }
@@ -37,6 +39,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     @include sm {
       padding: 32px;
     }
@@ -56,6 +59,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
 
     & .button {
       align-self: flex-start;
+
       @include sm {
         align-self: stretch;
       }
@@ -66,9 +70,11 @@ import BaseButton from "@/components/base/BaseButton.vue";
     @include md {
       display: none;
     }
+
     @include sm {
       display: none;
     }
+
     img {
       object-fit: cover;
       height: 100%;
