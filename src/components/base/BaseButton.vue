@@ -3,7 +3,8 @@ import { computed } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    buttonType:
+    buttonKind?: "button" | "submit";
+    buttonType?:
     | "primary"
     | "primary-rev"
     | "secondary"
@@ -11,10 +12,11 @@ const props = withDefaults(
     | "tertiary-rev"
     | "breadcrumb"
     | "breadcrumb-rev";
-    buttonSize: "small" | "regular" | "medium" | "large" | "slim";
+    buttonSize?: "small" | "regular" | "medium" | "large" | "slim";
     to: string;
   }>(),
   {
+    buttonKind: "button",
     buttonType: "primary",
     buttonSize: "regular",
     to: "",
@@ -22,21 +24,7 @@ const props = withDefaults(
 );
 
 const buttonClasses = computed(() => {
-  return [
-    "button",
-    { "button--primary": props.buttonType === "primary" },
-    { "button--primary-rev": props.buttonType === "primary-rev" },
-    { "button--secondary": props.buttonType === "secondary" },
-    { "button--tertiary": props.buttonType === "tertiary" },
-    { "button--tertiary-rev": props.buttonType === "tertiary-rev" },
-    { "button--breadcrumb": props.buttonType === "breadcrumb" },
-    { "button--breadcrumb-rev": props.buttonType === "breadcrumb-rev" },
-    { "button--small": props.buttonSize === "small" },
-    { "button--regular": props.buttonSize === "regular" },
-    { "button--medium": props.buttonSize === "medium" },
-    { "button--large": props.buttonSize === "large" },
-    { "button--slim": props.buttonSize === "slim" },
-  ];
+  return ["button", `button--${props.buttonType}`, `button--${props.buttonSize}`];
 });
 </script>
 

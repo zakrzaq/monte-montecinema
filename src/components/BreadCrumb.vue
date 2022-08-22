@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import BaseButton from "./base/BaseButton.vue";
 import LeftArrow from "@/assets/icons/long-arrow-left.svg?component";
+import SeparatorIcon from "@/assets/icons/breadcrumb-arrow.svg?component";
 
 export interface Props {
-  backPath: string;
-  firstTier: string;
+  backPath?: string;
+  firstTier?: string;
+  secondTitle?: string;
+  secondTier?: string;
 }
 
 withDefaults(defineProps<Props>(), {
@@ -21,6 +24,15 @@ withDefaults(defineProps<Props>(), {
     </BaseButton>
     <BaseButton button-type="breadcrumb-rev" button-size="slim" :to="firstTier">
       Movies
+    </BaseButton>
+    <SeparatorIcon v-if="secondTitle" />
+    <BaseButton
+      v-if="secondTitle"
+      button-type="breadcrumb-rev"
+      button-size="slim"
+      :to="secondTier"
+    >
+      {{ secondTitle }}
     </BaseButton>
   </div>
 </template>

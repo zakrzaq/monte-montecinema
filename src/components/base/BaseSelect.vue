@@ -1,43 +1,46 @@
 <script setup lang="ts">
-interface Props {
-  options: string[];
-  modelValue: string;
-}
-const props = withDefaults(defineProps<Props>(), {
-  options: null,
-  modelValue: "",
-});
+const props = withDefaults(
+  defineProps<{
+    options: string[];
+    modelValue: string;
+  }>(),
+  {
+    options: () => [],
+    modelValue: "",
+  }
+);
 </script>
 
 <template>
   <div class="base-select">
-    <label class="base-select__label" for=""><slot /></label>
-    <select
-      class="base-select__select"
-      :modelValue="props.modelValue"
-      @change="
-        $emit('update:modelValue', ($event.target as HTMLInputElement).value)
-      "
-    >
-      <option
-        v-for="option in props.options"
-        :key="option"
-        class="base-select__option"
-        :value="option"
+    <label class="base-select__label" for=""
+      ><slot />
+      <select
+        class="base-select__select"
+        :modelValue="props.modelValue"
+        @change="
+          $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+        "
       >
-        {{ option }}
-      </option>
-    </select>
+        <option
+          v-for="option in props.options"
+          :key="option"
+          class="base-select__option"
+          :value="option"
+        >
+          {{ option }}
+        </option>
+      </select>
+    </label>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .base-select {
   &__label {
-    font-family: Roboto, Mono;
+    @include roboto-mono(normal, 700);
     color: $bitter-sweet;
     text-transform: uppercase;
-    font-weight: 700;
     font-size: 14px;
     line-height: 18px;
     margin: 12px 0;

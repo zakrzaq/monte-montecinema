@@ -1,16 +1,18 @@
 <script setup lang="ts">
-interface Props {
-  modelValue: string;
-  inputType: string;
-  inputName: string;
-  placeholder: string;
-}
-const props = withDefaults(defineProps<Props>(), {
-  modelValue: "",
-  inputValue: "text",
-  inputName: "",
-  placeholder: "...",
-});
+const props = withDefaults(
+  defineProps<{
+    modelValue?: string;
+    inputType?: string;
+    inputName?: string;
+    placeholder?: string;
+  }>(),
+  {
+    modelValue: "",
+    inputValue: "text",
+    inputName: "",
+    placeholder: "...",
+  }
+);
 </script>
 
 <template>

@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import lengthToTime from "@/helpers/lengthToTime";
 import type { Movie } from "@/types/movie";
-const props = defineProps<{
-  movie: Movie;
-}>();
+const props = withDefaults(
+  defineProps<{
+    movie: Movie;
+    to?: string;
+  }>(),
+  {
+    to: "",
+  }
+);
 </script>
 
 <template>
-  <RouterLink to="#" class="movie">
+  <RouterLink :to="to" class="movie">
     <div class="movie__title">
       <p>
         {{ props.movie.title }}
@@ -31,6 +37,7 @@ const props = defineProps<{
   background: $snow-white;
   box-shadow: $card-box-shadow;
   border-radius: 8px;
+
   @include sm {
     min-width: unset;
     max-width: 325px;
