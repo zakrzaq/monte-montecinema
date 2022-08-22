@@ -1,13 +1,34 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomePage from "@/views/HomePage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
-      component: HomePage,
+      name: "HomePage",
+      component: () => import("@/views/HomePage.vue"),
     },
+    {
+      path: "/movies",
+      name: "MoviesPage",
+      component: () => import("@/views/MoviesPage.vue"),
+    },
+    {
+      path: "/screenings",
+      name: "ScreeningsPage",
+      component: () => import("@/views/ScreeningsPage.vue"),
+    },
+    {
+      path: "/contact",
+      name: "ContactPage",
+      component: () => import("@/views/ContactPage.vue"),
+    },
+    {
+      path: "/404",
+      name: "404",
+      component: () => import("@/views/NotFoundPage.vue"),
+    },
+    { path: "/:catchAll(.*)", redirect: "/not-found" },
   ],
 });
 

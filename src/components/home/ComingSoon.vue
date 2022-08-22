@@ -8,7 +8,7 @@ import { comingSoon } from "@/data/coming-soon";
     <div class="comming__header">
       <h2 class="heading-2">COMMING SOON</h2>
       <h2 class="heading-2--red">
-        <RouterLink to="#"> SEE ALL </RouterLink>
+        <RouterLink :to="{ name: 'MoviesPage' }"> SEE ALL </RouterLink>
       </h2>
     </div>
     <div class="comming__movies">
