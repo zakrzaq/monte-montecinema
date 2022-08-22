@@ -3,7 +3,7 @@ import { getMovieList } from "@/api/movieService";
 import type { Movie } from "@/types/movie";
 
 interface RootState {
-  movieList: Movie[];
+  movieList: Movie[] | [];
   loading: boolean;
 }
 
@@ -11,7 +11,7 @@ export const useMovieStore = defineStore({
   id: "movieStore",
   state: () => {
     return {
-      movieList: null as Movie[] | null,
+      movieList: [] as Movie[] | [],
       loading: false,
     } as RootState;
   },

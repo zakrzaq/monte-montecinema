@@ -7,7 +7,7 @@ export interface Props {
   firstTier: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   backPath: "/",
   firstTier: "",
 });
@@ -15,19 +15,11 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div class="breadcrumbs">
-    <BaseButton
-      button-type="breadcrumb"
-      button-size="slim"
-      :to="props.backPath"
-    >
+    <BaseButton button-type="breadcrumb" button-size="slim" :to="backPath">
       <LeftArrow />
       Back
     </BaseButton>
-    <BaseButton
-      button-type="breadcrumb-rev"
-      button-size="slim"
-      :to="props.firstTier"
-    >
+    <BaseButton button-type="breadcrumb-rev" button-size="slim" :to="firstTier">
       Movies
     </BaseButton>
   </div>

@@ -10,10 +10,10 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div class="base-dropdown">
-    <label class="case-dropdown-__label" for=""><slot /></label>
+  <div class="base-select">
+    <label class="base-select__label" for=""><slot /></label>
     <select
-      class="base-dropdown__select"
+      class="base-select__select"
       :modelValue="props.modelValue"
       @change="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
       <option
         v-for="option in props.options"
         :key="option"
-        class="base-dropdown__option"
+        class="base-select__option"
         :value="option"
       >
         {{ option }}
@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<Props>(), {
 </template>
 
 <style lang="scss" scoped>
-.base-dropdown {
+.base-select {
   &__label {
     font-family: Roboto, Mono;
     color: $bitter-sweet;
