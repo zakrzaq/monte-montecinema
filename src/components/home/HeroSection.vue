@@ -13,7 +13,10 @@ import BaseButton from "@/components/base/BaseButton.vue";
       <BaseButton to="#" button-size="large">Book a ticket</BaseButton>
     </div>
     <div class="hero__image">
-      <img src="@/assets/images/welcome.jpg" alt="Image of theatre room full of people" />
+      <img
+        src="@/assets/images/welcome.jpg"
+        alt="Image of theatre room full of people"
+      />
     </div>
   </div>
 </template>
