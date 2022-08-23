@@ -32,34 +32,34 @@ import PhoneIcon from "@/assets/icons/phone.svg?component";
       <div class="contact-card__contact-icon">
         <EmailIcon />
       </div>
-      <p>hello@monterail.com</p>
+      <p><a href="mailto: hello@moterail.com">hello@monterail.com</a></p>
       <div class="contact-card__contact-icon">
         <PhoneIcon />
       </div>
-      <p>+48 533 600 136</p>
+      <p><a href="tel: +48533600136">+48 533 600 136</a></p>
     </div>
     <div class="contact-card__social">
-      <router-link to="#" class="contact-card__icon">
+      <a to="#" class="contact-card__icon">
         <TwitterIcon />
-      </router-link>
-      <router-link to="#" class="contact-card__icon">
+      </a>
+      <a to="#" class="contact-card__icon">
         <FacebookIcon />
-      </router-link>
-      <router-link to="#" class="contact-card__icon">
+      </a>
+      <a to="#" class="contact-card__icon">
         <LinkedinIcon />
-      </router-link>
-      <router-link to="#" class="contact-card__icon">
+      </a>
+      <a to="#" class="contact-card__icon">
         <InstagramIcon />
-      </router-link>
-      <router-link to="#" class="contact-card__icon">
+      </a>
+      <a to="#" class="contact-card__icon">
         <GithubIcon />
-      </router-link>
-      <router-link to="#" class="contact-card__icon">
+      </a>
+      <a to="#" class="contact-card__icon">
         <BehanceIcon />
-      </router-link>
-      <router-link to="#" class="contact-card__icon">
+      </a>
+      <a to="#" class="contact-card__icon">
         <DribbleIcon />
-      </router-link>
+      </a>
     </div>
   </div>
 </template>
@@ -112,7 +112,7 @@ import PhoneIcon from "@/assets/icons/phone.svg?component";
 
   &__social {
     display: grid;
-    grid-template: repeat(7, 1fr) / 1fr ;
+    grid-template: repeat(7, 1fr) / 1fr;
     @include sm {
       grid-template: 1fr / repeat(7, 1fr);
     }
