@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import TheHeader from "@/components/TheHeader.vue";
 import { useMovieStore } from "@/stores/movies";
+import { useSeancesStore } from "@/stores/seances";
 import { onMounted } from "vue";
 const movieStore = useMovieStore();
+const seancesStore = useSeancesStore();
 onMounted(async () => {
   movieStore.fetchMovieList();
+  seancesStore.getCurrentSeances();
 });
 </script>
 

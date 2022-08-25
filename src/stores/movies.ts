@@ -11,13 +11,16 @@ export const useMovieStore = defineStore({
   id: "movieStore",
   state: () => {
     return {
-      movieList: [] as Movie[] | [],
+      movieList: [],
       loading: false,
     } as RootState;
   },
   getters: {
     genreList(): string[] {
       return [...new Set(this.movieList.map((movie) => movie.genre.name))];
+    },
+    movieById: (state) => {
+      return (id: number) => state.movieList.find((movie) => movie.id === id);
     },
   },
   actions: {
