@@ -5,15 +5,15 @@ const props = withDefaults(
   defineProps<{
     buttonKind?: "button" | "submit";
     buttonType?:
-    | "primary"
-    | "primary-rev"
-    | "secondary"
-    | "tertiary"
-    | "tertiary-rev"
-    | "breadcrumb"
-    | "breadcrumb-rev";
+      | "primary"
+      | "primary-rev"
+      | "secondary"
+      | "tertiary"
+      | "tertiary-rev"
+      | "breadcrumb"
+      | "breadcrumb-rev";
     buttonSize?: "small" | "regular" | "medium" | "large" | "slim";
-    to: string;
+    to?: string;
   }>(),
   {
     buttonKind: "button",
@@ -24,7 +24,11 @@ const props = withDefaults(
 );
 
 const buttonClasses = computed(() => {
-  return ["button", `button--${props.buttonType}`, `button--${props.buttonSize}`];
+  return [
+    "button",
+    `button--${props.buttonType}`,
+    `button--${props.buttonSize}`,
+  ];
 });
 </script>
 
