@@ -1,28 +1,25 @@
 import { defineStore } from "pinia";
 import { getDaySeance } from "@/api/seancesService";
 import type { Seance } from "@/types/seance";
-
+const todayDate = new Date();
 interface RootState {
-  selectedDay: Date;
+  selectedDate: string;
   currentSeances: Seance[] | [];
 }
 export const useSeancesStore = defineStore({
   id: "seancesStore",
   state: () => {
     return {
-      selectedDay: new Date(),
+      selectedDate: todayDate.toISOString().substring(0, 10),
       currentSeances: [],
     } as RootState;
   },
   getters: {
-    selectedDate(): string {
-      return this.selectedDay.toISOString().substring(0, 10);
-    },
     seancesByMovie: (state) => {
       return (id: number) =>
         state.currentSeances.filter((seance) => seance.movie === id);
     },
-    currentMovies(): number[] | [] {
+    uniqueMovies(): number[] | [] {
       if (this.currentSeances)
         return [
           ...new Set(this.currentSeances.map((seance: Seance) => seance.movie)),
