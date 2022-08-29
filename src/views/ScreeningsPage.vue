@@ -5,6 +5,7 @@ import { useMovieStore } from "@/stores/movies";
 import BreadCrumb from "@/components/BreadCrumb.vue";
 import SeancesCard from "@/components/seances/SeancesCard.vue";
 import DateSelector from "@/components/seances/DateSelector.vue";
+import { prettyDate } from "@/helpers/prettyDate";
 const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
 
@@ -27,8 +28,10 @@ const moviesByCategory = computed(() => {
 <template>
   <div class="screenings-page">
     <BreadCrumb first-title="Screenings" />
-    <h1 class="Screenings-page__title heading-1">
-      Screenings:<br /><span class="gray">Date</span>
+    <h1 class="screenings-page__title heading-1">
+      Screenings:<br /><span class="gray">{{
+        prettyDate(seancesStore.selectedDate)
+      }}</span>
     </h1>
     <DateSelector v-model="selectedCategory" />
     <div>
@@ -45,6 +48,7 @@ const moviesByCategory = computed(() => {
 <style scoped lang="scss">
 .screenings-page {
   &__title {
+    margin-bottom: 32px;
     .gray {
       color: $jumbo;
     }
