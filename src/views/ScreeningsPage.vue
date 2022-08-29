@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import { useRoute } from "vue-router"
 import { useSeancesStore } from "@/stores/seances";
 import { useMovieStore } from "@/stores/movies";
 import BreadCrumb from "@/components/BreadCrumb.vue";
@@ -8,6 +9,7 @@ import DateSelector from "@/components/seances/DateSelector.vue";
 import { prettyDate } from "@/helpers/prettyDate";
 const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
+const route = useRoute()
 
 const currentMovies = computed(() => {
   return seancesStore.uniqueMovies.map((movie) => ({
@@ -27,7 +29,7 @@ const moviesByCategory = computed(() => {
 
 <template>
   <div class="screenings-page">
-    <BreadCrumb first-title="Screenings" />
+    <BreadCrumb first-title="Screenings" v-if="route.path === '/screenings'" />
     <h1 class="screenings-page__title heading-1">
       Screenings:<br /><span class="gray">{{
         prettyDate(seancesStore.selectedDate)
