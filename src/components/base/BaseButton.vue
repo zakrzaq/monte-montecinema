@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import type { RouteLocationRaw } from "vue-router";
 
 const props = withDefaults(
   defineProps<{
@@ -7,14 +8,7 @@ const props = withDefaults(
     buttonType?: "primary" | "secondary" | "tertiary" | "breadcrumb";
     buttonSize?: "small" | "regular" | "medium" | "large" | "slim";
     buttonStyle?: "outlined" | "noborder" | "";
-    to?:
-    | string
-    | {
-      name: string;
-      params: {
-        id: string | number;
-      };
-    };
+    to?: RouteLocationRaw;
   }>(),
   {
     buttonKind: "button",
@@ -28,7 +22,8 @@ const props = withDefaults(
 const buttonClasses = computed(() => {
   return [
     "button",
-    `button--${props.buttonType}${props.buttonStyle ? `--${props.buttonStyle}` : ""
+    `button--${props.buttonType}${
+      props.buttonStyle ? `--${props.buttonStyle}` : ""
     }`,
     `button--${props.buttonSize}`,
   ];

@@ -12,8 +12,12 @@ import { comingSoon } from "@/data/coming-soon";
       </h2>
     </div>
     <div class="comming__movies">
-      <MovieCard v-for="movie in comingSoon" :key="movie.id" :movie="movie"
-        :to="{ name: 'SingleMoviePage', params: { id: movie.id } }" />
+      <MovieCard
+        v-for="movie in comingSoon"
+        :key="movie.id"
+        :movie="movie"
+        :to="{ name: 'SingleMoviePage', params: { id: movie.id } }"
+      />
     </div>
   </div>
 </template>

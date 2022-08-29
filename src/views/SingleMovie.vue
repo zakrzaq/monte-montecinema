@@ -4,23 +4,23 @@ import BreadCrumb from "@/components/BreadCrumb.vue";
 import { useMovieStore } from "@/stores/movies";
 import { useRoute } from "vue-router";
 import lengthToTime from "@/helpers/lengthToTime";
-import type { Movie } from "@/types/movie"
 const movieStore = useMovieStore();
 const route = useRoute();
 
 const selectedId = computed((): string => route.params.id.toString());
-const selectedMovie = computed(
-  (): Movie =>
-    movieStore.movieList.find(
-      (movie) => movie.id.toString() === selectedId.value
-    ) || []
-);
-const movieDetails = computed((): string => {
-  return (
-    selectedMovie.value.release_date.substring(0, 4) +
-    "  |  " +
-    lengthToTime(selectedMovie.value.length)
+const selectedMovie = computed(() => {
+  return movieStore.movieList.find(
+    (movie) => movie.id.toString() === selectedId.value
   );
+});
+const movieDetails = computed<string>(() => {
+  if (selectedMovie.value)
+    return (
+      selectedMovie.value.release_date.substring(0, 4) +
+      "  |  " +
+      lengthToTime(selectedMovie.value.length)
+    );
+  return "";
 });
 </script>
 
@@ -33,7 +33,7 @@ const movieDetails = computed((): string => {
           <h1>{{ selectedMovie.title }}</h1>
           <div class="single-movie__sunheading">
             <span class="single-movie__genre">{{
-                selectedMovie.genre.name
+              selectedMovie.genre.name
             }}</span>
             <span class="single-movie__details">{{ movieDetails }}</span>
           </div>
@@ -41,15 +41,16 @@ const movieDetails = computed((): string => {
         </div>
 
         <div class="single-movie__image">
-          <img :src="selectedMovie.poster_url" :alt="`${selectedMovie.title} poster`" />
+          <img
+            :src="selectedMovie.poster_url"
+            :alt="`${selectedMovie.title} poster`"
+          />
         </div>
       </div>
       <div class="movie-screening">Screenings to come</div>
     </div>
   </template>
-  <template v-else>
-    Movie not found...
-  </template>
+  <template v-else> Movie not found... </template>
 </template>
 
 <style scoped lang="scss">
