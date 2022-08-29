@@ -4,28 +4,23 @@ import { computed } from "vue";
 const props = withDefaults(
   defineProps<{
     buttonKind?: "button" | "submit";
-    buttonType?:
-      | "primary"
-      | "primary-rev"
-      | "secondary"
-      | "tertiary"
-      | "tertiary-rev"
-      | "breadcrumb"
-      | "breadcrumb-rev";
+    buttonType?: "primary" | "secondary" | "tertiary" | "breadcrumb";
     buttonSize?: "small" | "regular" | "medium" | "large" | "slim";
+    buttonStyle?: "outlined" | "noborder" | "";
     to?:
-      | string
-      | {
-          name: string;
-          params: {
-            id: string | number;
-          };
-        };
+    | string
+    | {
+      name: string;
+      params: {
+        id: string | number;
+      };
+    };
   }>(),
   {
     buttonKind: "button",
     buttonType: "primary",
     buttonSize: "regular",
+    buttonStyle: "",
     to: "",
   }
 );
@@ -33,7 +28,8 @@ const props = withDefaults(
 const buttonClasses = computed(() => {
   return [
     "button",
-    `button--${props.buttonType}`,
+    `button--${props.buttonType}${props.buttonStyle ? `--${props.buttonStyle}` : ""
+    }`,
     `button--${props.buttonSize}`,
   ];
 });
@@ -96,10 +92,15 @@ const buttonClasses = computed(() => {
   }
 
   &--breadcrumb {
-    color: $tuna;
-    background-color: transparent;
+    color: $snow-white;
+    background-color: $tuna;
 
-    &-rev {
+    &--outlined {
+      color: $tuna;
+      background-color: transparent;
+    }
+
+    &--noborder {
       border-color: transparent;
       background-color: transparent;
     }
@@ -121,7 +122,7 @@ const buttonClasses = computed(() => {
     }
   }
 
-  &--primary-rev {
+  &--primary--outlined {
     color: $primary-bg;
     border: 2px solid $primary-bg;
     background-color: $snow-white;
@@ -164,7 +165,7 @@ const buttonClasses = computed(() => {
     }
   }
 
-  &--tertiary-rev {
+  &--tertiary--outlined {
     color: $tertiary-bg;
     border: 2px solid $tertiary-bg;
     background-color: $snow-white;
