@@ -4,24 +4,18 @@ import BreadCrumb from "@/components/BreadCrumb.vue";
 import { useMovieStore } from "@/stores/movies";
 import { useRoute } from "vue-router";
 import lengthToTime from "@/helpers/lengthToTime";
+import type { Movie } from "@/types/movie"
 const movieStore = useMovieStore();
 const route = useRoute();
 
-const selectedId = computed(() => route.params.id.toString());
+const selectedId = computed((): string => route.params.id.toString());
 const selectedMovie = computed(
-  () =>
+  (): Movie =>
     movieStore.movieList.find(
       (movie) => movie.id.toString() === selectedId.value
-    ) || {
-      title: "Movie.title",
-      length: 115,
-      description: "description...",
-      poster_url:
-        "https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg",
-      genre: { name: "genre" },
-    }
+    ) || []
 );
-const movieDetails = computed(() => {
+const movieDetails = computed((): string => {
   return (
     selectedMovie.value.release_date.substring(0, 4) +
     "  |  " +
@@ -31,29 +25,31 @@ const movieDetails = computed(() => {
 </script>
 
 <template>
-  <div class="wrapper">
-    <BreadCrumb first-tier="/movies" :second-title="selectedMovie.title" />
-    <div class="single-movie">
-      <div class="single-movie__description">
-        <h1>{{ selectedMovie.title }}</h1>
-        <div class="single-movie__sunheading">
-          <span class="single-movie__genre">{{
-            selectedMovie.genre.name
-          }}</span>
-          <span class="single-movie__details">{{ movieDetails }}</span>
+  <template v-if="selectedMovie">
+    <div class="wrapper">
+      <BreadCrumb first-tier="/movies" :second-title="selectedMovie.title" />
+      <div class="single-movie">
+        <div class="single-movie__description">
+          <h1>{{ selectedMovie.title }}</h1>
+          <div class="single-movie__sunheading">
+            <span class="single-movie__genre">{{
+                selectedMovie.genre.name
+            }}</span>
+            <span class="single-movie__details">{{ movieDetails }}</span>
+          </div>
+          <p class="single-movie__text">{{ selectedMovie.description }}</p>
         </div>
-        <p class="single-movie__text">{{ selectedMovie.description }}</p>
-      </div>
 
-      <div class="single-movie__image">
-        <img
-          :src="selectedMovie.poster_url"
-          :alt="`${selectedMovie.title} poster`"
-        />
+        <div class="single-movie__image">
+          <img :src="selectedMovie.poster_url" :alt="`${selectedMovie.title} poster`" />
+        </div>
       </div>
+      <div class="movie-screening">Screenings to come</div>
     </div>
-    <div class="movie-screening">Screenings to come</div>
-  </div>
+  </template>
+  <template v-else>
+    Movie not found...
+  </template>
 </template>
 
 <style scoped lang="scss">
@@ -63,6 +59,7 @@ const movieDetails = computed(() => {
     width: calc(100vw);
   }
 }
+
 .single-movie {
   margin-top: 20px;
   gap: 25px;
@@ -70,9 +67,11 @@ const movieDetails = computed(() => {
   grid-template: minmax(250px, 650px) / repeat(2, 1fr);
   width: 100%;
   height: 100%;
+
   @include md {
     grid-template: minmax(250px, 600px) / 2fr 1fr;
   }
+
   @include sm {
     grid-template: 250px 1fr / 1fr;
     gap: 5px;
@@ -82,6 +81,7 @@ const movieDetails = computed(() => {
     @include sm {
       order: -1;
     }
+
     img {
       object-fit: cover;
       height: 100%;
@@ -114,13 +114,13 @@ const movieDetails = computed(() => {
   }
 
   &__text {
-    font-family: "Roboto Mono";
-    font-weight: 400;
+    @include roboto-mono(normal, 400);
     font-size: 22px;
     line-height: 37px;
     letter-spacing: 0.015em;
     color: $tuna;
     margin: 32px 0px;
+
     @include sm {
       margin: 10px 0;
       font-size: 16px;
@@ -130,13 +130,13 @@ const movieDetails = computed(() => {
   }
 
   h1 {
-    font-family: "Eczar";
-    font-weight: 600;
+    @include eczar(normal, 600);
     font-size: 80px;
     line-height: 82px;
     letter-spacing: -0.01em;
     color: $tuna;
     margin: 32px 0px;
+
     @include sm {
       font-size: 48px;
       line-height: 1.25;

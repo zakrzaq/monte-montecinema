@@ -13,7 +13,14 @@ const props = withDefaults(
       | "breadcrumb"
       | "breadcrumb-rev";
     buttonSize?: "small" | "regular" | "medium" | "large" | "slim";
-    to?: string;
+    to?:
+      | string
+      | {
+          name: string;
+          params: {
+            id: string | number;
+          };
+        };
   }>(),
   {
     buttonKind: "button",

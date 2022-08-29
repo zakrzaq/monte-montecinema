@@ -2,22 +2,25 @@
 const props = withDefaults(
   defineProps<{
     options: string[];
+    id?: string | number;
     modelValue: string;
   }>(),
   {
     options: () => [],
     modelValue: "",
+    id: "",
   }
 );
 </script>
 
 <template>
   <div class="base-select">
-    <label class="base-select__label" for=""
+    <label class="base-select__label" :for="`base-selelect-${id}`"
       ><slot />
       <select
         class="base-select__select"
         :modelValue="props.modelValue"
+        id="id"
         @change="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "

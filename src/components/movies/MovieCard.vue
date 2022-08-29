@@ -4,7 +4,14 @@ import type { Movie } from "@/types/movie";
 const props = withDefaults(
   defineProps<{
     movie: Movie;
-    to?: string;
+    to?:
+    | string
+    | {
+      name: string;
+      params: {
+        id: string | number;
+      };
+    };
   }>(),
   {
     to: "",
