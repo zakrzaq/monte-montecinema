@@ -23,6 +23,7 @@ onMounted(async () => {
   flex-direction: column;
   justify-content: center;
   width: 100vw;
+  max-width: 1500px;
   margin: 0 48px;
 }
 </style>

@@ -15,8 +15,8 @@ const categorisedMovies = computed(() => {
   return category.value === "" || category.value === "All categories"
     ? moviesStore.movieList
     : moviesStore.movieList.filter(
-      (movie) => movie.genre.name === category.value
-    );
+        (movie) => movie.genre.name === category.value
+      );
 });
 
 const filteredTitleMovives = computed(() => {
@@ -24,8 +24,8 @@ const filteredTitleMovives = computed(() => {
 
   return query.value
     ? categorisedMovies.value.filter((movie) =>
-      movie.title.toLowerCase().includes(query.value)
-    )
+        movie.title.toLowerCase().includes(query.value)
+      )
     : categorisedMovies.value;
 });
 
@@ -40,12 +40,19 @@ const selectOptions = computed(() => {
     <h1 class="heading-1">All the movies</h1>
   </div>
   <div class="controls">
-    <BaseInput v-model="query" input-name="search">SEARCH</BaseInput>
-    <BaseSelect v-model="category" :options="selectOptions">CATEGORY</BaseSelect>
+    <BaseInput v-model="query" input-name="search">Search</BaseInput>
+    <BaseSelect v-model="category" :options="selectOptions"
+      >Category</BaseSelect
+    >
   </div>
   <template v-if="!moviesStore.loading">
     <div class="movies-list">
-      <MovieCard v-for="movie in filteredTitleMovives" :key="movie.id" :movie="movie" />
+      <MovieCard
+        v-for="movie in filteredTitleMovives"
+        :key="movie.id"
+        :movie="movie"
+        :to="{ name: 'SingleMoviePage', params: { id: movie.id } }"
+      />
     </div>
   </template>
   <template v-else> Loading... </template>

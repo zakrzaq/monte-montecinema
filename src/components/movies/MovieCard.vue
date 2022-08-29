@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import lengthToTime from "@/helpers/lengthToTime";
 import type { Movie } from "@/types/movie";
+import { computed } from "vue";
 const props = defineProps<{
   movie: Movie;
 }>();
+
+const movieRoute = computed(() => {
+  return {
+    name: "SingleMoviePage",
+    params: {
+      id: props.movie.id,
+    },
+  };
+});
 </script>
 
 <template>
-  <RouterLink to="#" class="movie">
+  <RouterLink :to="movieRoute" class="movie">
     <div class="movie__title">
       <p>
         {{ props.movie.title }}
@@ -31,6 +41,7 @@ const props = defineProps<{
   background: $snow-white;
   box-shadow: $card-box-shadow;
   border-radius: 8px;
+
   @include sm {
     min-width: unset;
     max-width: 325px;

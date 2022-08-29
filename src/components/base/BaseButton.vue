@@ -1,22 +1,20 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import type { RouteLocationRaw } from "vue-router";
 
 const props = withDefaults(
   defineProps<{
-    buttonType:
-    | "primary"
-    | "primary-rev"
-    | "secondary"
-    | "tertiary"
-    | "tertiary-rev"
-    | "breadcrumb"
-    | "breadcrumb-rev";
-    buttonSize: "small" | "regular" | "medium" | "large" | "slim";
-    to: string;
+    buttonKind?: "button" | "submit";
+    buttonType?: "primary" | "secondary" | "tertiary" | "breadcrumb";
+    buttonSize?: "small" | "regular" | "medium" | "large" | "slim";
+    buttonStyle?: "outlined" | "noborder" | "";
+    to?: RouteLocationRaw;
   }>(),
   {
+    buttonKind: "button",
     buttonType: "primary",
     buttonSize: "regular",
+    buttonStyle: "",
     to: "",
   }
 );
@@ -24,18 +22,10 @@ const props = withDefaults(
 const buttonClasses = computed(() => {
   return [
     "button",
-    { "button--primary": props.buttonType === "primary" },
-    { "button--primary-rev": props.buttonType === "primary-rev" },
-    { "button--secondary": props.buttonType === "secondary" },
-    { "button--tertiary": props.buttonType === "tertiary" },
-    { "button--tertiary-rev": props.buttonType === "tertiary-rev" },
-    { "button--breadcrumb": props.buttonType === "breadcrumb" },
-    { "button--breadcrumb-rev": props.buttonType === "breadcrumb-rev" },
-    { "button--small": props.buttonSize === "small" },
-    { "button--regular": props.buttonSize === "regular" },
-    { "button--medium": props.buttonSize === "medium" },
-    { "button--large": props.buttonSize === "large" },
-    { "button--slim": props.buttonSize === "slim" },
+    `button--${props.buttonType}${
+      props.buttonStyle ? `--${props.buttonStyle}` : ""
+    }`,
+    `button--${props.buttonSize}`,
   ];
 });
 </script>
@@ -97,10 +87,15 @@ const buttonClasses = computed(() => {
   }
 
   &--breadcrumb {
-    color: $tuna;
-    background-color: transparent;
+    color: $snow-white;
+    background-color: $tuna;
 
-    &-rev {
+    &--outlined {
+      color: $tuna;
+      background-color: transparent;
+    }
+
+    &--noborder {
       border-color: transparent;
       background-color: transparent;
     }
@@ -122,7 +117,7 @@ const buttonClasses = computed(() => {
     }
   }
 
-  &--primary-rev {
+  &--primary--outlined {
     color: $primary-bg;
     border: 2px solid $primary-bg;
     background-color: $snow-white;
@@ -165,7 +160,7 @@ const buttonClasses = computed(() => {
     }
   }
 
-  &--tertiary-rev {
+  &--tertiary--outlined {
     color: $tertiary-bg;
     border: 2px solid $tertiary-bg;
     background-color: $snow-white;
