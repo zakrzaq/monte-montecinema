@@ -23,7 +23,7 @@ export const useMovieStore = defineStore({
       ];
     },
     movieById: (state) => {
-      return (id: number) => state.movieList.find((movie) => movie.id === id);
+      return (id: number) => state.movieList.find((movie) => movie.id === id) 
     },
   },
   actions: {
