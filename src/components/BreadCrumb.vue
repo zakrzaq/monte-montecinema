@@ -29,7 +29,7 @@ withDefaults(defineProps<Props>(), {
       <span class="back-text">Back</span>
     </BaseButton>
     <BaseButton
-      button-type="breadcrumb-rev"
+      button-type="breadcrumb"
       button-style="noborder"
       button-size="slim"
       :to="firstTier"
@@ -39,7 +39,8 @@ withDefaults(defineProps<Props>(), {
     <SeparatorIcon v-if="secondTitle" />
     <BaseButton
       v-if="secondTitle"
-      button-type="breadcrumb-rev"
+      button-type="breadcrumb"
+      button-style="noborder"
       button-size="slim"
       :to="secondTier"
     >

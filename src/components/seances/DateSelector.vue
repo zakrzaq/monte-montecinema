@@ -36,6 +36,7 @@ const updateDate = (date: string) => {
     <div class="date-selector__tabs">
       <BaseButton
         button-type="breadcrumb"
+        button-style="outlined"
         button-size="large"
         v-for="day in daysList"
         :key="day.id"
@@ -74,4 +75,3 @@ const updateDate = (date: string) => {
   gap: 50px;
 }
 </style>
-
