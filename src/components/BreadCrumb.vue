@@ -19,12 +19,22 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <div class="breadcrumbs">
-    <BaseButton button-type="breadcrumb" button-size="slim" :to="backPath">
+    <BaseButton
+      button-type="breadcrumb"
+      button-style="outlined"
+      button-size="slim"
+      :to="backPath"
+    >
       <LeftArrow />
       <span class="back-text">Back</span>
     </BaseButton>
-    <BaseButton button-type="breadcrumb-rev" button-size="slim" :to="firstTier">
-    {{ firstTitle }}
+    <BaseButton
+      button-type="breadcrumb-rev"
+      button-style="noborder"
+      button-size="slim"
+      :to="firstTier"
+    >
+      {{ firstTitle }}
     </BaseButton>
     <SeparatorIcon v-if="secondTitle" />
     <BaseButton
@@ -49,25 +59,31 @@ withDefaults(defineProps<Props>(), {
   width: 100%;
   height: 80px;
   background: $wisp-pink;
+
   @include sm {
     margin-bottom: 24px;
     justify-content: flex-start;
     height: 40px;
     gap: 12px;
     font-size: 12px;
+
     .button {
       padding: 5px;
       min-width: 0;
     }
+
     .button:first-child {
       border: none;
+
       :nth-child(2) {
         display: none;
       }
     }
+
     .button:nth-child(3) {
       color: $cherry-red;
     }
+
     .button:nth-child(4) {
       overflow: hidden;
     }

@@ -16,7 +16,7 @@ import { comingSoon } from "@/data/coming-soon";
         v-for="movie in comingSoon"
         :key="movie.id"
         :movie="movie"
-        :to="`/movies/${movie.id}`"
+        :to="{ name: 'SingleMoviePage', params: { id: movie.id } }"
       />
     </div>
   </div>

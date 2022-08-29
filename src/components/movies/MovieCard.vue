@@ -1,19 +1,23 @@
 <script setup lang="ts">
 import lengthToTime from "@/helpers/lengthToTime";
 import type { Movie } from "@/types/movie";
-const props = withDefaults(
-  defineProps<{
-    movie: Movie;
-    to?: string;
-  }>(),
-  {
-    to: "",
-  }
-);
+import { computed } from "vue";
+const props = defineProps<{
+  movie: Movie;
+}>();
+
+const movieRoute = computed(() => {
+  return {
+    name: "SingleMoviePage",
+    params: {
+      id: props.movie.id,
+    },
+  };
+});
 </script>
 
 <template>
-  <RouterLink :to="to" class="movie">
+  <RouterLink :to="movieRoute" class="movie">
     <div class="movie__title">
       <p>
         {{ props.movie.title }}
