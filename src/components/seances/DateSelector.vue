@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import BaseButton from "../base/BaseButton.vue";
 import BaseSelect from "../base/BaseSelect.vue";
+import Datepicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+import CalendarIcon from "@/assets/icons/calendar.svg?component";
 import { useSeancesStore } from "@/stores/seances";
 import { useMovieStore } from "@/stores/movies";
 import type { DaysList } from "@/types/days-list";
@@ -31,13 +34,18 @@ const daysList = computed(() => {
 const updateDate = (date: string) => {
   seancesStore.selectedDate = date;
 };
+
+const datePickerDate = ref("");
+watch(datePickerDate, (newDate) => {
+  updateDate(newDate);
+});
 </script>
 
 <template>
   <div class="date-selector">
     <label class="date-selector__label">Days</label>
     <label class="date-selector__label">Movies</label>
-    <div>
+    <div class="date-selector__buttons">
       <BaseButton
         button-type="breadcrumb"
         :button-style="day.date === seancesStore.selectedDate ? '' : 'outlined'"
@@ -48,10 +56,25 @@ const updateDate = (date: string) => {
       >
         {{ day.name }}
       </BaseButton>
-      <input
+      <BaseButton
+        class="date-selector__date-picker"
+        button-type="breadcrumb"
+        button-style="outlined"
+        button-size="large"
+      >
+        <Datepicker
+          v-model="datePickerDate"
+          auto-apply="true"
+          close-on-auto-apply="true"
+          #input-icon
+        >
+          <CalendarIcon />
+        </Datepicker>
+      </BaseButton>
+      <!-- <input
         type="date"
         @input="updateDate(($event.target as HTMLInputElement).value)"
-      />
+      /> -->
     </div>
     <div class="date-selector__movies">
       <BaseSelect
@@ -92,11 +115,45 @@ const updateDate = (date: string) => {
     margin-bottom: 12px;
   }
 
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+  }
+
   &__actions {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+  }
+
+  &__date-picker {
+    position: relative;
+    padding: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    min-width: unset;
+
+    :deep(.dp__main, .dp__theme_light) {
+      width: 100%;
+      height: 100%;
+    }
+
+    :deep(.dp__pointer, .dp__input_readonly, .dp__input, dp__input_icon_pad, .dp__input_reg) {
+      border: none;
+      display: none;
+    }
+    :deep(.dp__icon, .dp__clear_icon) {
+      display: none;
+    }
+
+    :deep(.dp__input_icon) {
+      top: 27px;
+      right: -1px;
+    }
   }
 }
 </style>

@@ -11,6 +11,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@vuepic/vue-datepicker": "^3.4.6",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "normalize.css": "^8.0.1",
