@@ -64,17 +64,14 @@ watch(datePickerDate, (newDate) => {
       >
         <Datepicker
           v-model="datePickerDate"
-          auto-apply="true"
-          close-on-auto-apply="true"
-          #input-icon
+          :auto-apply="true"
+          :close-on-auto-apply="true"
         >
-          <CalendarIcon />
+          <template #input-icon>
+            <CalendarIcon />
+          </template>
         </Datepicker>
       </BaseButton>
-      <!-- <input
-        type="date"
-        @input="updateDate(($event.target as HTMLInputElement).value)"
-      /> -->
     </div>
     <div class="date-selector__movies">
       <BaseSelect
@@ -102,6 +99,11 @@ watch(datePickerDate, (newDate) => {
 
   &__movies {
     min-width: 250px;
+
+    :deep(.base-select__select) {
+      min-height: 56px;
+      margin-bottom: 0;
+    }
   }
 
   &__label {

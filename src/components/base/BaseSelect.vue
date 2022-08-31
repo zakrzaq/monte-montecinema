@@ -56,6 +56,7 @@ const props = withDefaults(
     border-radius: 0.5em;
     background-color: $athens-gray;
     margin-bottom: 15px;
+    outline: none;
   }
   &__option {
     background-color: $snow-white;
