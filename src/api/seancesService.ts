@@ -10,7 +10,7 @@ export const getAllSeance = async (): Promise<Seance[]> => {
 
 export const getDaySeance = async (date: string): Promise<Seance[]> => {
   const response = await axios.get(`/seances?date=${date}`) 
-  if (response) return response.data
+  if (response.data) return response.data
   return [] 
 }
 

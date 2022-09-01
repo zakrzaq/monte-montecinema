@@ -33,7 +33,7 @@ export const useSeancesStore = defineStore({
         const data = await getDaySeance(this.selectedDate);
         this.currentSeances = data;
       } catch (err) {
-        console.log(err);
+        console.error(err);
         this.currentSeances = [];
       }
     },

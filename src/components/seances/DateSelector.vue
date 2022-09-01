@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
+import { storeToRefs } from "pinia"
 import BaseButton from "../base/BaseButton.vue";
 import BaseSelect from "../base/BaseSelect.vue";
 import Datepicker from "@vuepic/vue-datepicker";
@@ -10,6 +11,7 @@ import { useMovieStore } from "@/stores/movies";
 import type { DaysList } from "@/types/days-list";
 const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
+const { selectedDate } = storeToRefs(seancesStore)
 
 const todayDate = new Date();
 
@@ -34,11 +36,6 @@ const daysList = computed(() => {
 const updateDate = (date: string) => {
   seancesStore.selectedDate = date;
 };
-
-const datePickerDate = ref("");
-watch(datePickerDate, (newDate) => {
-  updateDate(newDate);
-});
 </script>
 
 <template>
@@ -63,7 +60,7 @@ watch(datePickerDate, (newDate) => {
         button-size="large"
       >
         <Datepicker
-          v-model="datePickerDate"
+          v-model="selectedDate"
           :auto-apply="true"
           :close-on-auto-apply="true"
         >
