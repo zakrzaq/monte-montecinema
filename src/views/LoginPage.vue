@@ -1,16 +1,72 @@
 <script setup lang="ts">
+import { computed, ref } from "vue";
+import { useUserStore } from "@/stores/user";
+import validateEmail from "@/helpers/validateEmail";
 import BaseInput from "@/components/base/BaseInput.vue";
-import BaseButton from "@/component/base/BaseButton.vue";
+import BaseButton from "@/components/base/BaseButton.vue";
+import BaseCard from "../components/base/BaseCard.vue";
+import type { LoginForm } from "@/types/user";
+import { eachMinuteOfInterval } from "date-fns";
+const userStore = useUserStore();
+
+const loginFormData = ref<LoginForm>({
+  email: "",
+  password: "",
+});
+
+const emailValid = computed(() => {
+  return validateEmail(loginFormData.value.email);
+});
+const passwordValid = computed(() => {
+  return !!loginFormData.value.password;
+});
+
+const emailValidation = computed(() => {
+  return !emailValid.value ? "Please provide a valid email address" : "";
+});
+const passwordValidation = computed(() => {
+  return !passwordValid.value ? "Please provide a valid password" : "";
+});
+
+const submitForm = () => {
+  if (emailValid.value && passwordValid.value) return;
+  userStore.login({
+    email: loginFormData.value.email,
+    password: loginFormData.value.password,
+  });
+};
 </script>
 
 <template>
-  <div>
-    <h1>Hi there!<br />Care to log in/</h1>
-    <div>
-      <form action="">
-        <BaseInput>Email</BaseInput>
-        <BaseInput>Password</BaseInput>
-        <div>
+  <div class="login">
+    <h1 class="login__header heading-1">
+      Hi there!<br /><span class="gray">Care to log in?</span>
+    </h1>
+    <BaseCard class="login__form-wrapper">
+      <form
+        action=""
+        class="login__form"
+        novalidate
+        @submit.prevent="submitForm"
+      >
+        <BaseInput
+          input-name="email"
+          v-model="loginFormData.username"
+          placeholder="Something ending with monterail.com"
+          :valid="emailValid"
+          :validation="emailValidation"
+          >Email</BaseInput
+        >
+        <BaseInput
+          input-name="password"
+          v-model="loginFormData.password"
+          placeholder="Enter your password"
+          input-type="password"
+          :valid="passwordValid"
+          :validation="passwordValidation"
+          >Password</BaseInput
+        >
+        <div class="login__actions">
           <BaseButton button-size="large" button-type="secondary"
             >Register instead</BaseButton
           >
@@ -22,8 +78,54 @@ import BaseButton from "@/component/base/BaseButton.vue";
           >
         </div>
       </form>
-    </div>
+    </BaseCard>
+    <p class="login__footnote">
+      Did you forget your password? <a href="#" class="red">Reset it now</a>
+    </p>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.login {
+  width: 100%;
+  @include flex-vcenter-hcenter;
+  flex-direction: column;
+  &__header {
+    margin-top: 124px;
+    width: 600px;
+  }
+  &__form-wrapper {
+    margin-top: 40px;
+  }
+  &__form {
+    :deep(.base-input) {
+      margin-bottom: 24px;
+    }
+    :deep(.base-input__input) {
+      margin-top: 12px;
+    }
+  }
+  &__actions {
+    margin-top: 40px;
+    display: flex;
+    .button {
+      width: 100%;
+      padding: 19px 19px;
+    }
+  }
+  &__footnote {
+    margin: 40px 0;
+    width: 600px;
+    @include roboto(normal, 400);
+    font-size: 16px;
+    line-height: 170%;
+  }
+}
+
+.gray {
+  color: $jumbo;
+}
+.red {
+  color: $cherry-red;
+}
+</style>

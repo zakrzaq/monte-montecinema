@@ -57,6 +57,23 @@ const props = withDefaults(
     background-color: $athens-gray;
     margin-bottom: 15px;
     outline: none;
+
+    &::placeholder {
+      color: $input-pl-txt;
+    }
+    &:hover {
+      background: $input-bg-hover;
+      border-color: $input-bg-hover;
+    }
+    &:focus {
+      background: $input-bg-focus;
+      border-color: $input-brd-focus;
+      outline: 1px solid $dark-blue;
+    }
+    &--error {
+      background: $athens-gray;
+      border-color: $primary-bg;
+    }
   }
   &__option {
     background-color: $snow-white;
