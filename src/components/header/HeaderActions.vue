@@ -7,7 +7,7 @@ import Hamburger from "@/assets/icons/hamburger.svg?component";
   <div class="actions">
     <div class="actions__buttons">
       <BaseButton button-type="secondary" to="#">Register</BaseButton>
-      <BaseButton to="#">Login</BaseButton>
+      <BaseButton :to="{ name: 'LoginPage' }">Login</BaseButton>
     </div>
     <div class="actions__hamburger">
       <RouterLink to="#">

@@ -29,6 +29,11 @@ const router = createRouter({
       component: () => import("@/views/ContactPage.vue"),
     },
     {
+      path: "/login",
+      name: "LoginPage",
+      component: () => import("@/views/LoginPage.vue"),
+    },
+    {
       path: "/404",
       name: "404",
       component: () => import("@/views/NotFoundPage.vue"),
