@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
 
 export const defaultClient = axios.create({
@@ -12,15 +12,15 @@ defaultClient.interceptors.response.use(
   async (error) => {
     if (error.response.status === 401) {
       const userStore = useUserStore();
-      const router = useRouter();
+      // const router = useRouter();
       await userStore.logout();
-      router.push("/login");
+      // router.push("/login");
     }
     return Promise.reject(error);
   }
 );
 
-export const setAuthHeader = (authHeader) => {
+export const setAuthHeader = (authHeader: string) => {
   defaultClient.defaults.headers.common["Authorization"] = authHeader;
 };
 

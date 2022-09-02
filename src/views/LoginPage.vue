@@ -5,11 +5,10 @@ import validateEmail from "@/helpers/validateEmail";
 import BaseInput from "@/components/base/BaseInput.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseCard from "../components/base/BaseCard.vue";
-import type { LoginForm } from "@/types/user";
-import { eachMinuteOfInterval } from "date-fns";
+import type { LoginCredentials } from "@/types/user";
 const userStore = useUserStore();
 
-const loginFormData = ref<LoginForm>({
+const loginFormData = ref<LoginCredentials>({
   email: "",
   password: "",
 });
@@ -29,7 +28,8 @@ const passwordValidation = computed(() => {
 });
 
 const submitForm = () => {
-  if (emailValid.value && passwordValid.value) return;
+  console.log(loginFormData.value);
+  // if (emailValid.value && passwordValid.value) return;
   userStore.login({
     email: loginFormData.value.email,
     password: loginFormData.value.password,
@@ -51,7 +51,7 @@ const submitForm = () => {
       >
         <BaseInput
           input-name="email"
-          v-model="loginFormData.username"
+          v-model="loginFormData.email"
           placeholder="Something ending with monterail.com"
           :valid="emailValid"
           :validation="emailValidation"
