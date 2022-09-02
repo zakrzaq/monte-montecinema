@@ -30,12 +30,12 @@ const filteredTitleMovives = computed(() => {
 });
 
 const selectOptions = computed(() => {
-  return ["All categories", ...moviesStore.genreList] as string[];
+  return moviesStore.genreList as string[];
 });
 </script>
 
 <template>
-  <BreadCrumbs />
+  <BreadCrumbs first-title="Movies" />
   <div class="page-title">
     <h1 class="heading-1">All the movies</h1>
   </div>

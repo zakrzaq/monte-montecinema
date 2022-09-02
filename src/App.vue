@@ -1,11 +1,21 @@
 <script setup lang="ts">
 import TheHeader from "@/components/TheHeader.vue";
+import { storeToRefs } from 'pinia'
 import { useMovieStore } from "@/stores/movies";
-import { onMounted } from "vue";
+import { useSeancesStore } from "@/stores/seances";
+import { onMounted, watch } from "vue";
 const movieStore = useMovieStore();
+const seancesStore = useSeancesStore();
+const { selectedDate } = storeToRefs(seancesStore)
+
 onMounted(async () => {
   movieStore.fetchMovieList();
+  seancesStore.getCurrentSeances();
 });
+
+watch(selectedDate, () => {
+  seancesStore.getCurrentSeances();
+})
 </script>
 
 <template>

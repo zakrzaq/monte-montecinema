@@ -27,7 +27,11 @@ const movieDetails = computed<string>(() => {
 <template>
   <template v-if="selectedMovie">
     <div class="wrapper">
-      <BreadCrumb first-tier="/movies" :second-title="selectedMovie.title" />
+      <BreadCrumb
+        first-tier="/movies"
+        first-title="Movies"
+        :second-title="selectedMovie.title"
+      />
       <div class="single-movie">
         <div class="single-movie__description">
           <h1>{{ selectedMovie.title }}</h1>

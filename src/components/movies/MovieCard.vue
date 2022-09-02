@@ -24,7 +24,11 @@ const movieRoute = computed(() => {
       </p>
     </div>
     <p class="movie__length">{{ lengthToTime(props.movie.length) }}</p>
-    <img class="movie__poster" :src="props.movie.poster_url" alt="poster" />
+    <img
+      class="movie__poster"
+      :src="props.movie.poster_url"
+      :alt="`${movie.title} poster`"
+    />
     <p class="movie__genre">{{ props.movie.genre.name }}</p>
   </RouterLink>
 </template>

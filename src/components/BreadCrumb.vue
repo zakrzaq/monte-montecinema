@@ -6,6 +6,7 @@ import SeparatorIcon from "@/assets/icons/breadcrumb-arrow.svg?component";
 export interface Props {
   backPath?: string;
   firstTier?: string;
+  firstTitle?: string;
   secondTitle?: string;
   secondTier?: string;
 }
@@ -18,15 +19,31 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <div class="breadcrumbs">
-    <BaseButton button-type="breadcrumb" button-style="outlined" button-size="slim" :to="backPath">
+    <BaseButton
+      button-type="breadcrumb"
+      button-style="outlined"
+      button-size="slim"
+      :to="backPath"
+    >
       <LeftArrow />
       <span class="back-text">Back</span>
     </BaseButton>
-    <BaseButton button-type="breadcrumb" button-style="noborder" button-size="slim" :to="firstTier">
-      Movies
+    <BaseButton
+      button-type="breadcrumb"
+      button-style="noborder"
+      button-size="slim"
+      :to="firstTier"
+    >
+      {{ firstTitle }}
     </BaseButton>
     <SeparatorIcon v-if="secondTitle" />
-    <BaseButton v-if="secondTitle" button-type="breadcrumb" button-style="noborder" button-size="slim" :to="secondTier">
+    <BaseButton
+      v-if="secondTitle"
+      button-type="breadcrumb"
+      button-style="noborder"
+      button-size="slim"
+      :to="secondTier"
+    >
       {{ secondTitle }}
     </BaseButton>
   </div>

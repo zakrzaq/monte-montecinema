@@ -47,6 +47,7 @@ const buttonClasses = computed(() => {
 .button {
   @include roboto-mono();
   @include flex-vcenter-hcenter;
+  display: inline-flex;
   text-decoration: none;
   outline: none;
   min-width: 115px;
