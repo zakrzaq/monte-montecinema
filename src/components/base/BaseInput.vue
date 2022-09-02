@@ -28,7 +28,7 @@ const toggleViewPassword = () => {
 const inputClasses = computed(() => {
   return [
     "base-input__input",
-    props.validation ? "base-input_input--error" : "",
+    props.validation ? "base-input__input--error" : "",
   ];
 });
 </script>
@@ -71,11 +71,13 @@ const inputClasses = computed(() => {
     display: block;
     position: relative;
     width: 100%;
+    height: 56px;
     padding: 1em 1.5em;
     border: 0;
     border-radius: 0.5em;
     background-color: $athens-gray;
-    margin-bottom: 15px;
+    margin-top: 12px;
+    margin-bottom: 5px;
     outline: none;
 
     &--error {
@@ -107,8 +109,8 @@ const inputClasses = computed(() => {
     margin: 12px 0;
   }
   &__button {
-    width: 50px;
-    height: 50px;
+    width: 56px;
+    height: 56px;
     border: none;
     background-color: rgba(0, 0, 0, 0);
     position: absolute;
@@ -118,6 +120,13 @@ const inputClasses = computed(() => {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &__validations {
+    @include roboto(normal, 400);
+    font-size: 14px;
+    line-height: 170%;
+    color: $cherry-red;
   }
 }
 </style>

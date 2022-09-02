@@ -91,9 +91,28 @@ const buttonClasses = computed(() => {
     color: $snow-white;
     background-color: $tuna;
 
+    &:hover {
+      background-color: lighten($tuna, 50%);
+      border-color: lighten($tuna, 50%);
+    }
+
+    &:focus {
+      border-color: $athens-gray;
+    }
+
     &--outlined {
       color: $tuna;
       background-color: transparent;
+      border: 2px solid $tuna;
+
+      &:hover {
+        color: lighten($tuna, 50%);
+        border-color: lighten($tuna, 50%);
+      }
+
+      &:focus {
+        border-color: $athens-gray;
+      }
     }
 
     &--noborder {

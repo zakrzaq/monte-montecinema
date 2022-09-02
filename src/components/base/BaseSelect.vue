@@ -1,16 +1,26 @@
 <script setup lang="ts">
+import { computed } from "vue";
 const props = withDefaults(
   defineProps<{
     options: string[];
     id?: string | number;
     modelValue: string;
+    validation?: string;
   }>(),
   {
     options: () => [],
     modelValue: "",
     id: "",
+    validation: "",
   }
 );
+
+const selectClasses = computed(() => {
+  return [
+    "base-select__select",
+    props.validation ? "base-select__select--error" : "",
+  ];
+});
 </script>
 
 <template>
@@ -35,6 +45,9 @@ const props = withDefaults(
         </option>
       </select>
     </label>
+    <div v-if="props.validation" class="base-select__validations">
+      <p>{{ validation }}</p>
+    </div>
   </div>
 </template>
 
@@ -51,6 +64,7 @@ const props = withDefaults(
   &__select {
     display: block;
     width: 100%;
+    height: 56px;
     padding: 1em 1.5em;
     border: 0;
     border-radius: 0.5em;
@@ -78,6 +92,13 @@ const props = withDefaults(
   &__option {
     background-color: $snow-white;
     color: $tuna;
+  }
+
+  &__validations {
+    @include roboto(normal, 400);
+    font-size: 14px;
+    line-height: 170%;
+    color: $cherry-red;
   }
 }
 </style>
