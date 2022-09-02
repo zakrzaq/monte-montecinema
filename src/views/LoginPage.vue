@@ -5,6 +5,7 @@ import validateEmail from "@/helpers/validateEmail";
 import BaseInput from "@/components/base/BaseInput.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseCard from "../components/base/BaseCard.vue";
+import touchAll from "@/helpers/touchAll";
 import type { LoginCredentials } from "@/types/user";
 const userStore = useUserStore();
 
@@ -12,6 +13,15 @@ const loginFormData = ref<LoginCredentials>({
   email: "",
   password: "",
 });
+
+const formBlur = ref({
+  email: false,
+  password: false,
+});
+
+const touchForm = () => {
+  touchAll(formBlur.value);
+};
 
 const emailValid = computed(() => {
   return validateEmail(loginFormData.value.email);
@@ -21,15 +31,19 @@ const passwordValid = computed(() => {
 });
 
 const emailValidation = computed(() => {
-  return !emailValid.value ? "Please provide a valid email address" : "";
+  return !emailValid.value && formBlur.value.email
+    ? "Please provide a valid email address"
+    : "";
 });
 const passwordValidation = computed(() => {
-  return !passwordValid.value ? "Please provide a valid password" : "";
+  return !passwordValid.value && formBlur.value.password
+    ? "Please provide a valid password"
+    : "";
 });
 
 const submitForm = () => {
-  console.log(loginFormData.value);
-  // if (emailValid.value && passwordValid.value) return;
+  touchForm();
+  if (!emailValid.value || !passwordValid.value) return;
   userStore.login({
     email: loginFormData.value.email,
     password: loginFormData.value.password,
@@ -55,6 +69,7 @@ const submitForm = () => {
           placeholder="Something ending with monterail.com"
           :valid="emailValid"
           :validation="emailValidation"
+          @blur="formBlur.email = true"
           >Email</BaseInput
         >
         <BaseInput
@@ -64,6 +79,7 @@ const submitForm = () => {
           input-type="password"
           :valid="passwordValid"
           :validation="passwordValidation"
+          @blur="formBlur.password = true"
           >Password</BaseInput
         >
         <div class="login__actions">

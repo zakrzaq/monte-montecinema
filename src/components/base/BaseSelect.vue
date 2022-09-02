@@ -34,11 +34,12 @@ const selectClasses = computed(() => {
         @change="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "
+        @blur="$emit('blur')"
       >
         <option
           v-for="option in props.options"
           :key="option"
-          class="base-select__option"
+          :class="selectClasses"
           :value="option"
         >
           {{ option }}
@@ -66,6 +67,7 @@ const selectClasses = computed(() => {
     width: 100%;
     height: 56px;
     padding: 1em 1.5em;
+    margin-top: 12px;
     border: 0;
     border-radius: 0.5em;
     background-color: $athens-gray;

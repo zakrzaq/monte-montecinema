@@ -2,6 +2,17 @@
 import LogoImage from "@/assets/images/logo.svg?component";
 import HeaderActions from "@/components/header/HeaderActions.vue";
 import HeaderLinks from "@/components/header/HeaderLinks.vue";
+import HeaderBanner from "@/components/header/HeaderBanner.vue";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
+
+const showActions = computed(() => {
+  return route.matched.some((el) => el.path !== "/login");
+});
+const showBanner = computed(() => {
+  return route.matched.some((el) => el.path === "/login");
+});
 </script>
 
 <template>
@@ -9,8 +20,9 @@ import HeaderLinks from "@/components/header/HeaderLinks.vue";
     <RouterLink :to="{ name: 'HomePage' }" class="logo">
       <LogoImage />
     </RouterLink>
-    <HeaderLinks />
-    <HeaderActions />
+    <HeaderLinks v-if="showActions" />
+    <HeaderActions v-if="showActions" />
+    <HeaderBanner v-if="showBanner" />
   </header>
 </template>
 

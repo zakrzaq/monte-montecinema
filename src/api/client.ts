@@ -1,5 +1,6 @@
 import axios from "axios";
-// import { useRouter } from "vue-router";
+import router from "./../router";
+
 import { useUserStore } from "@/stores/user";
 
 export const defaultClient = axios.create({
@@ -12,9 +13,8 @@ defaultClient.interceptors.response.use(
   async (error) => {
     if (error.response.status === 401) {
       const userStore = useUserStore();
-      // const router = useRouter();
       await userStore.logout();
-      // router.push("/login");
+      router.push("/login");
     }
     return Promise.reject(error);
   }

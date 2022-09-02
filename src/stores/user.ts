@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-
+import router from "./../router";
 import { login, register, logout } from "@/api/userService";
 import { removeAuthHeader, setAuthHeader } from "@/api/client";
 import type { User, LoginCredentials, RegisterCredentials } from "@/types/user";
@@ -55,9 +55,9 @@ export const useUserStore = defineStore("userStore", {
       const response = await login(credentials);
       const authHeader = response.headers.authorization;
       const authToken = authHeader.slice("Bearer ".length);
-      console.log(authToken);
       setAuthHeader(authHeader);
       this.setUserData({ authToken, user: response.data });
+      router.push({ name: "HomePage" });
     },
     async register(credentials: RegisterCredentials) {
       if (this.isLoggedIn) await logout();

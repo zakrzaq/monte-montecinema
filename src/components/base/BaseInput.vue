@@ -48,6 +48,7 @@ const inputClasses = computed(() => {
         @input="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "
+        @blur="$emit('blur')"
       />
       <button
         v-if="props.inputType === 'password'"
