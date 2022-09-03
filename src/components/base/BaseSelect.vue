@@ -5,20 +5,20 @@ const props = withDefaults(
     options: string[];
     id?: string | number;
     modelValue: string;
-    validation?: string;
+    errorMessage?: string;
   }>(),
   {
     options: () => [],
     modelValue: "",
     id: "",
-    validation: "",
+    errorMessage: "",
   }
 );
 
 const selectClasses = computed(() => {
   return [
     "base-select__select",
-    props.validation ? "base-select__select--error" : "",
+    props.errorMessage ? "base-select__select--error" : "",
   ];
 });
 </script>
@@ -29,7 +29,7 @@ const selectClasses = computed(() => {
       ><slot />
       <select
         class="base-select__select"
-        :modelValue="props.modelValue"
+        :modelValue="modelValue"
         id="id"
         @change="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
@@ -37,7 +37,7 @@ const selectClasses = computed(() => {
         @blur="$emit('blur')"
       >
         <option
-          v-for="option in props.options"
+          v-for="option in options"
           :key="option"
           :class="selectClasses"
           :value="option"
@@ -46,8 +46,8 @@ const selectClasses = computed(() => {
         </option>
       </select>
     </label>
-    <div v-if="props.validation" class="base-select__validations">
-      <p>{{ validation }}</p>
+    <div v-if="errorMessage" class="base-select__validations">
+      <p>{{ errorMessage }}</p>
     </div>
   </div>
 </template>

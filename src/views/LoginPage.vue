@@ -64,32 +64,29 @@ const submitForm = () => {
         @submit.prevent="submitForm"
       >
         <BaseInput
-          input-name="email"
+          name="email"
           v-model="loginFormData.email"
           placeholder="Something ending with monterail.com"
           :valid="emailValid"
-          :validation="emailValidation"
+          :errorMessage="emailValidation"
           @blur="formBlur.email = true"
           >Email</BaseInput
         >
         <BaseInput
-          input-name="password"
+          name="password"
           v-model="loginFormData.password"
           placeholder="Enter your password"
-          input-type="password"
+          type="password"
           :valid="passwordValid"
-          :validation="passwordValidation"
+          :errorMessage="passwordValidation"
           @blur="formBlur.password = true"
           >Password</BaseInput
         >
         <div class="login__actions">
-          <BaseButton button-size="large" button-type="secondary"
+          <BaseButton size="large" type="secondary"
             >Register instead</BaseButton
           >
-          <BaseButton
-            button-size="large"
-            button-type="primary"
-            button-kind="submit"
+          <BaseButton size="large" type="primary" kind="submit"
             >Log in</BaseButton
           >
         </div>

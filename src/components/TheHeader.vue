@@ -20,8 +20,10 @@ const showBanner = computed(() => {
     <RouterLink :to="{ name: 'HomePage' }" class="logo">
       <LogoImage />
     </RouterLink>
-    <HeaderLinks v-if="showActions" />
-    <HeaderActions v-if="showActions" />
+    <template v-if="showActions">
+      <HeaderLinks />
+      <HeaderActions />
+    </template>
     <HeaderBanner v-if="showBanner" />
   </header>
 </template>

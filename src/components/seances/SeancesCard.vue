@@ -5,7 +5,7 @@ import type { Movie } from "@/types/movie";
 import type { Seance } from "@/types/seance";
 withDefaults(
   defineProps<{
-    movie: Movie;
+    movie: Movie | undefined;
     seances: Seance[];
   }>(),
   {}
@@ -29,9 +29,9 @@ withDefaults(
             v-for="seance in seances"
             :key="seance.id"
             to="#"
-            button-type="primary"
-            button-style="outlined"
-            button-size="medium"
+            type="primary"
+            style="outlined"
+            size="medium"
           >
             {{ seance.datetime.substring(11, 16) }}
           </BaseButton>

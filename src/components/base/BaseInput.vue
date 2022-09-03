@@ -5,17 +5,17 @@ import EyeIcon from "@/assets/icons/eye.svg?component";
 const props = withDefaults(
   defineProps<{
     modelValue?: string;
-    inputType?: string;
-    inputName?: string;
+    type?: string;
+    name?: string;
     placeholder?: string;
-    validation?: string;
+    errorMessage?: string;
   }>(),
   {
     modelValue: "",
     inputValue: "text",
-    inputName: "",
+    name: "",
     placeholder: "...",
-    validation: "",
+    errorMessage: "",
   }
 );
 
@@ -28,30 +28,30 @@ const toggleViewPassword = () => {
 const inputClasses = computed(() => {
   return [
     "base-input__input",
-    props.validation ? "base-input__input--error" : "",
+    props.errorMessage ? "base-input__input--error" : "",
   ];
 });
 </script>
 
 <template>
   <div class="base-input">
-    <label :for="props.inputName" class="base-input__label"
+    <label :for="name" class="base-input__label"
       ><slot />
       <input
-        :id="props.inputName"
+        :id="name"
         :class="inputClasses"
         required
-        :type="passwordVisible ? 'text' : inputType"
-        :placeholder="props.placeholder"
-        :modelValue="props.modelValue"
-        :name="props.inputType"
+        :type="passwordVisible ? 'text' : type"
+        :placeholder="placeholder"
+        :modelValue="modelValue"
+        :name="type"
         @input="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "
         @blur="$emit('blur')"
       />
       <button
-        v-if="props.inputType === 'password'"
+        v-if="type === 'password'"
         type="button"
         class="base-input__button"
         @click="toggleViewPassword"
@@ -59,8 +59,8 @@ const inputClasses = computed(() => {
         <EyeIcon />
       </button>
     </label>
-    <div v-if="props.validation" class="base-input__validations">
-      <p>{{ validation }}</p>
+    <div v-if="errorMessage" class="base-input__validations">
+      <p>{{ errorMessage }}</p>
     </div>
   </div>
 </template>

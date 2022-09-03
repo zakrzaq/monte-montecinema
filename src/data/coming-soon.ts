@@ -1,4 +1,4 @@
-import type { Movie } from '@/types/movie'
+import type { Movie } from "@/types/movie";
 
 export const comingSoon: Movie[] = [
   {
@@ -43,4 +43,3 @@ export const comingSoon: Movie[] = [
       "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
   },
 ];
-

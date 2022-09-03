@@ -4,7 +4,7 @@ import router from "./../router";
 import { useUserStore } from "@/stores/user";
 
 export const defaultClient = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: import.meta.env.VITE_API_URL,
   headers: { "Content-Type": "application/json" },
 });
 
@@ -14,7 +14,7 @@ defaultClient.interceptors.response.use(
     if (error.response.status === 401) {
       const userStore = useUserStore();
       await userStore.logout();
-      router.push("/login");
+      router.push({ name: "HomePage" });
     }
     return Promise.reject(error);
   }

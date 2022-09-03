@@ -10,7 +10,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
         Best movies, best experiences, best people. And all that doesn’t exist.
         Yikes.
       </p>
-      <BaseButton to="#" button-size="large">Book a ticket</BaseButton>
+      <BaseButton to="#" size="large">Book a ticket</BaseButton>
     </div>
     <div class="hero__image">
       <img

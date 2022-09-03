@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { useRoute } from "vue-router"
+import { useRoute } from "vue-router";
 import { useSeancesStore } from "@/stores/seances";
 import { useMovieStore } from "@/stores/movies";
 import BreadCrumb from "@/components/BreadCrumb.vue";
@@ -9,7 +9,7 @@ import DateSelector from "@/components/seances/DateSelector.vue";
 import { prettyDate } from "@/helpers/prettyDate";
 const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
-const route = useRoute()
+const route = useRoute();
 
 const currentMovies = computed(() => {
   return seancesStore.uniqueMovies.map((movie) => ({

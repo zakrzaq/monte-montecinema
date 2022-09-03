@@ -24,8 +24,8 @@ const handleLogin = () => {
 <template>
   <div class="actions">
     <div class="actions__buttons">
-      <BaseButton button-type="secondary" to="#">Register</BaseButton>
-      <BaseButton button-kind="button" @click="handleLogin">{{
+      <BaseButton type="secondary" to="#">Register</BaseButton>
+      <BaseButton kind="button" @click="handleLogin">{{
         loginButtonLabel
       }}</BaseButton>
     </div>
