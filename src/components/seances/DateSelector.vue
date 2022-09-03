@@ -45,7 +45,7 @@ const updateDate = (date: string) => {
     <div class="date-selector__buttons">
       <BaseButton
         type="breadcrumb"
-        :style="day.date === seancesStore.selectedDate ? '' : 'outlined'"
+        :modifier="day.date === seancesStore.selectedDate ? '' : 'outlined'"
         size="large"
         v-for="day in daysList"
         :key="day.id"
@@ -56,7 +56,7 @@ const updateDate = (date: string) => {
       <BaseButton
         class="date-selector__date-picker"
         type="breadcrumb"
-        style="outlined"
+        modifier="outlined"
         size="large"
       >
         <Datepicker

@@ -30,7 +30,7 @@ withDefaults(
             :key="seance.id"
             to="#"
             type="primary"
-            style="outlined"
+            modifier="outlined"
             size="medium"
           >
             {{ seance.datetime.substring(11, 16) }}

@@ -7,14 +7,14 @@ const props = withDefaults(
     kind?: "button" | "submit";
     type?: "primary" | "secondary" | "tertiary" | "breadcrumb";
     size?: "small" | "regular" | "medium" | "large" | "slim";
-    style?: "outlined" | "noborder" | "";
+    modifier?: "outlined" | "noborder" | "";
     to?: RouteLocationRaw;
   }>(),
   {
     kind: "button",
     type: "primary",
     size: "regular",
-    style: "",
+    modifier: "",
     to: "",
   }
 );
@@ -22,7 +22,7 @@ const props = withDefaults(
 const buttonClasses = computed(() => {
   return [
     "button",
-    `button--${props.type}${props.style ? `--${props.style}` : ""}`,
+    `button--${props.type}${props.modifier ? `--${props.modifier}` : ""}`,
     `button--${props.size}`,
   ];
 });
