@@ -4,17 +4,17 @@ import type { RouteLocationRaw } from "vue-router";
 
 const props = withDefaults(
   defineProps<{
-    buttonKind?: "button" | "submit";
-    buttonType?: "primary" | "secondary" | "tertiary" | "breadcrumb";
-    buttonSize?: "small" | "regular" | "medium" | "large" | "slim";
-    buttonStyle?: "outlined" | "noborder" | "";
+    kind?: "button" | "submit";
+    type?: "primary" | "secondary" | "tertiary" | "breadcrumb";
+    size?: "small" | "regular" | "medium" | "large" | "slim";
+    modifier?: "outlined" | "noborder" | "";
     to?: RouteLocationRaw;
   }>(),
   {
-    buttonKind: "button",
-    buttonType: "primary",
-    buttonSize: "regular",
-    buttonStyle: "",
+    kind: "button",
+    type: "primary",
+    size: "regular",
+    modifier: "",
     to: "",
   }
 );
@@ -22,22 +22,20 @@ const props = withDefaults(
 const buttonClasses = computed(() => {
   return [
     "button",
-    `button--${props.buttonType}${
-      props.buttonStyle ? `--${props.buttonStyle}` : ""
-    }`,
-    `button--${props.buttonSize}`,
+    `button--${props.type}${props.modifier ? `--${props.modifier}` : ""}`,
+    `button--${props.size}`,
   ];
 });
 </script>
 
 <template>
-  <template v-if="!props.to">
+  <template v-if="!to">
     <button :class="buttonClasses" @click="$emit('click', $event)">
       <slot />
     </button>
   </template>
   <template v-else>
-    <RouterLink :to="props.to" :class="buttonClasses">
+    <RouterLink :to="to" :class="buttonClasses">
       <slot />
     </RouterLink>
   </template>
@@ -91,9 +89,28 @@ const buttonClasses = computed(() => {
     color: $snow-white;
     background-color: $tuna;
 
+    &:hover {
+      background-color: lighten($tuna, 50%);
+      border-color: lighten($tuna, 50%);
+    }
+
+    &:focus {
+      border-color: $athens-gray;
+    }
+
     &--outlined {
       color: $tuna;
       background-color: transparent;
+      border: 2px solid $tuna;
+
+      &:hover {
+        color: lighten($tuna, 50%);
+        border-color: lighten($tuna, 50%);
+      }
+
+      &:focus {
+        border-color: $athens-gray;
+      }
     }
 
     &--noborder {

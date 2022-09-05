@@ -1,16 +1,26 @@
 <script setup lang="ts">
+import { computed } from "vue";
 const props = withDefaults(
   defineProps<{
     options: string[];
     id?: string | number;
     modelValue: string;
+    errorMessage?: string;
   }>(),
   {
     options: () => [],
     modelValue: "",
     id: "",
+    errorMessage: "",
   }
 );
+
+const selectClasses = computed(() => {
+  return [
+    "base-select__select",
+    props.errorMessage ? "base-select__select--error" : "",
+  ];
+});
 </script>
 
 <template>
@@ -19,22 +29,26 @@ const props = withDefaults(
       ><slot />
       <select
         class="base-select__select"
-        :modelValue="props.modelValue"
+        :modelValue="modelValue"
         id="id"
         @change="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "
+        @blur="$emit('blur')"
       >
         <option
-          v-for="option in props.options"
+          v-for="option in options"
           :key="option"
-          class="base-select__option"
+          :class="selectClasses"
           :value="option"
         >
           {{ option }}
         </option>
       </select>
     </label>
+    <div v-if="errorMessage" class="base-select__validations">
+      <p>{{ errorMessage }}</p>
+    </div>
   </div>
 </template>
 
@@ -51,16 +65,42 @@ const props = withDefaults(
   &__select {
     display: block;
     width: 100%;
+    height: 56px;
     padding: 1em 1.5em;
+    margin-top: 12px;
     border: 0;
     border-radius: 0.5em;
     background-color: $athens-gray;
     margin-bottom: 15px;
     outline: none;
+
+    &::placeholder {
+      color: $input-pl-txt;
+    }
+    &:hover {
+      background: $input-bg-hover;
+      border-color: $input-bg-hover;
+    }
+    &:focus {
+      background: $input-bg-focus;
+      border-color: $input-brd-focus;
+      outline: 1px solid $dark-blue;
+    }
+    &--error {
+      background: $athens-gray;
+      border-color: $primary-bg;
+    }
   }
   &__option {
     background-color: $snow-white;
     color: $tuna;
+  }
+
+  &__validations {
+    @include roboto(normal, 400);
+    font-size: 14px;
+    line-height: 170%;
+    color: $cherry-red;
   }
 }
 </style>

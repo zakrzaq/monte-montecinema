@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import TheHeader from "@/components/TheHeader.vue";
-import { storeToRefs } from 'pinia'
+import { storeToRefs } from "pinia";
 import { useMovieStore } from "@/stores/movies";
 import { useSeancesStore } from "@/stores/seances";
 import { onMounted, watch } from "vue";
 const movieStore = useMovieStore();
 const seancesStore = useSeancesStore();
-const { selectedDate } = storeToRefs(seancesStore)
+const { selectedDate } = storeToRefs(seancesStore);
 
 onMounted(async () => {
   movieStore.fetchMovieList();
@@ -15,7 +15,7 @@ onMounted(async () => {
 
 watch(selectedDate, () => {
   seancesStore.getCurrentSeances();
-})
+});
 </script>
 
 <template>

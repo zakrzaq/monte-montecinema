@@ -20,18 +20,18 @@ withDefaults(defineProps<Props>(), {
 <template>
   <div class="breadcrumbs">
     <BaseButton
-      button-type="breadcrumb"
-      button-style="outlined"
-      button-size="slim"
+      type="breadcrumb"
+      modifier="outlined"
+      size="slim"
       :to="backPath"
     >
       <LeftArrow />
       <span class="back-text">Back</span>
     </BaseButton>
     <BaseButton
-      button-type="breadcrumb"
-      button-style="noborder"
-      button-size="slim"
+      type="breadcrumb"
+      modifier="noborder"
+      size="slim"
       :to="firstTier"
     >
       {{ firstTitle }}
@@ -39,9 +39,9 @@ withDefaults(defineProps<Props>(), {
     <SeparatorIcon v-if="secondTitle" />
     <BaseButton
       v-if="secondTitle"
-      button-type="breadcrumb"
-      button-style="noborder"
-      button-size="slim"
+      type="breadcrumb"
+      modifier="noborder"
+      size="slim"
       :to="secondTier"
     >
       {{ secondTitle }}

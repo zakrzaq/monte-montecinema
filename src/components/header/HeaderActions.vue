@@ -1,13 +1,33 @@
 <script setup lang="ts">
 import BaseButton from "@/components/base/BaseButton.vue";
 import Hamburger from "@/assets/icons/hamburger.svg?component";
+import { useUserStore } from "@/stores/user";
+import { useRouter } from "vue-router";
+import { computed } from "vue";
+const userStore = useUserStore();
+const router = useRouter();
+
+const loginButtonLabel = computed(() => {
+  return userStore.isLoggedIn ? "Logout" : "Login";
+});
+
+const handleLogin = () => {
+  if (userStore.isLoggedIn) {
+    userStore.logout();
+    router.push({ name: "LoginPage" });
+  } else {
+    router.push({ name: "LoginPage" });
+  }
+};
 </script>
 
 <template>
   <div class="actions">
     <div class="actions__buttons">
-      <BaseButton button-type="secondary" to="#">Register</BaseButton>
-      <BaseButton to="#">Login</BaseButton>
+      <BaseButton type="secondary" to="#">Register</BaseButton>
+      <BaseButton kind="button" @click="handleLogin">{{
+        loginButtonLabel
+      }}</BaseButton>
     </div>
     <div class="actions__hamburger">
       <RouterLink to="#">

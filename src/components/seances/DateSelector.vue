@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { storeToRefs } from "pinia"
+import { storeToRefs } from "pinia";
 import BaseButton from "../base/BaseButton.vue";
 import BaseSelect from "../base/BaseSelect.vue";
 import Datepicker from "@vuepic/vue-datepicker";
@@ -11,7 +11,7 @@ import { useMovieStore } from "@/stores/movies";
 import type { DaysList } from "@/types/days-list";
 const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
-const { selectedDate } = storeToRefs(seancesStore)
+const { selectedDate } = storeToRefs(seancesStore);
 
 const todayDate = new Date();
 
@@ -44,9 +44,9 @@ const updateDate = (date: string) => {
     <label class="date-selector__label">Movies</label>
     <div class="date-selector__buttons">
       <BaseButton
-        button-type="breadcrumb"
-        :button-style="day.date === seancesStore.selectedDate ? '' : 'outlined'"
-        button-size="large"
+        type="breadcrumb"
+        :modifier="day.date === seancesStore.selectedDate ? '' : 'outlined'"
+        size="large"
         v-for="day in daysList"
         :key="day.id"
         @click="updateDate(day.date)"
@@ -55,9 +55,9 @@ const updateDate = (date: string) => {
       </BaseButton>
       <BaseButton
         class="date-selector__date-picker"
-        button-type="breadcrumb"
-        button-style="outlined"
-        button-size="large"
+        type="breadcrumb"
+        modifier="outlined"
+        size="large"
       >
         <Datepicker
           v-model="selectedDate"

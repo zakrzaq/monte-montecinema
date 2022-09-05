@@ -40,7 +40,7 @@ const selectOptions = computed(() => {
     <h1 class="heading-1">All the movies</h1>
   </div>
   <div class="controls">
-    <BaseInput v-model="query" input-name="search">Search</BaseInput>
+    <BaseInput v-model="query" name="search">Search</BaseInput>
     <BaseSelect v-model="category" :options="selectOptions"
       >Category</BaseSelect
     >
