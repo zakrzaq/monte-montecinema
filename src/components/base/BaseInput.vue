@@ -59,6 +59,7 @@ const inputClasses = computed(() => {
         <EyeIcon />
       </button>
     </label>
+    <div class="base-input__message"><slot name="message"></slot></div>
     <div v-if="errorMessage" class="base-input__validations">
       <p>{{ errorMessage }}</p>
     </div>
@@ -121,6 +122,10 @@ const inputClasses = computed(() => {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &__message {
+    margin-top: 8px;
   }
 
   &__validations {

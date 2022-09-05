@@ -14,7 +14,7 @@ defaultClient.interceptors.response.use(
     if (error.response.status === 401) {
       const userStore = useUserStore();
       await userStore.logout();
-      router.push({ name: "HomePage" });
+      router.push({ name: "LoginPage" });
     }
     return Promise.reject(error);
   }

@@ -6,7 +6,9 @@ export const register = async (credentials: RegisterCredentials) =>
     user: {
       email: credentials.email,
       password: credentials.password,
-      date_of_birth: "1990-01-01",
+      first_name: credentials.first_name,
+      last_name: credentials.last_name,
+      date_of_birth: credentials.date_of_birth,
     },
   });
 
