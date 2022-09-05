@@ -11,18 +11,27 @@ const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
 const route = useRoute();
 
+const props = defineProps<{
+  selectedMovie?: number;
+}>();
+
 const currentMovies = computed(() => {
   return seancesStore.uniqueMovies.map((movie) => ({
     id: movie,
     genre: movieStore.movieById(movie)?.genre.name,
+    title: movieStore.movieById(movie)?.title,
   }));
 });
-const selectedCategory = ref("All categories");
-const moviesByCategory = computed(() => {
-  return selectedCategory.value === "All categories"
+const selectedTitle = ref(
+  props.selectedMovie
+    ? movieStore.movieById(props.selectedMovie)?.title
+    : "All movies"
+);
+const moviesByTitle = computed(() => {
+  return selectedTitle.value === "All movies"
     ? currentMovies.value
     : currentMovies.value.filter(
-        (movie) => movie.genre === selectedCategory.value
+        (movie) => movie.title === selectedTitle.value
       );
 });
 </script>
@@ -35,10 +44,10 @@ const moviesByCategory = computed(() => {
         prettyDate(seancesStore.selectedDate)
       }}</span>
     </h1>
-    <DateSelector v-model="selectedCategory" />
+    <DateSelector v-model="selectedTitle" />
     <div>
       <SeancesCard
-        v-for="movie in moviesByCategory"
+        v-for="movie in moviesByTitle"
         :key="movie.id"
         :movie="movieStore.movieById(movie.id)"
         :seances="seancesStore.seancesByMovie(movie.id)"

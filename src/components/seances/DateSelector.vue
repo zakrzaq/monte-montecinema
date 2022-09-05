@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
+import { useRoute } from "vue-router";
 import BaseButton from "../base/BaseButton.vue";
 import BaseSelect from "../base/BaseSelect.vue";
 import Datepicker from "@vuepic/vue-datepicker";
@@ -11,6 +12,7 @@ import { useMovieStore } from "@/stores/movies";
 import type { DaysList } from "@/types/days-list";
 const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
+const route = useRoute();
 const { selectedDate } = storeToRefs(seancesStore);
 
 const todayDate = new Date();
@@ -36,12 +38,20 @@ const daysList = computed(() => {
 const updateDate = (date: string) => {
   seancesStore.selectedDate = date;
 };
+
+const showMoviesDropdown = computed(() => {
+  if (route.path === "/") return "";
+  if (route.path === "/screenings") return "";
+  return "hidden";
+});
 </script>
 
 <template>
   <div class="date-selector">
     <label class="date-selector__label">Days</label>
-    <label class="date-selector__label">Movies</label>
+    <label class="date-selector__label" :class="showMoviesDropdown"
+      >Movies</label
+    >
     <div class="date-selector__buttons">
       <BaseButton
         type="breadcrumb"
@@ -70,10 +80,10 @@ const updateDate = (date: string) => {
         </Datepicker>
       </BaseButton>
     </div>
-    <div class="date-selector__movies">
+    <div class="date-selector__movies" :class="showMoviesDropdown">
       <BaseSelect
         name=""
-        :options="movieStore.genreList"
+        :options="movieStore.titleList"
         @change="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "
@@ -154,5 +164,9 @@ const updateDate = (date: string) => {
       right: -1px;
     }
   }
+}
+
+.hidden {
+  visibility: hidden;
 }
 </style>

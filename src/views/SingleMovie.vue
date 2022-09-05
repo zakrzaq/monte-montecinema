@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import BreadCrumb from "@/components/BreadCrumb.vue";
+import ScreeningsPage from "@/views/ScreeningsPage.vue";
 import { useMovieStore } from "@/stores/movies";
 import { useRoute } from "vue-router";
 import lengthToTime from "@/helpers/lengthToTime";
@@ -51,7 +52,9 @@ const movieDetails = computed<string>(() => {
           />
         </div>
       </div>
-      <div class="movie-screening">Screenings to come</div>
+      <div class="movie-screening">
+        <ScreeningsPage :selected-movie="+selectedId" />
+      </div>
     </div>
   </template>
   <template v-else> Movie not found... </template>

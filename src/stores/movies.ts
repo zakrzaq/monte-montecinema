@@ -22,6 +22,9 @@ export const useMovieStore = defineStore({
         ...new Set(this.movieList.map((movie) => movie.genre.name)),
       ];
     },
+    titleList: (state) => {
+      return ["All movies", ...state.movieList.map((movie) => movie.title)];
+    },
     movieById: (state) => {
       return (id: number) => state.movieList.find((movie) => movie.id === id);
     },
