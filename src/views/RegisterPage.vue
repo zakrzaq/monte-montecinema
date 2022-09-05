@@ -7,6 +7,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import BaseCheckbox from "@/components/base/BaseCheckbox.vue";
 import BaseCard from "../components/base/BaseCard.vue";
 import type { RegisterCredentials } from "@/types/user";
+import router from "@/router";
 const userStore = useUserStore();
 
 const steps = ref(1);
@@ -98,7 +99,7 @@ const getWarningMessageClass = (validator: ComputedRef<string> | boolean) => {
     ];
 };
 
-const submitForm = () => {
+const submitForm = async () => {
   if (steps.value === 1) {
     formBlur.value.email = true;
     formBlur.value.password = true;
@@ -113,11 +114,16 @@ const submitForm = () => {
       !firstNameValid.value ||
       !lastNameValid.value ||
       !dateOfBirthValid.value ||
-      privacy_policy.value
+      !privacy_policy.value
     )
       return;
-    console.log(formData.value);
-    userStore.register(formData.value);
+    try {
+      console.log(formData.value);
+      await userStore.register(formData.value);
+      router.push({ name: "UserPage" });
+    } catch (err) {
+      console.error(err);
+    }
   }
 };
 </script>
@@ -202,9 +208,11 @@ const submitForm = () => {
           </BaseCheckbox>
         </template>
         <div class="register__actions">
-          <BaseButton size="large" type="secondary">Log in instead</BaseButton>
-          <BaseButton size="large" type="primary" kind="submit"
-            >Next Step</BaseButton
+          <BaseButton size="large" type="secondary" :to="{ name: 'LoginPage' }"
+            >Log in instead</BaseButton
+          >
+          <BaseButton size="large" type="primary" kind="submit">
+            {{ steps === 1 ? "Next Step" : "Register" }}</BaseButton
           >
         </div>
       </form>

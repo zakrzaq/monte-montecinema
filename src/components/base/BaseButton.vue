@@ -5,7 +5,7 @@ import type { RouteLocationRaw } from "vue-router";
 const props = withDefaults(
   defineProps<{
     kind?: "button" | "submit";
-    type?: "primary" | "secondary" | "tertiary" | "breadcrumb";
+    type?: "primary" | "secondary" | "tertiary" | "breadcrumb" | "account";
     size?: "small" | "regular" | "medium" | "large" | "slim";
     modifier?: "outlined" | "noborder" | "";
     to?: RouteLocationRaw;
@@ -185,6 +185,19 @@ const buttonClasses = computed(() => {
 
     &:hover {
       background-color: darken($snow-white, 10%);
+    }
+
+    &:focus {
+      border-color: $tertiary-brd-focus;
+    }
+  }
+
+  &--account {
+    background: #fdebeb;
+    color: $cherry-red;
+
+    &:hover {
+      background-color: darken(#fdebeb, 10%);
     }
 
     &:focus {
