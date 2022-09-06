@@ -80,10 +80,13 @@ const submitForm = () => {
           :valid="passwordValid"
           :errorMessage="passwordValidation"
           @blur="formBlur.password = true"
-          >Password</BaseInput
-        >
+          >Password
+        </BaseInput>
         <div class="login__actions">
-          <BaseButton size="large" type="secondary"
+          <BaseButton
+            size="large"
+            type="secondary"
+            :to="{ name: 'RegisterPage' }"
             >Register instead</BaseButton
           >
           <BaseButton size="large" type="primary" kind="submit"
@@ -103,29 +106,36 @@ const submitForm = () => {
   width: 100%;
   @include flex-vcenter-hcenter;
   flex-direction: column;
+
   &__header {
     margin-top: 124px;
     width: 600px;
   }
+
   &__form-wrapper {
     margin-top: 40px;
   }
+
   &__form {
     :deep(.base-input) {
       margin-bottom: 24px;
     }
+
     :deep(.base-input__input) {
       margin-top: 12px;
     }
   }
+
   &__actions {
     margin-top: 40px;
     display: flex;
+
     .button {
       width: 100%;
       padding: 19px 19px;
     }
   }
+
   &__footnote {
     margin: 40px 0;
     width: 600px;
@@ -138,6 +148,7 @@ const submitForm = () => {
 .gray {
   color: $jumbo;
 }
+
 .red {
   color: $cherry-red;
 }

@@ -1,8 +1,9 @@
 import { defineStore } from "pinia";
 import router from "./../router";
-import { login, register, logout } from "@/api/userService";
+import { login, register, logout, getUser } from "@/api/userService";
 import { removeAuthHeader, setAuthHeader } from "@/api/client";
 import type { User, LoginCredentials, RegisterCredentials } from "@/types/user";
+import type { AxiosResponse } from "axios";
 
 const TOKEN_STORAGE_KEY = "AUTH";
 const USER_STORAGE_KEY = "USER";
@@ -50,27 +51,52 @@ export const useUserStore = defineStore("userStore", {
         this.resetUserData();
       }
     },
-    async login(credentials: LoginCredentials) {
+    async callLogout() {
       if (this.isLoggedIn) await logout();
-      const response = await login(credentials);
+    },
+    processResponse(response: AxiosResponse) {
       const authHeader = response.headers.authorization;
       const authToken = authHeader.slice("Bearer ".length);
       setAuthHeader(authHeader);
       this.setUserData({ authToken, user: response.data });
-      router.push({ name: "HomePage" });
+    },
+    async login(credentials: LoginCredentials) {
+      this.callLogout();
+      try {
+        const response = await login(credentials);
+        this.processResponse(response);
+        router.push({ name: "HomePage" });
+      } catch (err) {
+        console.error(err);
+      }
     },
     async register(credentials: RegisterCredentials) {
-      if (this.isLoggedIn) await logout();
-      const response = await register(credentials);
-      const authHeader = response.headers.authorization;
-      const authToken = authHeader.slice("Bearer ".length);
-      setAuthHeader(authHeader);
-      this.setUserData({ authToken, user: response.data });
+      this.callLogout();
+      try {
+        const response = await register(credentials);
+        this.processResponse(response);
+        router.push({ name: "UserPage" });
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getUser() {
+      this.callLogout();
+      try {
+        const response = await getUser();
+        this.processResponse(response);
+      } catch (err) {
+        console.error(err);
+      }
     },
     async logout() {
-      if (!this.isLoggedIn) return;
-      this.resetUserData();
-      removeAuthHeader();
+      try {
+        this.callLogout();
+        this.resetUserData();
+        removeAuthHeader();
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
 });

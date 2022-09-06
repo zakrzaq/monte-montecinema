@@ -3,8 +3,8 @@ export interface LoginCredentials {
   password: string;
 }
 
-export interface RegisterCredentials extends LoginCredentials {
-  date_of_birth: string;
+export interface RegisterCredentials extends User {
+  privacy_policy?: boolean;
 }
 
 export interface User {

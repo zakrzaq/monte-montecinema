@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useUserStore } from "@/stores/user";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,16 @@ const router = createRouter({
       path: "/login",
       name: "LoginPage",
       component: () => import("@/views/LoginPage.vue"),
+    },
+    {
+      path: "/register",
+      name: "RegisterPage",
+      component: () => import("@/views/RegisterPage.vue"),
+    },
+    {
+      path: "/user",
+      name: "UserPage",
+      component: () => import("@/views/UserPage.vue"),
     },
     {
       path: "/404",
