@@ -16,7 +16,10 @@ defaultClient.interceptors.response.use(
       const userStore = useUserStore();
       await userStore.logout();
       router.push({ name: "LoginPage" });
+<<<<<<< HEAD
       notify({ type: "error", text: "You are not authorized" });
+=======
+>>>>>>> main
     }
     return Promise.reject(error);
   }

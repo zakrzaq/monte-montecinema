@@ -1,9 +1,13 @@
 import { defineStore } from "pinia";
 import router from "./../router";
+<<<<<<< HEAD
 import { notify } from "@kyvg/vue3-notification";
+=======
+>>>>>>> main
 import { login, register, logout, getUser } from "@/api/userService";
 import { removeAuthHeader, setAuthHeader } from "@/api/client";
 import type { User, LoginCredentials, RegisterCredentials } from "@/types/user";
+import type { AxiosResponse } from "axios";
 
 const TOKEN_STORAGE_KEY = "AUTH";
 const USER_STORAGE_KEY = "USER";
@@ -51,6 +55,7 @@ export const useUserStore = defineStore("userStore", {
         this.resetUserData();
       }
     },
+<<<<<<< HEAD
     async login(credentials: LoginCredentials) {
       try {
         if (this.isLoggedIn) await logout();
@@ -86,12 +91,53 @@ export const useUserStore = defineStore("userStore", {
         setAuthHeader(authHeader);
         this.setUserData({ authToken, user: response.data });
       } catch (err) {
+=======
+    async callLogout() {
+      if (this.isLoggedIn) await logout();
+    },
+    processResponse(response: AxiosResponse) {
+      const authHeader = response.headers.authorization;
+      const authToken = authHeader.slice("Bearer ".length);
+      setAuthHeader(authHeader);
+      this.setUserData({ authToken, user: response.data });
+    },
+    async login(credentials: LoginCredentials) {
+      this.callLogout();
+      try {
+        const response = await login(credentials);
+        this.processResponse(response);
+        router.push({ name: "HomePage" });
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async register(credentials: RegisterCredentials) {
+      this.callLogout();
+      try {
+        const response = await register(credentials);
+        this.processResponse(response);
+        router.push({ name: "UserPage" });
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getUser() {
+      this.callLogout();
+      try {
+        const response = await getUser();
+        this.processResponse(response);
+      } catch (err) {
+>>>>>>> main
         console.error(err);
       }
     },
     async logout() {
       try {
+<<<<<<< HEAD
         if (!this.isLoggedIn) return;
+=======
+        this.callLogout();
+>>>>>>> main
         this.resetUserData();
         removeAuthHeader();
       } catch (err) {
