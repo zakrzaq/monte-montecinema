@@ -193,11 +193,11 @@ const buttonClasses = computed(() => {
   }
 
   &--account {
-    background: #fdebeb;
+    background: $light-pinks;
     color: $cherry-red;
 
     &:hover {
-      background-color: darken(#fdebeb, 10%);
+      background-color: darken($light-pinks, 10%);
     }
 
     &:focus {
