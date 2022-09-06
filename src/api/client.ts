@@ -1,12 +1,14 @@
 import axios from "axios";
 import router from "@/router";
+import {} from "@/stores/user";
 import { notify } from "@kyvg/vue3-notification";
-
 import { useUserStore } from "@/stores/user";
 
 export const defaultClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  headers: { "Content-Type": "application/json" },
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 defaultClient.interceptors.response.use(

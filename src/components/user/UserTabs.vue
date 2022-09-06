@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, defineEmits } from "vue";
+const emit = defineEmits(["selected"]);
 
 const tabs = ["Personal details", "Reservations"];
 const selectedIndex = ref(0);
 const selectedTab = computed(() => tabs[selectedIndex.value]);
+
+const handleClick = (index: number) => {
+  selectedIndex.value = index;
+  emit("selected", selectedTab.value);
+};
 </script>
 
 <template>
@@ -14,7 +20,7 @@ const selectedTab = computed(() => tabs[selectedIndex.value]);
         :key="index"
         class="user-tabs__tab"
         :class="{ 'user-tabs__tab--active': index === selectedIndex }"
-        @click="selectedIndex = index"
+        @click="handleClick(index)"
       >
         {{ tab }}
       </li>
