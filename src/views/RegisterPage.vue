@@ -118,7 +118,6 @@ const submitForm = async () => {
     )
       return;
     try {
-      console.log(formData.value);
       await userStore.register(formData.value);
       router.push({ name: "UserPage" });
     } catch (err) {

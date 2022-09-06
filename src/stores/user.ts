@@ -4,6 +4,7 @@ import { notify } from "@kyvg/vue3-notification";
 import { login, register, logout, getUser } from "@/api/userService";
 import { removeAuthHeader, setAuthHeader } from "@/api/client";
 import type { User, LoginCredentials, RegisterCredentials } from "@/types/user";
+import type { AxiosResponse } from "axios";
 
 const TOKEN_STORAGE_KEY = "AUTH";
 const USER_STORAGE_KEY = "USER";
@@ -51,47 +52,47 @@ export const useUserStore = defineStore("userStore", {
         this.resetUserData();
       }
     },
+    async callLogout() {
+      if (this.isLoggedIn) await logout();
+    },
+    processResponse(response: AxiosResponse) {
+      const authHeader = response.headers.authorization;
+      const authToken = authHeader.slice("Bearer ".length);
+      setAuthHeader(authHeader);
+      this.setUserData({ authToken, user: response.data });
+    },
     async login(credentials: LoginCredentials) {
+      this.callLogout();
       try {
-        if (this.isLoggedIn) await logout();
         const response = await login(credentials);
-        const authHeader = response.headers.authorization;
-        const authToken = authHeader.slice("Bearer ".length);
-        setAuthHeader(authHeader);
-        this.setUserData({ authToken, user: response.data });
+        this.processResponse(response);
         router.push({ name: "HomePage" });
       } catch (err) {
-        notify({ type: "error", text: "Unable to log in" });
+        console.error(err);
       }
     },
     async register(credentials: RegisterCredentials) {
+      this.callLogout();
       try {
-        if (this.isLoggedIn) await logout();
         const response = await register(credentials);
-        const authHeader = response.headers.authorization;
-        const authToken = authHeader.slice("Bearer ".length);
-        setAuthHeader(authHeader);
-        this.setUserData({ authToken, user: response.data });
+        this.processResponse(response);
         router.push({ name: "UserPage" });
       } catch (err) {
-        notify({ type: "error", text: "Unable to register" });
+        console.error(err);
       }
     },
     async getUser() {
+      this.callLogout();
       try {
-        if (this.isLoggedIn) await logout();
         const response = await getUser();
-        const authHeader = response.headers.authorization;
-        const authToken = authHeader.slice("Bearer ".length);
-        setAuthHeader(authHeader);
-        this.setUserData({ authToken, user: response.data });
+        this.processResponse(response);
       } catch (err) {
         console.error(err);
       }
     },
     async logout() {
       try {
-        if (!this.isLoggedIn) return;
+        this.callLogout();
         this.resetUserData();
         removeAuthHeader();
       } catch (err) {
