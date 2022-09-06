@@ -7,11 +7,11 @@ import { useUserStore } from "@/stores/user";
 import { onMounted, watch } from "vue";
 const movieStore = useMovieStore();
 const seancesStore = useSeancesStore();
-const userStore = useUserStore()
+const userStore = useUserStore();
 const { selectedDate } = storeToRefs(seancesStore);
 
 onMounted(async () => {
-  userStore.restoreUserData()
+  userStore.restoreUserData();
   movieStore.fetchMovieList();
   seancesStore.getCurrentSeances();
 });
@@ -28,6 +28,7 @@ watch(selectedDate, () => {
       <RouterView />
     </main>
   </div>
+  <notifications position="top right" :duration="3000" :closeOnClick="true" />
 </template>
 
 <style scoped lang="scss">

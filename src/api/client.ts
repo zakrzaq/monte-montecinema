@@ -1,5 +1,6 @@
 import axios from "axios";
-import router from "./../router";
+import router from "@/router";
+import { notify } from "@kyvg/vue3-notification";
 
 import { useUserStore } from "@/stores/user";
 
@@ -15,6 +16,7 @@ defaultClient.interceptors.response.use(
       const userStore = useUserStore();
       await userStore.logout();
       router.push({ name: "LoginPage" });
+      notify({ type: "error", text: "You are not authorized" });
     }
     return Promise.reject(error);
   }

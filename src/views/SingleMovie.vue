@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import BreadCrumb from "@/components/BreadCrumb.vue";
 import ScreeningsPage from "@/views/ScreeningsPage.vue";
+import NoResults from "@/components/NoResults.vue";
 import { useMovieStore } from "@/stores/movies";
 import { useRoute } from "vue-router";
 import lengthToTime from "@/helpers/lengthToTime";
@@ -57,7 +58,7 @@ const movieDetails = computed<string>(() => {
       </div>
     </div>
   </template>
-  <template v-else> Movie not found... </template>
+  <NoResults v-else>Movie not found...</NoResults>
 </template>
 
 <style scoped lang="scss">

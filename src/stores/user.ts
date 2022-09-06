@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import router from "./../router";
+import { notify } from "@kyvg/vue3-notification";
 import { login, register, logout, getUser } from "@/api/userService";
 import { removeAuthHeader, setAuthHeader } from "@/api/client";
 import type { User, LoginCredentials, RegisterCredentials } from "@/types/user";
@@ -60,7 +61,7 @@ export const useUserStore = defineStore("userStore", {
         this.setUserData({ authToken, user: response.data });
         router.push({ name: "HomePage" });
       } catch (err) {
-        console.error(err);
+        notify({ type: "error", text: "Unable to log in" });
       }
     },
     async register(credentials: RegisterCredentials) {
@@ -73,7 +74,7 @@ export const useUserStore = defineStore("userStore", {
         this.setUserData({ authToken, user: response.data });
         router.push({ name: "UserPage" });
       } catch (err) {
-        console.error(err);
+        notify({ type: "error", text: "Unable to register" });
       }
     },
     async getUser() {

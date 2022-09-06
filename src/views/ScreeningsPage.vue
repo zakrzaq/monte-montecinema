@@ -3,12 +3,16 @@ import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 import { useSeancesStore } from "@/stores/seances";
 import { useMovieStore } from "@/stores/movies";
+import { useUiStore } from "@/stores/ui";
 import BreadCrumb from "@/components/BreadCrumb.vue";
 import SeancesCard from "@/components/seances/SeancesCard.vue";
 import DateSelector from "@/components/seances/DateSelector.vue";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
+import NoResults from "@/components/NoResults.vue";
 import { prettyDate } from "@/helpers/prettyDate";
 const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
+const uiStore = useUiStore();
 const route = useRoute();
 
 const props = defineProps<{
@@ -45,13 +49,20 @@ const moviesByTitle = computed(() => {
       }}</span>
     </h1>
     <DateSelector v-model="selectedTitle" />
-    <div>
-      <SeancesCard
-        v-for="movie in moviesByTitle"
-        :key="movie.id"
-        :movie="movieStore.movieById(movie.id)"
-        :seances="seancesStore.seancesByMovie(movie.id)"
-      />
+    <LoadingSpinner v-if="uiStore.seancesLoading" />
+    <div v-else>
+      <template v-if="moviesByTitle.length > 0">
+        <SeancesCard
+          v-for="movie in moviesByTitle"
+          :key="movie.id"
+          :movie="movieStore.movieById(movie.id)"
+          :seances="seancesStore.seancesByMovie(movie.id)"
+        />
+      </template>
+      <NoResults v-else>
+        No screenings for {{ selectedTitle }} on
+        {{ prettyDate(seancesStore.selectedDate) }}.
+      </NoResults>
     </div>
   </div>
 </template>
