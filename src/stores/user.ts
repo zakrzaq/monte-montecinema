@@ -9,6 +9,14 @@ import type { AxiosResponse } from "axios";
 const TOKEN_STORAGE_KEY = "AUTH";
 const USER_STORAGE_KEY = "USER";
 
+const userModel = {
+  email: "",
+  password: "",
+  first_name: "",
+  last_name: "",
+  date_of_birth: "",
+};
+
 interface RootState {
   user: User | null;
   authToken: string | null;
@@ -17,7 +25,7 @@ interface RootState {
 export const useUserStore = defineStore("userStore", {
   state: () => {
     return {
-      user: null,
+      user: { ...userModel },
       authToken: null,
     } as RootState;
   },

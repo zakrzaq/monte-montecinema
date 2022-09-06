@@ -162,6 +162,12 @@ const buttonClasses = computed(() => {
       background-color: $snow-white;
       border-color: $primary-brd-focus;
     }
+
+    &--outlined {
+      border: 2px solid $primary-bg;
+      background-color: $snow-white;
+      color: $primary-bg;
+    }
   }
 
   &--tertiary {
