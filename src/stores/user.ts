@@ -1,9 +1,6 @@
 import { defineStore } from "pinia";
 import router from "./../router";
-<<<<<<< HEAD
 import { notify } from "@kyvg/vue3-notification";
-=======
->>>>>>> main
 import { login, register, logout, getUser } from "@/api/userService";
 import { removeAuthHeader, setAuthHeader } from "@/api/client";
 import type { User, LoginCredentials, RegisterCredentials } from "@/types/user";
@@ -55,43 +52,6 @@ export const useUserStore = defineStore("userStore", {
         this.resetUserData();
       }
     },
-<<<<<<< HEAD
-    async login(credentials: LoginCredentials) {
-      try {
-        if (this.isLoggedIn) await logout();
-        const response = await login(credentials);
-        const authHeader = response.headers.authorization;
-        const authToken = authHeader.slice("Bearer ".length);
-        setAuthHeader(authHeader);
-        this.setUserData({ authToken, user: response.data });
-        router.push({ name: "HomePage" });
-      } catch (err) {
-        notify({ type: "error", text: "Unable to log in" });
-      }
-    },
-    async register(credentials: RegisterCredentials) {
-      try {
-        if (this.isLoggedIn) await logout();
-        const response = await register(credentials);
-        const authHeader = response.headers.authorization;
-        const authToken = authHeader.slice("Bearer ".length);
-        setAuthHeader(authHeader);
-        this.setUserData({ authToken, user: response.data });
-        router.push({ name: "UserPage" });
-      } catch (err) {
-        notify({ type: "error", text: "Unable to register" });
-      }
-    },
-    async getUser() {
-      try {
-        if (this.isLoggedIn) await logout();
-        const response = await getUser();
-        const authHeader = response.headers.authorization;
-        const authToken = authHeader.slice("Bearer ".length);
-        setAuthHeader(authHeader);
-        this.setUserData({ authToken, user: response.data });
-      } catch (err) {
-=======
     async callLogout() {
       if (this.isLoggedIn) await logout();
     },
@@ -127,17 +87,12 @@ export const useUserStore = defineStore("userStore", {
         const response = await getUser();
         this.processResponse(response);
       } catch (err) {
->>>>>>> main
         console.error(err);
       }
     },
     async logout() {
       try {
-<<<<<<< HEAD
-        if (!this.isLoggedIn) return;
-=======
         this.callLogout();
->>>>>>> main
         this.resetUserData();
         removeAuthHeader();
       } catch (err) {

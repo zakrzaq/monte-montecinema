@@ -15,8 +15,6 @@ const loginView = computed(() => {
     route.matched.some((el) => el.path === "/login") ||
     route.matched.some((el) => el.path === "/register")
   );
-<<<<<<< HEAD
-=======
 });
 
 const showHeaderForLoggedUser = computed(() => {
@@ -24,7 +22,6 @@ const showHeaderForLoggedUser = computed(() => {
 });
 const showHeaderForNotLoggedUser = computed(() => {
   return !loginView.value && userStore.isLoggedIn;
->>>>>>> main
 });
 </script>
 
@@ -33,19 +30,11 @@ const showHeaderForNotLoggedUser = computed(() => {
     <RouterLink :to="{ name: 'HomePage' }" class="logo">
       <LogoImage />
     </RouterLink>
-<<<<<<< HEAD
-    <template v-if="!loginView && !userStore.isLoggedIn">
-      <HeaderLinks />
-      <HeaderActions />
-    </template>
-    <template v-else-if="!loginView && userStore.isLoggedIn">
-=======
     <template v-if="showHeaderForLoggedUser">
       <HeaderLinks />
       <HeaderActions />
     </template>
     <template v-else-if="showHeaderForNotLoggedUser">
->>>>>>> main
       <HeaderLinks />
       <AuthActions />
     </template>
