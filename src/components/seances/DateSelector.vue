@@ -16,6 +16,9 @@ const route = useRoute();
 const { selectedDate } = storeToRefs(seancesStore);
 
 const todayDate = new Date();
+const selectOptions = computed(() => {
+  return ["All movies", ...movieStore.titleList];
+});
 
 const daysList = computed(() => {
   const daysList = [];
@@ -83,7 +86,7 @@ const showMoviesDropdown = computed(() => {
     <div class="date-selector__movies" :class="showMoviesDropdown">
       <BaseSelect
         name=""
-        :options="movieStore.titleList"
+        :options="selectOptions"
         @change="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "
