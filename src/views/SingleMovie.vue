@@ -37,7 +37,7 @@ const movieDetails = computed<string>(() => {
       <div class="single-movie">
         <div class="single-movie__description">
           <h1>{{ selectedMovie.title }}</h1>
-          <div class="single-movie__sunheading">
+          <div class="single-movie__subheading">
             <span class="single-movie__genre">{{
               selectedMovie.genre.name
             }}</span>
@@ -108,7 +108,7 @@ const movieDetails = computed<string>(() => {
     color: $bitter-sweet;
   }
 
-  &__sunheading {
+  &__subheading {
     @include sm {
       @include flex-vcenter-hcenter;
     }

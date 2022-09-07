@@ -19,6 +19,11 @@ withDefaults(
 <style scoped lang="scss">
 .base-cell {
   min-height: 56px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   &__label {
     @include roboto-mono(normal, 700);
     font-size: 12px;

@@ -22,7 +22,9 @@ const handleClick = (index: number) => {
         :class="{ 'user-tabs__tab--active': index === selectedIndex }"
         @click="handleClick(index)"
       >
-        {{ tab }}
+        <button>
+          {{ tab }}
+        </button>
       </li>
     </ul>
   </div>
@@ -45,6 +47,16 @@ const handleClick = (index: number) => {
     letter-spacing: -0.01em;
     color: $bombay;
     cursor: pointer;
+
+    button {
+      background: none;
+      color: inherit;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+    }
 
     &--active {
       color: $tuna;
