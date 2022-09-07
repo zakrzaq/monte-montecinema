@@ -17,14 +17,9 @@ export const useMovieStore = defineStore({
   },
   getters: {
     genreList(): string[] {
-      return [
-        "All categories",
-        ...new Set(this.movieList.map((movie) => movie.genre.name)),
-      ];
+      return [...new Set(this.movieList.map((movie) => movie.genre.name))];
     },
-    titleList: (state) => {
-      return ["All movies", ...state.movieList.map((movie) => movie.title)];
-    },
+    titleList: (state) => state.movieList.map((movie) => movie.title),
     movieById: (state) => {
       return (id: number) => state.movieList.find((movie) => movie.id === id);
     },
