@@ -2,19 +2,32 @@
 import { onMounted, ref } from "vue";
 import { getReservations } from "@/api/reservationsService";
 import { useUserStore } from "@/stores/user";
-import BaseCard from "../base/BaseCard.vue";
+import BaseCard from "@/components/base/BaseCard.vue";
 import ReservationItem from "@/components/reservations/ReservationItem.vue";
-import LoadingSpinner from "../LoadingSpinner.vue";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import NoResults from "@/components/NoResults.vue";
+import type { ShowTicket } from "@/types/reservations";
 const userStore = useUserStore();
 
 const userReservations = ref();
+const ticketList = ref<[] | ShowTicket[]>([]);
 const loading = ref(false);
 
 onMounted(async () => {
   loading.value = true;
   try {
-    userReservations.value = await getReservations(userStore.user.email);
+    const response = await getReservations(userStore.user.email);
+    userReservations.value = response;
+    response.forEach((res) =>
+      res.tickets.forEach((ticket) => {
+        const next_ticket = {
+          ...ticket,
+          movie: res.movie_title,
+          datetime: res.seance_datetime,
+        } as ShowTicket;
+        ticketList.value = [...ticketList.value, next_ticket];
+      })
+    );
   } catch (err) {
     console.error(err);
   } finally {
@@ -28,12 +41,12 @@ onMounted(async () => {
     <LoadingSpinner />
   </template>
   <template v-else>
-    <div v-if="userReservations" class="user-reservations">
+    <div v-if="ticketList" class="user-reservations">
       <BaseCard>
         <ReservationItem
-          v-for="item in userReservations"
-          :key="item.id"
-          :reservation="item"
+          v-for="ticket in ticketList"
+          :key="ticket.id"
+          :ticket="ticket"
         ></ReservationItem>
       </BaseCard>
     </div>

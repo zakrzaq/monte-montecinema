@@ -1,8 +1,15 @@
+import type { StartOfSourceMap } from "source-map-js";
+
 export interface Ticket {
   id: number;
   price: string;
   seat: string;
   type: string;
+}
+
+export interface Status {
+  id: number;
+  name: string;
 }
 
 export interface Reservation {
@@ -12,9 +19,11 @@ export interface Reservation {
   movie_title: string;
   seance_id: number;
   seance_datetime: string;
-  status: {
-    id: number;
-    name: string;
-  };
+  status: StartOfSourceMap;
   tickets: Ticket[];
+}
+
+export interface ShowTicket extends Ticket {
+  movie: string;
+  datetime: string;
 }
