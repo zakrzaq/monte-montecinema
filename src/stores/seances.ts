@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
+import { useUiStore } from "@/stores/ui";
 import { getDaySeance } from "@/api/seancesService";
+import { notify } from "@kyvg/vue3-notification";
 import type { Seance } from "@/types/seance";
 const todayDate = new Date();
 interface RootState {
@@ -29,12 +31,16 @@ export const useSeancesStore = defineStore({
   },
   actions: {
     async getCurrentSeances() {
+      const uiStore = useUiStore();
+      uiStore.seancesLoading = true;
       try {
         const data = await getDaySeance(this.selectedDate);
         this.currentSeances = data;
       } catch (err) {
-        console.error(err);
+        notify({ type: "error", text: "Could not get seances..." });
         this.currentSeances = [];
+      } finally {
+        uiStore.seancesLoading = false;
       }
     },
   },

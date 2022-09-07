@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import router from "./../router";
+import { notify } from "@kyvg/vue3-notification";
 import { login, register, logout, getUser } from "@/api/userService";
 import { removeAuthHeader, setAuthHeader } from "@/api/client";
 import type { User, LoginCredentials, RegisterCredentials } from "@/types/user";

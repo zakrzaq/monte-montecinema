@@ -3,9 +3,13 @@ import MovieCard from "@/components/movies/MovieCard.vue";
 import BreadCrumbs from "@/components/BreadCrumb.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
 import BaseSelect from "@/components/base/BaseSelect.vue";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
+import NoResults from "@/components/NoResults.vue";
 import { useMovieStore } from "@/stores/movies";
+import { useUiStore } from "@/stores/ui";
 import { computed, ref } from "vue";
 const moviesStore = useMovieStore();
+const uiStore = useUiStore();
 
 const query = ref("");
 const category = ref("");
@@ -29,9 +33,7 @@ const filteredTitleMovives = computed(() => {
     : categorisedMovies.value;
 });
 
-const selectOptions = computed(() => {
-  return moviesStore.genreList as string[];
-});
+const selectOptions = computed(() => ["All movies", ...moviesStore.genreList]);
 </script>
 
 <template>
@@ -45,8 +47,8 @@ const selectOptions = computed(() => {
       >Category</BaseSelect
     >
   </div>
-  <template v-if="!moviesStore.loading">
-    <div class="movies-list">
+  <template v-if="filteredTitleMovives.length">
+    <div v-if="!uiStore.moviesLoading" class="movies-list">
       <MovieCard
         v-for="movie in filteredTitleMovives"
         :key="movie.id"
@@ -54,8 +56,12 @@ const selectOptions = computed(() => {
         :to="{ name: 'SingleMoviePage', params: { id: movie.id } }"
       />
     </div>
+    <div v-else><LoadingSpinner /></div>
   </template>
-  <template v-else> Loading... </template>
+  <NoResults v-else>
+    Sorry we have no movies to show you at the moment
+  </NoResults>
+  >
 </template>
 
 <style scoped lang="scss">

@@ -53,4 +53,10 @@ const router = createRouter({
   ],
 });
 
+// router.beforeEach((to, from) => {
+//   const userStore = useUserStore();
+
+//   if (!userStore.isLoggedIn && to.name === "LoginPage") return "/login";
+// });
+
 export default router;
