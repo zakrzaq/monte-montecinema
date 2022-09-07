@@ -27,9 +27,9 @@ const handleLogin = () => {
       <BaseButton type="secondary" :to="{ name: 'RegisterPage' }">
         Register
       </BaseButton>
-      <BaseButton kind="button" @click="handleLogin">{{
-        loginButtonLabel
-      }}</BaseButton>
+      <BaseButton @click="handleLogin">
+        {{ loginButtonLabel }}
+      </BaseButton>
     </div>
     <div class="actions__hamburger">
       <RouterLink to="#">

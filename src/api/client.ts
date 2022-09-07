@@ -1,7 +1,7 @@
 import axios from "axios";
 import router from "@/router";
-import {} from "@/stores/user";
 import { notify } from "@kyvg/vue3-notification";
+
 import { useUserStore } from "@/stores/user";
 
 export const defaultClient = axios.create({

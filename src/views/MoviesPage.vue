@@ -33,9 +33,7 @@ const filteredTitleMovives = computed(() => {
     : categorisedMovies.value;
 });
 
-const selectOptions = computed(() => {
-  return moviesStore.genreList as string[];
-});
+const selectOptions = computed(() => ["All movies", ...moviesStore.genreList]);
 </script>
 
 <template>
@@ -49,7 +47,7 @@ const selectOptions = computed(() => {
       >Category</BaseSelect
     >
   </div>
-  <template v-if="filteredTitleMovives.length > 0">
+  <template v-if="filteredTitleMovives.length">
     <div v-if="!uiStore.moviesLoading" class="movies-list">
       <MovieCard
         v-for="movie in filteredTitleMovives"
@@ -60,11 +58,9 @@ const selectOptions = computed(() => {
     </div>
     <div v-else><LoadingSpinner /></div>
   </template>
-  <template v-else
-    ><NoResults
-      >Sorry we have no movies to show you at the moment</NoResults
-    ></template
-  >
+  <NoResults v-else>
+    Sorry we have no movies to show you at the moment
+  </NoResults>
 </template>
 
 <style scoped lang="scss">
