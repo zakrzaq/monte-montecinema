@@ -2,7 +2,7 @@
 import { computed } from "vue";
 const props = withDefaults(
   defineProps<{
-    options: string[] | { id: number; title: string }[];
+    options: { id: number | string; title: string }[];
     id?: string | number;
     modelValue: string | number;
     errorMessage?: string;
@@ -32,30 +32,23 @@ const selectClasses = computed(() => {
         :value="modelValue"
         id="id"
         @change="
-          $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+          $emit(
+            'update:modelValue',
+            ($event.target as HTMLInputElement).value.length > 1
+              ? ($event.target as HTMLInputElement).value
+              : parseInt(($event.target as HTMLInputElement).value)
+          )
         "
         @blur="$emit('blur')"
       >
-        <template v-if="typeof props.options[0] === 'object'">
-          <option
-            v-for="option in options"
-            :key="option.id"
-            :class="selectClasses"
-            :value="option.id"
-          >
-            {{ option.title }}
-          </option>
-        </template>
-        <template v-else>
-          <option
-            v-for="option in options"
-            :key="option"
-            :class="selectClasses"
-            :value="option"
-          >
-            {{ option }}
-          </option>
-        </template>
+        <option
+          v-for="option in options"
+          :key="option.id"
+          :class="selectClasses"
+          :value="option.id"
+        >
+          {{ option.title }}
+        </option>
       </select>
     </label>
     <div v-if="errorMessage" class="base-select__validations">

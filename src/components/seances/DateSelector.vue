@@ -17,7 +17,10 @@ const { selectedDate } = storeToRefs(seancesStore);
 
 const todayDate = new Date();
 const selectOptions = computed(() => {
-  return ["All movies", ...movieStore.titleList];
+  const all = ["All movies", ...movieStore.titleList];
+  return all.map((item) => {
+    return { id: item, title: item };
+  });
 });
 
 const daysList = computed(() => {

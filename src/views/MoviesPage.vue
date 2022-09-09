@@ -33,7 +33,12 @@ const filteredTitleMovives = computed(() => {
     : categorisedMovies.value;
 });
 
-const selectOptions = computed(() => ["All movies", ...moviesStore.genreList]);
+const selectOptions = computed(() => {
+  const all = ["All movies", ...moviesStore.genreList];
+  return all.map((item) => {
+    return { id: item, title: item };
+  });
+});
 </script>
 
 <template>
