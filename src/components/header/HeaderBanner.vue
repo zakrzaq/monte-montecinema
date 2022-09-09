@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <div class="slogan">
     <p>
@@ -7,8 +9,6 @@
     </p>
   </div>
 </template>
-
-<script setup></script>
 
 <style lang="scss" scoped>
 .slogan {
