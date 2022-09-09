@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { storeToRefs } from "pinia";
-import { validateEmail, validateDateOfBirth } from "@/helpers/validate";
+import {
+  validateEmail,
+  validateDateOfBirth,
+  validatePassword,
+} from "@/helpers/validate";
 import { touchAll } from "@/helpers/touchAll";
 import { patchUser } from "@/api/userService";
 import { useUserStore } from "@/stores/user";
@@ -42,15 +46,7 @@ const dateOfBirthValid = computed(() => {
   return validateDateOfBirth(user.value.date_of_birth);
 });
 const passwordNewValid = computed(() => {
-  if (editPassword.value) {
-    return (
-      new_password.value.length > 7 &&
-      /[a-zA-Z]/.test(new_password.value) &&
-      /\d/.test(new_password.value)
-    );
-  } else {
-    return true;
-  }
+  return editPassword.value ? validatePassword(new_password.value) : false;
 });
 const passwordCurrentValid = computed(() => {
   return editPassword.value ? !!current_password.value : true;
@@ -109,7 +105,6 @@ const submitForm = async () => {
       password: new_password.value,
       current_password: current_password.value,
     };
-    console.log(formData);
     await patchUser(formData);
   } catch (err) {
     console.error(err);

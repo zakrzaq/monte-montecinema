@@ -92,7 +92,6 @@ export const useUserStore = defineStore("userStore", {
     async getUser() {
       try {
         const response = await getUser();
-        console.log(response);
         this.processResponse(response);
       } catch (err) {
         console.error(err);

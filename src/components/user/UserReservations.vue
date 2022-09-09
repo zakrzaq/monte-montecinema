@@ -10,16 +10,12 @@ import type { ShowTicket } from "@/types/reservations";
 const userStore = useUserStore();
 
 const userReservations = ref();
-const ticketList = ref<[] | ShowTicket[]>([]);
+const ticketList = ref<ShowTicket[]>([]);
 const upcomingTickets = computed(() => {
-  return ticketList.value.filter(
-    (ticket: ShowTicket) => ticket.status !== "Cancelled"
-  );
+  return ticketList.value.filter((ticket) => ticket.status !== "Cancelled");
 });
 const pastTickets = computed(() => {
-  return ticketList.value.filter(
-    (ticket: ShowTicket) => ticket.status === "Cancelled"
-  );
+  return ticketList.value.filter((ticket) => ticket.status === "Cancelled");
 });
 const loading = ref(false);
 
@@ -60,7 +56,7 @@ onMounted(async () => {
             v-for="ticket in upcomingTickets"
             :key="ticket.id"
             :ticket="ticket"
-          ></ReservationItem>
+          />
         </template>
         <NoResults v-else>
           Sorry, we could not find any reservations...
