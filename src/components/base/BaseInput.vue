@@ -42,8 +42,8 @@ const inputClasses = computed(() => {
         :class="inputClasses"
         required
         :type="passwordVisible ? 'text' : type"
+        :value="modelValue"
         :placeholder="placeholder"
-        :modelValue="modelValue"
         :name="type"
         @input="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)

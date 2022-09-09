@@ -61,7 +61,6 @@ const selectOptions = computed(() => ["All movies", ...moviesStore.genreList]);
   <NoResults v-else>
     Sorry we have no movies to show you at the moment
   </NoResults>
-  >
 </template>
 
 <style scoped lang="scss">

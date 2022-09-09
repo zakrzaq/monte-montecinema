@@ -10,3 +10,9 @@ export const validateDateOfBirth = (dob: string) => {
   const age = (today.getTime() - dateOfBirth.getTime()) / 31536000000;
   return age >= 18 ? true : false;
 };
+
+export const validatePassword = (password: string) => {
+  return (
+    password.length > 7 && /[a-zA-Z]/.test(password) && /\d/.test(password)
+  );
+};

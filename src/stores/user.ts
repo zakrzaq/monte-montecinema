@@ -9,15 +9,23 @@ import type { AxiosResponse } from "axios";
 const TOKEN_STORAGE_KEY = "AUTH";
 const USER_STORAGE_KEY = "USER";
 
+export const userModel = {
+  email: "",
+  password: "",
+  first_name: "",
+  last_name: "",
+  date_of_birth: "",
+};
+
 interface RootState {
-  user: User | null;
+  user: User;
   authToken: string | null;
 }
 
 export const useUserStore = defineStore("userStore", {
   state: () => {
     return {
-      user: null,
+      user: { ...userModel },
       authToken: null,
     } as RootState;
   },
@@ -33,7 +41,7 @@ export const useUserStore = defineStore("userStore", {
     },
     resetUserData() {
       this.authToken = null;
-      this.user = null;
+      this.user = { ...userModel };
       localStorage.removeItem(TOKEN_STORAGE_KEY);
       localStorage.removeItem(USER_STORAGE_KEY);
     },
@@ -82,7 +90,6 @@ export const useUserStore = defineStore("userStore", {
       }
     },
     async getUser() {
-      this.callLogout();
       try {
         const response = await getUser();
         this.processResponse(response);

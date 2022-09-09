@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, type ComputedRef } from "vue";
-import { useUserStore } from "@/stores/user";
+import { useUserStore, userModel } from "@/stores/user";
 import { validateEmail, validateDateOfBirth } from "@/helpers/validate";
 import BaseInput from "@/components/base/BaseInput.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
@@ -18,13 +18,7 @@ const subtitle = computed(() => {
   return steps.value === 1 ? "Care to register?" : "Now your name";
 });
 
-const formData = ref<RegisterCredentials>({
-  email: "",
-  password: "",
-  first_name: "",
-  last_name: "",
-  date_of_birth: "",
-});
+const formData = ref<RegisterCredentials>({ ...userModel });
 const privacy_policy = ref(false);
 
 const formBlur = ref({
