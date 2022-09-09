@@ -1,5 +1,22 @@
+<script setup lang="ts">
+import { computed } from "vue";
+
+const props = withDefaults(
+  defineProps<{
+    width?: string;
+  }>(),
+  {
+    width: "600px",
+  }
+);
+
+const cssStyles = computed(() => {
+  return `width: ${props.width}`;
+});
+</script>
+
 <template>
-  <div class="base-card"><slot /></div>
+  <div class="base-card" :style="cssStyles"><slot /></div>
 </template>
 
 <style scoped lang="scss">

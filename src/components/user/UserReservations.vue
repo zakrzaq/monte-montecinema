@@ -53,7 +53,7 @@ onMounted(async () => {
   </template>
   <template v-else>
     <div v-if="ticketList" class="user-reservations">
-      <BaseCard>
+      <BaseCard width="100%">
         <h3 class="user-reservations__heading">Upcoming</h3>
         <template v-if="upcomingTickets">
           <ReservationItem

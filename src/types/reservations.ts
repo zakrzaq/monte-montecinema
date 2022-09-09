@@ -26,3 +26,8 @@ export interface ShowTicket extends Ticket {
   datetime: string;
   status: string;
 }
+
+export interface TempTicket {
+  seat: string;
+  ticket_type_id: number;
+}

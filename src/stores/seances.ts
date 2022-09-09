@@ -21,12 +21,12 @@ export const useSeancesStore = defineStore({
       return (id: number) =>
         state.currentSeances.filter((seance) => seance.movie === id);
     },
-    uniqueMovies(): number[] | [] {
-      if (this.currentSeances)
-        return [
-          ...new Set(this.currentSeances.map((seance: Seance) => seance.movie)),
-        ];
-      return [];
+    screeningTimesById: (state) => {
+      return (id: number) => {
+        return state.currentSeances
+          .filter((seance) => seance.datetime.includes(state.selectedDate))
+          .filter((seance) => seance.movie === id);
+      };
     },
   },
   actions: {

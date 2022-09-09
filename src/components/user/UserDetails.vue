@@ -119,7 +119,7 @@ const submitForm = async () => {
 
 <template>
   <div v-if="user" class="user-page">
-    <BaseCard>
+    <BaseCard width="100%">
       <form class="user-page__form" novalidate @submit.prevent="submitForm">
         <BaseInput
           name="email_"

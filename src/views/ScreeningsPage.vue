@@ -10,6 +10,7 @@ import DateSelector from "@/components/seances/DateSelector.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import NoResults from "@/components/NoResults.vue";
 import { prettyDate } from "@/helpers/prettyDate";
+import type { MovieWithSeances } from "@/types/seance";
 const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
 const uiStore = useUiStore();
@@ -19,22 +20,21 @@ const props = defineProps<{
   selectedMovie?: number;
 }>();
 
-const currentMovies = computed(() => {
-  return seancesStore.uniqueMovies.map((movie) => ({
-    id: movie,
-    genre: movieStore.movieById(movie)?.genre.name,
-    title: movieStore.movieById(movie)?.title,
-  }));
+const currentMoviesWithSeances = computed(() => {
+  return movieStore.movieList.map((movie) => {
+    const screeningsForMovie = seancesStore.seancesByMovie(movie.id);
+    return { ...movie, screenings: screeningsForMovie } as MovieWithSeances;
+  });
 });
 const selectedTitle = ref(
   props.selectedMovie
     ? movieStore.movieById(props.selectedMovie)?.title
     : "All movies"
 );
-const moviesByTitle = computed(() => {
+const currentMoviesbyTitle = computed(() => {
   return selectedTitle.value === "All movies"
-    ? currentMovies.value
-    : currentMovies.value.filter(
+    ? currentMoviesWithSeances.value
+    : currentMoviesWithSeances.value.filter(
         (movie) => movie.title === selectedTitle.value
       );
 });
@@ -51,12 +51,11 @@ const moviesByTitle = computed(() => {
     <DateSelector v-model="selectedTitle" />
     <LoadingSpinner v-if="uiStore.seancesLoading" />
     <div v-else>
-      <template v-if="moviesByTitle.length > 0">
+      <template v-if="currentMoviesbyTitle">
         <SeancesCard
-          v-for="movie in moviesByTitle"
+          v-for="movie in currentMoviesbyTitle"
           :key="movie.id"
-          :movie="movieStore.movieById(movie.id)"
-          :seances="seancesStore.seancesByMovie(movie.id)"
+          :movie="movie"
         />
       </template>
       <NoResults v-else>

@@ -2,9 +2,9 @@
 import { computed } from "vue";
 const props = withDefaults(
   defineProps<{
-    options: string[];
+    options: string[] | { id: number; title: string }[];
     id?: string | number;
-    modelValue: string;
+    modelValue: string | number;
     errorMessage?: string;
   }>(),
   {
@@ -29,21 +29,33 @@ const selectClasses = computed(() => {
       ><slot />
       <select
         class="base-select__select"
-        :modelValue="modelValue"
+        :value="modelValue"
         id="id"
         @change="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "
         @blur="$emit('blur')"
       >
-        <option
-          v-for="option in options"
-          :key="option"
-          :class="selectClasses"
-          :value="option"
-        >
-          {{ option }}
-        </option>
+        <template v-if="typeof props.options[0] === 'object'">
+          <option
+            v-for="option in options"
+            :key="option.id"
+            :class="selectClasses"
+            :value="option.id"
+          >
+            {{ option.title }}
+          </option>
+        </template>
+        <template v-else>
+          <option
+            v-for="option in options"
+            :key="option"
+            :class="selectClasses"
+            :value="option"
+          >
+            {{ option }}
+          </option>
+        </template>
       </select>
     </label>
     <div v-if="errorMessage" class="base-select__validations">
@@ -68,6 +80,7 @@ const selectClasses = computed(() => {
     height: 56px;
     padding: 1em 1.5em;
     margin-top: 12px;
+    margin-bottom: 5px;
     border: 0;
     border-radius: 0.5em;
     background-color: $athens-gray;

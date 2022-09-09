@@ -5,8 +5,6 @@ import ComingSoon from "@/components/home/ComingSoon.vue";
 import AddressCard from "@/components/contact/AddressCard.vue";
 import ScreeningPage from "@/views/ScreeningsPage.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
-import { useMeta } from "vue-meta";
-useMeta({ title: "Montecinema | Home" });
 
 const uiStore = useUiStore();
 </script>
