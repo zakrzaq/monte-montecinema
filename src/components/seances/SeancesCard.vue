@@ -50,7 +50,7 @@ const handleBooking = async (seance: Seance) => {
             </BaseButton>
           </template>
           <NoResults v-else>
-            Sorry, there is no screenings for {{ movie.title }} ton this day.
+            Sorry, there is no screenings for {{ movie.title }} on this day.
           </NoResults>
         </div>
       </div>
