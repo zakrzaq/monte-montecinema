@@ -31,3 +31,8 @@ export interface TempTicket {
   seat: string;
   ticket_type_id: number;
 }
+
+export interface OnlineReservation {
+  seance_id: number;
+  tickets: TempTicket[];
+}

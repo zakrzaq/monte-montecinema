@@ -1,18 +1,11 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed } from "vue";
 import { useBookingStore } from "@/stores/booking";
 import BaseCard from "../base/BaseCard.vue";
 import SeatingSeat from "@/components/bookings/SeatingSeat.vue";
 import SeatingRow from "@/components/bookings/SeatingRow.vue";
 import SeatingLabels from "@/components/bookings/SeatingLabels.vue";
-import type { TempTicket } from "@/types/reservations";
 const bookingStore = useBookingStore();
-
-const storeSelectedTickets = computed(() => {
-  return bookingStore.selectedTickets.map((ticket) => ticket.seat);
-});
-const selectedSeats = ref<string[]>(storeSelectedTickets.value);
-const selectedTickets = ref<TempTicket[]>([]);
 
 const allSeats = computed(() => {
   return bookingStore.selectedReservation
@@ -34,20 +27,23 @@ const rowNumbers = computed(() => {
       return +a - +b;
     });
 });
+const selectedSeats = computed(() => {
+  return bookingStore.selectedTickets.map((ticket) => ticket.seat);
+});
 
 const addSeat = (seat: string) => {
   if (bookingStore.selectedReservation.taken_seats.includes(seat)) return;
   if (selectedSeats.value.includes(seat)) {
-    const index = selectedSeats.value.indexOf(seat);
-    selectedSeats.value.splice(index, 1);
+    bookingStore.selectedTickets = bookingStore.selectedTickets.filter(
+      (ticket) => ticket.seat !== seat
+    );
   } else {
-    selectedTickets.value.push({ seat: seat, ticket_type_id: 1 });
+    bookingStore.selectedTickets = [
+      ...bookingStore.selectedTickets,
+      { seat: seat, ticket_type_id: 1 },
+    ];
   }
 };
-
-watch(selectedTickets.value, (newVal) => {
-  bookingStore.selectedTickets = newVal;
-});
 </script>
 
 <template>

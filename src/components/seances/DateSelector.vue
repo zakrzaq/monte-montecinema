@@ -14,6 +14,7 @@ const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
 const route = useRoute();
 const { selectedDate } = storeToRefs(seancesStore);
+defineEmits(["update:modelValue"]);
 
 const todayDate = new Date();
 const selectOptions = computed(() => {

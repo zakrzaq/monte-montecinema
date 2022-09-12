@@ -4,7 +4,7 @@ const props = withDefaults(
   defineProps<{
     options: { id: number | string; title: string }[];
     id?: string | number;
-    modelValue: string | number;
+    modelValue?: string | number;
     errorMessage?: string;
   }>(),
   {
@@ -14,6 +14,7 @@ const props = withDefaults(
     errorMessage: "",
   }
 );
+defineEmits(["update:modelValue", "blur"]);
 
 const selectClasses = computed(() => {
   return [

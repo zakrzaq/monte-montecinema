@@ -9,7 +9,7 @@
 <style scoped lang="scss">
 .no-results {
   width: 100%;
-  height: 150px;
+  min-height: 50px;
   @include flex-vcenter-hcenter;
 }
 </style>

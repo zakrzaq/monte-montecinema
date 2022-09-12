@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import type { Seance, CompleteSeance } from "@/types/seance";
+import type { TempTicket } from "@/types/reservations";
 
 interface RootState {
   selectedSeance: Seance;
   selectedReservation: CompleteSeance;
-  selectedTickets: { seat: string; ticket_type_id: number }[] | [];
+  selectedTickets: TempTicket[] | [];
 }
 
 export const useBookingStore = defineStore({

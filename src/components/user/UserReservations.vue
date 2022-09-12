@@ -6,19 +6,19 @@ import BaseCard from "@/components/base/BaseCard.vue";
 import ReservationItem from "@/components/reservations/ReservationItem.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import NoResults from "@/components/NoResults.vue";
-import type { ShowTicket } from "@/types/reservations";
+import type { ShowTicket, Reservation } from "@/types/reservations";
 const userStore = useUserStore();
 
-const userReservations = ref();
+const userReservations = ref<[] | Reservation[]>();
 const ticketList = ref<[] | ShowTicket[]>([]);
 const upcomingTickets = computed(() => {
   return ticketList.value.filter(
-    (ticket: ShowTicket) => ticket.status !== "Cancelled"
+    (ticket: ShowTicket) => new Date(ticket.datetime) >= new Date()
   );
 });
 const pastTickets = computed(() => {
   return ticketList.value.filter(
-    (ticket: ShowTicket) => ticket.status === "Cancelled"
+    (ticket: ShowTicket) => new Date(ticket.datetime) < new Date()
   );
 });
 const loading = ref(false);
@@ -26,19 +26,24 @@ const loading = ref(false);
 onMounted(async () => {
   loading.value = true;
   try {
-    const response = await getReservations(userStore.user.email);
-    userReservations.value = response;
-    response.forEach((res) =>
-      res.tickets.forEach((ticket) => {
-        const next_ticket = {
-          ...ticket,
-          movie: res.movie_title,
-          datetime: res.seance_datetime,
-          status: res.status.name,
-        } as ShowTicket;
-        ticketList.value = [...ticketList.value, next_ticket];
-      })
-    );
+    for (let i = 1; i <= 20; i++) {
+      const response = await getReservations(userStore.user.email, i, 25);
+      userReservations.value = userReservations.value
+        ? [...userReservations.value, ...response]
+        : response;
+    }
+    if (userReservations.value)
+      userReservations.value.forEach((res) =>
+        res.tickets.forEach((ticket) => {
+          const next_ticket = {
+            ...ticket,
+            movie: res.movie_title,
+            datetime: res.seance_datetime,
+            status: res.status.name,
+          } as ShowTicket;
+          ticketList.value = [...ticketList.value, next_ticket];
+        })
+      );
   } catch (err) {
     console.error(err);
   } finally {

@@ -18,6 +18,7 @@ const props = withDefaults(
     to: "",
   }
 );
+defineEmits(["click"]);
 
 const buttonClasses = computed(() => {
   return [
@@ -30,7 +31,7 @@ const buttonClasses = computed(() => {
 
 <template>
   <template v-if="!to">
-    <button :class="buttonClasses" @click="$emit('click', $event)">
+    <button :class="buttonClasses" @click.stop="$emit('click', $event)">
       <slot />
     </button>
   </template>

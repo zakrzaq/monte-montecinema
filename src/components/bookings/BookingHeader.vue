@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { useMovieStore } from "@/stores/movies";
 import lengthToTime from "@/helpers/lengthToTime";
+import { prettyDate } from "@/helpers/prettyDate";
+import { useBookingStore } from "@/stores/booking";
 import { computed } from "vue";
+import BaseTag from "@/components/base/BaseTag.vue";
 const movieStore = useMovieStore();
+const bookingStore = useBookingStore();
 
 const props = defineProps<{
   movie_id: number;
@@ -25,6 +29,9 @@ const movie = computed(() => {
           <p class="booking__genre">{{ movie.genre.name }}</p>
           <p class="booking__length">{{ lengthToTime(movie.length) }}</p>
         </div>
+        <BaseTag size="large" type="booking">{{
+          prettyDate(bookingStore.selectedReservation.datetime, 1)
+        }}</BaseTag>
       </div>
     </div>
   </template>
@@ -43,13 +50,13 @@ const movie = computed(() => {
   &__poster {
     padding: 40px;
     img {
-      max-width: 130px;
+      max-width: 100px;
       height: auto;
     }
   }
 
   &__details {
-    padding: 40px;
+    padding: 40px 40px 40px 0;
   }
 
   &__title {
@@ -91,6 +98,10 @@ const movie = computed(() => {
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+  }
+
+  :deep(.base-tag) {
+    display: inline-block;
   }
 }
 </style>

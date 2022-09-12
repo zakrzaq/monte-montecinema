@@ -1,12 +1,19 @@
 import { defaultClient } from "@/api/client";
 import { useUserStore } from "@/stores/user";
-import type { Reservation } from "@/types/reservations";
+import type { Reservation, OnlineReservation } from "@/types/reservations";
 const userStore = useUserStore();
+
+export const getSingleReservation = async (id: number) => {
+  const response = await defaultClient.get<Reservation>("/reservations", {
+    params: { id },
+  });
+  return response.data;
+};
 
 export const getReservations = async (
   email: string,
   page = 1,
-  per_page = 10
+  per_page = 25
 ) => {
   const response = await defaultClient.get<Reservation[]>("/reservations", {
     params: {
@@ -17,4 +24,10 @@ export const getReservations = async (
     headers: { Authorization: `Bearer ${userStore.authToken}` },
   });
   return response.data;
+};
+
+export const postReservation = async (reservation: OnlineReservation) => {
+  await defaultClient.post("/reservations/online", reservation, {
+    headers: { Authorization: `Bearer ${userStore.authToken}` },
+  });
 };
