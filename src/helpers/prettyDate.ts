@@ -1,4 +1,4 @@
-export const prettyDate = (dateString: string, type: number): string => {
+export const prettyDate = (dateString: string, type?: number): string => {
   const days = [
     "Sunday",
     "Monday",
