@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-const emit = defineEmits(["selected"]);
+
+const emit = defineEmits<{
+  (e: "selected", id: string): void;
+}>();
 
 const tabs = ["Personal details", "Reservations"];
 const selectedIndex = ref(0);

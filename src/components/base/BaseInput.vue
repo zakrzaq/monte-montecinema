@@ -20,7 +20,10 @@ const props = withDefaults(
     disabled: false,
   }
 );
-defineEmits(["update:modelValue", "blur"]);
+defineEmits<{
+  (e: "update:modelValue", id: string): void;
+  (e: "blur"): void;
+}>();
 
 const passwordVisible = ref(false);
 

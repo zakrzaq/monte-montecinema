@@ -3,8 +3,12 @@ import { computed, ref } from "vue";
 import { useBookingStore } from "@/stores/booking";
 import No1Circle from "@/assets/icons/circle-no1.svg?component";
 import No2Circle from "@/assets/icons/circle-no2.svg?component";
+
 const bookingStore = useBookingStore();
-const emit = defineEmits(["selected"]);
+
+const emit = defineEmits<{
+  (e: "selected", id: string): void;
+}>();
 
 const tabs = ["Choose seats", "Book tickets"];
 const selectedIndex = ref(0);

@@ -1,27 +1,42 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useBookingStore } from "@/stores/booking";
+
 const bookingStore = useBookingStore();
-defineProps<{
+
+const props = defineProps<{
   letter: string;
   seat: string;
 }>();
-const emit = defineEmits(["addSeat"]);
+const emit = defineEmits<{
+  (e: "addSeat", id: string): void;
+}>();
 
 const storeSelectedTickets = computed(() => {
   return bookingStore.selectedTickets.map((ticket) => ticket.seat);
+});
+const seatValue = computed(() => {
+  return (letter: string, seat: string) => letter + seat;
+});
+const isSeatTaken = computed(() => {
+  return (letter: string, seat: string) =>
+    bookingStore.selectedReservation.taken_seats.includes(
+      seatValue.value(letter, seat)
+    );
+});
+const isSeatSelected = computed(() => {
+  return (letter: string, seat: string) =>
+    storeSelectedTickets.value.includes(seatValue.value(letter, seat));
 });
 </script>
 
 <template>
   <button
-    :value="`${letter}${seat}`"
+    :value="seatValue(letter, seat)"
     :class="[
       'seat',
-      bookingStore.selectedReservation.taken_seats.includes(`${letter}${seat}`)
-        ? 'seat--taken'
-        : '',
-      storeSelectedTickets.includes(`${letter}${seat}`) ? 'seat--selected' : '',
+      isSeatTaken(letter, seat) ? 'seat--taken' : '',
+      isSeatSelected(letter, seat) ? 'seat--selected' : '',
     ]"
     @click="emit('addSeat', ($event.target as HTMLInputElement).value)"
   >

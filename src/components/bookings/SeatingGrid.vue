@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useBookingStore } from "@/stores/booking";
-import BaseCard from "../base/BaseCard.vue";
+import BaseCard from "@/components/base/BaseCard.vue";
 import SeatingSeat from "@/components/bookings/SeatingSeat.vue";
-import SeatingRow from "@/components/bookings/SeatingRow.vue";
 import SeatingLabels from "@/components/bookings/SeatingLabels.vue";
+
 const bookingStore = useBookingStore();
 
 const allSeats = computed(() => {
@@ -17,7 +17,7 @@ const allSeats = computed(() => {
 });
 const rowLetters = computed(() => {
   const firstChars = allSeats.value.map((seat) => seat.substring(0, 1));
-  return [...new Set(firstChars.map((seat) => seat))].sort();
+  return [...new Set(firstChars)].sort();
 });
 const rowNumbers = computed(() => {
   return allSeats.value
@@ -26,6 +26,13 @@ const rowNumbers = computed(() => {
     .sort(function (a, b) {
       return +a - +b;
     });
+  // return allSeats.value
+  //   .map((str) => {
+  //     if (str.includes("A")) str.substring(1);
+  //   })
+  //   .sort(function (a, b) {
+  //     return +a - +b;
+  //   });
 });
 const selectedSeats = computed(() => {
   return bookingStore.selectedTickets.map((ticket) => ticket.seat);
@@ -47,15 +54,15 @@ const addSeat = (seat: string) => {
 </script>
 
 <template>
-  <BaseCard width="100%">
+  <BaseCard card-width="100%">
     <div class="seating-hall">
       <SeatingLabels :letters="rowLetters" />
       <div class="seating-hall__hall">
-        <SeatingRow
+        <div
           v-for="letter in rowLetters"
           :key="letter"
           :letter="letter"
-          class="row"
+          class="seating-hall__row"
         >
           <SeatingSeat
             v-for="number in rowNumbers"
@@ -64,7 +71,7 @@ const addSeat = (seat: string) => {
             :letter="letter"
             @add-seat="addSeat"
           />
-        </SeatingRow>
+        </div>
       </div>
       <SeatingLabels :letters="rowLetters" />
     </div>
@@ -78,6 +85,12 @@ const addSeat = (seat: string) => {
   justify-content: center;
   align-items: center;
   grid-template-columns: 50px 1fr 50px;
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
 
   :deep(.base-card) {
     width: 100%;

@@ -2,11 +2,11 @@
 import { useRouter } from "vue-router";
 import { useBookingStore } from "@/stores/booking";
 import { getSeanceById } from "@/api/seancesService";
-
 import lengthToTime from "@/helpers/lengthToTime";
+import type { MovieWithSeances, Seance } from "@/types/seance";
 import BaseButton from "@/components/base/BaseButton.vue";
 import NoResults from "@/components/NoResults.vue";
-import type { MovieWithSeances, Seance } from "@/types/seance";
+
 const router = useRouter();
 const bookingStore = useBookingStore();
 
@@ -17,7 +17,7 @@ defineProps<{
 const handleBooking = async (seance: Seance) => {
   bookingStore.selectedSeance = seance;
   bookingStore.selectedReservation = await getSeanceById(seance.id);
-  bookingStore.selectedTickets = [];
+  bookingStore.clearSelectedTickets();
   await router.push({
     name: "BookingPage",
   });

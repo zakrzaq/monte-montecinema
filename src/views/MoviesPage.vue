@@ -34,8 +34,8 @@ const filteredTitleMovives = computed(() => {
 });
 
 const selectOptions = computed(() => {
-  const all = ["All movies", ...moviesStore.genreList];
-  return all.map((item) => {
+  const allGenres = ["All movies", ...moviesStore.genreList];
+  return allGenres.map((item) => {
     return { id: item, title: item };
   });
 });

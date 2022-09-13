@@ -18,7 +18,11 @@ export const useBookingStore = defineStore({
     } as RootState;
   },
   getters: {},
-  actions: {},
+  actions: {
+    clearSelectedTickets() {
+      this.selectedTickets = [];
+    },
+  },
   persist: {
     storage: sessionStorage,
   },

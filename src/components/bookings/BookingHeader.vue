@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { useMovieStore } from "@/stores/movies";
+import { useBookingStore } from "@/stores/booking";
 import lengthToTime from "@/helpers/lengthToTime";
 import { prettyDate } from "@/helpers/prettyDate";
-import { useBookingStore } from "@/stores/booking";
-import { computed } from "vue";
 import BaseTag from "@/components/base/BaseTag.vue";
+import NoResults from "@/components/NoResults.vue";
+
 const movieStore = useMovieStore();
 const bookingStore = useBookingStore();
 
@@ -35,7 +37,7 @@ const movie = computed(() => {
       </div>
     </div>
   </template>
-  <template v-else> Nothing to show here... </template>
+  <NoResults v-else> Nothing to show here... </NoResults>
 </template>
 
 <style scoped lang="scss">

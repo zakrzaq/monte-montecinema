@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/user";
 import BaseButton from "@/components/base/BaseButton.vue";
 import Hamburger from "@/assets/icons/hamburger.svg?component";
-import { useUserStore } from "@/stores/user";
-import { useRouter } from "vue-router";
-import { computed } from "vue";
+
 const userStore = useUserStore();
 const router = useRouter();
 

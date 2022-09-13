@@ -6,7 +6,7 @@ import type { Seance } from "@/types/seance";
 const todayDate = new Date();
 interface RootState {
   selectedDate: string;
-  currentSeances: Seance[] | [];
+  currentSeances: Seance[];
 }
 export const useSeancesStore = defineStore({
   id: "seancesStore",
@@ -23,9 +23,15 @@ export const useSeancesStore = defineStore({
     },
     screeningTimesById: (state) => {
       return (id: number) => {
-        return state.currentSeances
-          .filter((seance) => seance.datetime.includes(state.selectedDate))
-          .filter((seance) => seance.movie === id);
+        return state.currentSeances.filter((seance) => {
+          if (
+            seance.datetime.includes(state.selectedDate) &&
+            seance.movie === id
+          )
+            return seance;
+        });
+        // .filter((seance) => seance.datetime.includes(state.selectedDate))
+        // .filter((seance) => seance.movie === id);
       };
     },
   },

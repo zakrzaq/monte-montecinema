@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { useUserStore } from "@/stores/user";
 import BaseButton from "@/components/base/BaseButton.vue";
 import Hamburger from "@/assets/icons/hamburger.svg?component";
-import { useUserStore } from "@/stores/user";
+
 const userStore = useUserStore();
 </script>
 

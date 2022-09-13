@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
+
 const props = withDefaults(
   defineProps<{
     options: { id: number | string; title: string }[];
@@ -14,7 +15,10 @@ const props = withDefaults(
     errorMessage: "",
   }
 );
-defineEmits(["update:modelValue", "blur"]);
+const emit = defineEmits<{
+  (e: "update:modelValue", id: string | number): void;
+  (e: "blur"): void;
+}>();
 
 const selectClasses = computed(() => {
   return [
@@ -22,6 +26,14 @@ const selectClasses = computed(() => {
     props.errorMessage ? "base-select__select--error" : "",
   ];
 });
+const handleEmit = (event: Event) => {
+  emit(
+    "update:modelValue",
+    (event.target as HTMLInputElement).value.length > 1
+      ? (event.target as HTMLInputElement).value
+      : parseInt((event.target as HTMLInputElement).value)
+  );
+};
 </script>
 
 <template>
@@ -32,14 +44,7 @@ const selectClasses = computed(() => {
         class="base-select__select"
         :value="modelValue"
         id="id"
-        @change="
-          $emit(
-            'update:modelValue',
-            ($event.target as HTMLInputElement).value.length > 1
-              ? ($event.target as HTMLInputElement).value
-              : parseInt(($event.target as HTMLInputElement).value)
-          )
-        "
+        @change="handleEmit"
         @blur="$emit('blur')"
       >
         <option

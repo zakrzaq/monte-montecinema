@@ -1,22 +1,21 @@
 <script setup lang="ts">
-import { computed } from "vue";
-
 const props = withDefaults(
   defineProps<{
-    width?: string;
+    cardWidth?: string;
   }>(),
   {
-    width: "600px",
+    cardWidth: "600px",
   }
 );
-
-const cssStyles = computed(() => {
-  return `width: ${props.width}`;
-});
 </script>
 
 <template>
-  <div class="base-card" :style="cssStyles"><slot /></div>
+  <div
+    class="base-card"
+    v-bind:style="{ 'max-width': 'unset', width: props.cardWidth }"
+  >
+    <slot />
+  </div>
 </template>
 
 <style scoped lang="scss">

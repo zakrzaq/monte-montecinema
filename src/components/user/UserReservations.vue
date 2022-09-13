@@ -2,15 +2,16 @@
 import { onMounted, ref, computed } from "vue";
 import { getReservations } from "@/api/reservationsService";
 import { useUserStore } from "@/stores/user";
+import type { ShowTicket, Reservation } from "@/types/reservations";
 import BaseCard from "@/components/base/BaseCard.vue";
 import ReservationItem from "@/components/reservations/ReservationItem.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import NoResults from "@/components/NoResults.vue";
-import type { ShowTicket, Reservation } from "@/types/reservations";
+
 const userStore = useUserStore();
 
-const userReservations = ref<[] | Reservation[]>();
-const ticketList = ref<[] | ShowTicket[]>([]);
+const userReservations = ref<Reservation[]>();
+const ticketList = ref<ShowTicket[]>([]);
 const upcomingTickets = computed(() => {
   return ticketList.value.filter(
     (ticket: ShowTicket) => new Date(ticket.datetime) >= new Date()
@@ -58,7 +59,7 @@ onMounted(async () => {
   </template>
   <template v-else>
     <div v-if="ticketList" class="user-reservations">
-      <BaseCard width="100%">
+      <BaseCard card-width="100%">
         <h3 class="user-reservations__heading">Upcoming</h3>
         <template v-if="upcomingTickets">
           <ReservationItem

@@ -13,11 +13,6 @@ const bookingStore = useBookingStore();
 
 const selectedTab = ref("Choose seats");
 
-const headerTitle = computed(() => {
-  return `Choose your ${
-    selectedTab.value === "Choose seats" ? "seats" : "tickets"
-  }`;
-});
 const selectOptions = computed(() => {
   return ticketIds.map((ticket) => {
     return {
@@ -37,14 +32,21 @@ const handleBookTickets = async () => {
     seance_id: bookingStore.selectedReservation.id,
     tickets: bookingStore.selectedTickets,
   };
-  postReservation(selectionData);
+  await postReservation(selectionData);
+};
+const setSelectedTab = (val: string) => {
+  selectedTab.value = val;
 };
 </script>
 
 <template>
   <div>
-    <BookingTabs @selected="(val) => (selectedTab = val)" />
-    <h1>{{ headerTitle }}</h1>
+    <BookingTabs @selected="setSelectedTab" />
+    <h1>
+      {{
+        `Choose your ${selectedTab === "Choose seats" ? "seats" : "tickets"}`
+      }}
+    </h1>
     <BookingHeader
       v-if="bookingStore.selectedReservation"
       :movie_id="bookingStore.selectedReservation.movie"

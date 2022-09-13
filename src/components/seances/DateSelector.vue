@@ -2,24 +2,28 @@
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
-import BaseButton from "../base/BaseButton.vue";
-import BaseSelect from "../base/BaseSelect.vue";
-import Datepicker from "@vuepic/vue-datepicker";
-import "@vuepic/vue-datepicker/dist/main.css";
-import CalendarIcon from "@/assets/icons/calendar.svg?component";
 import { useSeancesStore } from "@/stores/seances";
 import { useMovieStore } from "@/stores/movies";
 import type { DaysList } from "@/types/days-list";
+import BaseButton from "../base/BaseButton.vue";
+import BaseSelect from "../base/BaseSelect.vue";
+import Datepicker from "@vuepic/vue-datepicker";
+import CalendarIcon from "@/assets/icons/calendar.svg?component";
+import "@vuepic/vue-datepicker/dist/main.css";
+
 const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
 const route = useRoute();
+
 const { selectedDate } = storeToRefs(seancesStore);
-defineEmits(["update:modelValue"]);
+defineEmits<{
+  (e: "update:modelValue", id: string): void;
+}>();
 
 const todayDate = new Date();
 const selectOptions = computed(() => {
-  const all = ["All movies", ...movieStore.titleList];
-  return all.map((item) => {
+  const allTitles = ["All movies", ...movieStore.titleList];
+  return allTitles.map((item) => {
     return { id: item, title: item };
   });
 });

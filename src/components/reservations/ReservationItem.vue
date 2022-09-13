@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import reservationDatetime from "@/helpers/reservationDatetime";
+import type { ShowTicket } from "@/types/reservations";
 import BaseCell from "@/components/base/BaseCell.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseTag from "@/components/base/BaseTag.vue";
-import type { ShowTicket } from "@/types/reservations";
+
 defineProps<{
   ticket?: ShowTicket;
 }>();
