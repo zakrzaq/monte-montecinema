@@ -3,9 +3,7 @@ import { shallowMount } from "@vue/test-utils";
 
 import MovieCard from "@/components/movies/MovieCard.vue";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-const createComponent = () => shallowMount(MovieCard, { propsData: { movie } });
+const createComponent = () => shallowMount(MovieCard, { props: { movie } });
 
 const movie = {
   id: 1,
@@ -27,21 +25,21 @@ describe("MovieCard.vue", () => {
 
   it("display header title", () => {
     const wrapper = createComponent();
-    expect(wrapper.find(".movie__title").text()).toMatch("Predator");
+    expect(wrapper.find('[data-spec="title"]').text()).toMatch("Predator");
   });
 
   it("display image from url", () => {
     const wrapper = createComponent();
-    expect(wrapper.find("img").attributes("src")).toBeTruthy;
+    expect(wrapper.find('[data-spec="poster"]').attributes("src")).toBeTruthy;
   });
 
   it("display correct genre", () => {
     const wrapper = createComponent();
-    expect(wrapper.find(".movie__genre").text()).toMatch("Action");
+    expect(wrapper.find('[data-spec="genre"]').text()).toMatch("Action");
   });
 
   it("display correct time", () => {
     const wrapper = createComponent();
-    expect(wrapper.find(".movie__length").text()).toMatch("1h 27min");
+    expect(wrapper.find('[data-spec="length"]').text()).toMatch("1h 27min");
   });
 });

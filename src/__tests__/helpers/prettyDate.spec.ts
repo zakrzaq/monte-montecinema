@@ -17,6 +17,6 @@ describe("prettyDate", () => {
     expect(prettyDate(mock)).toContain("Friday");
   });
   it("displays date in correct format", () => {
-    expect(prettyDate(mock)).toBe("Friday, 02/09/2022");
+    expect(prettyDate(mock)).toBe("Friday 02/09/2022");
   });
 });
