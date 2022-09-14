@@ -9,6 +9,7 @@ const props = withDefaults(
     name?: string;
     placeholder?: string;
     errorMessage?: string;
+    disabled?: boolean;
   }>(),
   {
     modelValue: "",
@@ -16,8 +17,13 @@ const props = withDefaults(
     name: "",
     placeholder: "...",
     errorMessage: "",
+    disabled: false,
   }
 );
+defineEmits<{
+  (e: "update:modelValue", id: string): void;
+  (e: "blur"): void;
+}>();
 
 const passwordVisible = ref(false);
 
@@ -29,6 +35,7 @@ const inputClasses = computed(() => {
   return [
     "base-input__input",
     props.errorMessage ? "base-input__input--error" : "",
+    props.disabled ? "base-input__input--disabled" : "",
   ];
 });
 </script>
@@ -39,6 +46,7 @@ const inputClasses = computed(() => {
       ><slot />
       <input
         :id="name"
+        :disabled="disabled"
         :class="inputClasses"
         required
         :type="passwordVisible ? 'text' : type"
@@ -86,6 +94,11 @@ const inputClasses = computed(() => {
       background: $athens-gray;
       border: 1px solid $cherry-red;
       color: $cherry-red;
+    }
+
+    &--disabled {
+      background: $wisp-pink;
+      border: 1px solid $wisp-pink;
     }
 
     &::placeholder {

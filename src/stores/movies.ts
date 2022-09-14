@@ -5,7 +5,7 @@ import { useUiStore } from "@/stores/ui";
 import type { Movie } from "@/types/movie";
 
 interface RootState {
-  movieList: Movie[] | [];
+  movieList: Movie[];
 }
 
 export const useMovieStore = defineStore({

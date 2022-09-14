@@ -2,22 +2,30 @@
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
-import BaseButton from "../base/BaseButton.vue";
-import BaseSelect from "../base/BaseSelect.vue";
-import Datepicker from "@vuepic/vue-datepicker";
-import "@vuepic/vue-datepicker/dist/main.css";
-import CalendarIcon from "@/assets/icons/calendar.svg?component";
 import { useSeancesStore } from "@/stores/seances";
 import { useMovieStore } from "@/stores/movies";
 import type { DaysList } from "@/types/days-list";
+import BaseButton from "../base/BaseButton.vue";
+import BaseSelect from "../base/BaseSelect.vue";
+import Datepicker from "@vuepic/vue-datepicker";
+import CalendarIcon from "@/assets/icons/calendar.svg?component";
+import "@vuepic/vue-datepicker/dist/main.css";
+
 const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
 const route = useRoute();
+
 const { selectedDate } = storeToRefs(seancesStore);
+defineEmits<{
+  (e: "update:modelValue", id: string): void;
+}>();
 
 const todayDate = new Date();
 const selectOptions = computed(() => {
-  return ["All movies", ...movieStore.titleList];
+  const allTitles = ["All movies", ...movieStore.titleList];
+  return allTitles.map((item) => {
+    return { id: item, title: item };
+  });
 });
 
 const daysList = computed(() => {
@@ -57,7 +65,7 @@ const showMoviesDropdown = computed(() => {
     >
     <div class="date-selector__buttons">
       <BaseButton
-        type="breadcrumb"
+        variant="breadcrumb"
         :modifier="day.date === seancesStore.selectedDate ? '' : 'outlined'"
         size="large"
         v-for="day in daysList"
@@ -68,7 +76,7 @@ const showMoviesDropdown = computed(() => {
       </BaseButton>
       <BaseButton
         class="date-selector__date-picker"
-        type="breadcrumb"
+        variant="breadcrumb"
         modifier="outlined"
         size="large"
       >

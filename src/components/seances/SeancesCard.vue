@@ -1,15 +1,27 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router";
+import { useBookingStore } from "@/stores/booking";
+import { getSeanceById } from "@/api/seancesService";
 import lengthToTime from "@/helpers/lengthToTime";
-import BaseButton from "../base/BaseButton.vue";
-import type { Movie } from "@/types/movie";
-import type { Seance } from "@/types/seance";
-withDefaults(
-  defineProps<{
-    movie: Movie | undefined;
-    seances: Seance[];
-  }>(),
-  {}
-);
+import type { MovieWithSeances, Seance } from "@/types/seance";
+import BaseButton from "@/components/base/BaseButton.vue";
+import NoResults from "@/components/NoResults.vue";
+
+const router = useRouter();
+const bookingStore = useBookingStore();
+
+defineProps<{
+  movie: MovieWithSeances;
+}>();
+
+const handleBooking = async (seance: Seance) => {
+  bookingStore.selectedSeance = seance;
+  bookingStore.selectedReservation = await getSeanceById(seance.id);
+  bookingStore.clearSelectedTickets();
+  await router.push({
+    name: "BookingPage",
+  });
+};
 </script>
 
 <template>
@@ -25,16 +37,21 @@ withDefaults(
           <p class="seance-card__length">{{ lengthToTime(movie.length) }}</p>
         </div>
         <div class="seance-card__times">
-          <BaseButton
-            v-for="seance in seances"
-            :key="seance.id"
-            to="#"
-            type="primary"
-            modifier="outlined"
-            size="medium"
-          >
-            {{ seance.datetime.substring(11, 16) }}
-          </BaseButton>
+          <template v-if="movie.screenings.length > 0">
+            <BaseButton
+              v-for="seance in movie.screenings"
+              :key="seance.id"
+              variant="primary"
+              modifier="outlined"
+              size="medium"
+              @click="handleBooking(seance)"
+            >
+              {{ seance.datetime.substring(11, 16) }}
+            </BaseButton>
+          </template>
+          <NoResults v-else>
+            Sorry, there is no screenings for {{ movie.title }} on this day.
+          </NoResults>
         </div>
       </div>
     </div>

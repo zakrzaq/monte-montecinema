@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import reservationDatetime from "@/helpers/reservationDatetime";
+import type { ShowTicket } from "@/types/reservations";
 import BaseCell from "@/components/base/BaseCell.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseTag from "@/components/base/BaseTag.vue";
-import type { ShowTicket } from "@/types/reservations";
+
 defineProps<{
-  ticket: ShowTicket;
+  ticket?: ShowTicket;
 }>();
 </script>
 
 <template>
-  <div class="reservation-item">
+  <div v-if="ticket" class="reservation-item">
     <BaseCell label="Movie">{{ ticket.movie }}</BaseCell>
     <BaseCell label="Seat">{{ ticket.seat }}</BaseCell>
     <BaseCell label="Time">{{ reservationDatetime(ticket.datetime) }}</BaseCell>
@@ -19,7 +20,7 @@ defineProps<{
     </BaseCell>
     <BaseTag :value="ticket.status">{{ ticket.status }}</BaseTag>
     <BaseButton
-      type="breadcrumb"
+      variant="breadcrumb"
       modifier="outlined"
       size="medium"
       v-if="ticket.status !== 'Cancelled'"

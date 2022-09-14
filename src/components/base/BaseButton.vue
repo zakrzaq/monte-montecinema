@@ -4,15 +4,13 @@ import type { RouteLocationRaw } from "vue-router";
 
 const props = withDefaults(
   defineProps<{
-    kind?: "button" | "submit";
-    type?: "primary" | "secondary" | "tertiary" | "breadcrumb" | "account";
+    variant?: "primary" | "secondary" | "tertiary" | "breadcrumb" | "account";
     size?: "small" | "regular" | "medium" | "large" | "slim";
     modifier?: "outlined" | "noborder" | "";
     to?: RouteLocationRaw;
   }>(),
   {
-    kind: "button",
-    type: "primary",
+    variant: "primary",
     size: "regular",
     modifier: "",
     to: "",
@@ -22,23 +20,19 @@ const props = withDefaults(
 const buttonClasses = computed(() => {
   return [
     "button",
-    `button--${props.type}${props.modifier ? `--${props.modifier}` : ""}`,
+    `button--${props.variant}${props.modifier ? `--${props.modifier}` : ""}`,
     `button--${props.size}`,
   ];
 });
 </script>
 
 <template>
-  <template v-if="!to">
-    <button :class="buttonClasses" @click="$emit('click', $event)">
-      <slot />
-    </button>
-  </template>
-  <template v-else>
-    <RouterLink :to="to" :class="buttonClasses">
-      <slot />
-    </RouterLink>
-  </template>
+  <button v-if="!to" :class="buttonClasses">
+    <slot />
+  </button>
+  <RouterLink v-else :to="to" :class="buttonClasses">
+    <slot />
+  </RouterLink>
 </template>
 
 <style lang="scss" scoped>

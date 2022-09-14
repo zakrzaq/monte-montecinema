@@ -3,12 +3,14 @@ import { computed } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    type: "default" | "gray" | "cancelled";
+    type?: "default" | "gray" | "cancelled" | "booking";
     value?: string;
+    size?: "medium" | "large";
   }>(),
   {
     type: "default",
     value: "",
+    size: "medium",
   }
 );
 
@@ -22,6 +24,7 @@ const tagStyle = computed(() => {
     "base-tag",
     props.type ? `base-tag--${props.type}` : "",
     props.value ? `base-tag--${valueToStyle.value}` : "",
+    `base-tag--${props.size}`,
   ];
 });
 </script>
@@ -34,26 +37,37 @@ const tagStyle = computed(() => {
 
 <style scoped lang="scss">
 .base-tag {
-  padding: 8px 16px;
-  border-radius: 24px;
+  margin: auto;
   @include roboto(normal, 700);
   font-size: 14px;
   line-height: 16px;
-  margin: auto;
+
+  &--medium {
+    padding: 8px 16px;
+    border-radius: 24px;
+  }
+  &--large {
+    padding: 12px 32px;
+    border-radius: 64px;
+  }
 
   &--default {
     background: $wisp-pink;
     color: $bitter-sweet;
   }
-
   &--gray {
     background: $athens-gray;
     color: $jumbo;
   }
-
   &--cancelled {
     background: $bitter-sweet;
     color: $wisp-pink;
+  }
+  &--booking {
+    @include roboto-mono(normal, 500);
+    font-size: 16px;
+    color: $cherry-red;
+    background-color: $wisp-pink;
   }
 }
 </style>

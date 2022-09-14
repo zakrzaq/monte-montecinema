@@ -85,11 +85,11 @@ const submitForm = () => {
         <div class="login__actions">
           <BaseButton
             size="large"
-            type="secondary"
+            variant="secondary"
             :to="{ name: 'RegisterPage' }"
             >Register instead</BaseButton
           >
-          <BaseButton size="large" type="primary" kind="submit"
+          <BaseButton size="large" variant="primary" kind="submit"
             >Log in</BaseButton
           >
         </div>

@@ -9,11 +9,12 @@ import {
 import { touchAll } from "@/helpers/touchAll";
 import { patchUser } from "@/api/userService";
 import { useUserStore } from "@/stores/user";
+import type { PatchCredentials } from "@/types/user";
 import BaseCard from "@/components/base/BaseCard.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import NoResults from "@/components/NoResults.vue";
-import type { PatchCredentials } from "@/types/user";
+
 const userStore = useUserStore();
 
 const { user } = storeToRefs(userStore);
@@ -126,7 +127,7 @@ const submitForm = async () => {
         >
         <BaseButton
           v-if="!editPassword"
-          type="secondary"
+          variant="secondary"
           modifier="outlined"
           @click="editPassword = true"
         >
@@ -177,7 +178,7 @@ const submitForm = async () => {
           <template #message>You should be minium 18 years old</template>
         </BaseInput>
         <div class="user-page__controls">
-          <BaseButton type="secondary" modifier="outlined">
+          <BaseButton variant="secondary" modifier="outlined">
             Save changes
           </BaseButton>
         </div>
