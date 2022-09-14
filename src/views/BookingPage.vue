@@ -57,7 +57,7 @@ const setSelectedTab = (val: string) => {
         <BaseButton
           :disabled="bookingStore.selectedTickets.length === 0"
           size="large"
-          type="secondary"
+          variant="secondary"
           modifier="outlined"
           @click="handleChooseSeats"
         >
@@ -88,7 +88,7 @@ const setSelectedTab = (val: string) => {
       <div class="reservations__controls reservations__controls--book">
         <BaseButton
           size="large"
-          type="secondary"
+          variant="secondary"
           modifier="outlined"
           @click="selectedTab = 'Choose seats'"
         >
@@ -96,7 +96,7 @@ const setSelectedTab = (val: string) => {
         </BaseButton>
         <BaseButton
           size="large"
-          type="secondary"
+          variant="secondary"
           modifier="outlined"
           @click="handleBookTickets"
         >

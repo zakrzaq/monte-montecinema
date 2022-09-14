@@ -127,7 +127,7 @@ const submitForm = async () => {
         >
         <BaseButton
           v-if="!editPassword"
-          type="secondary"
+          variant="secondary"
           modifier="outlined"
           @click="editPassword = true"
         >
@@ -178,7 +178,7 @@ const submitForm = async () => {
           <template #message>You should be minium 18 years old</template>
         </BaseInput>
         <div class="user-page__controls">
-          <BaseButton type="secondary" modifier="outlined">
+          <BaseButton variant="secondary" modifier="outlined">
             Save changes
           </BaseButton>
         </div>

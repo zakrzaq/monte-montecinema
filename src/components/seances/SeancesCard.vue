@@ -41,7 +41,7 @@ const handleBooking = async (seance: Seance) => {
             <BaseButton
               v-for="seance in movie.screenings"
               :key="seance.id"
-              type="primary"
+              variant="primary"
               modifier="outlined"
               size="medium"
               @click="handleBooking(seance)"

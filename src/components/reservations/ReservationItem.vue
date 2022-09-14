@@ -20,7 +20,7 @@ defineProps<{
     </BaseCell>
     <BaseTag :value="ticket.status">{{ ticket.status }}</BaseTag>
     <BaseButton
-      type="breadcrumb"
+      variant="breadcrumb"
       modifier="outlined"
       size="medium"
       v-if="ticket.status !== 'Cancelled'"

@@ -26,13 +26,6 @@ const rowNumbers = computed(() => {
     .sort(function (a, b) {
       return +a - +b;
     });
-  // return allSeats.value
-  //   .map((str) => {
-  //     if (str.includes("A")) str.substring(1);
-  //   })
-  //   .sort(function (a, b) {
-  //     return +a - +b;
-  //   });
 });
 const selectedSeats = computed(() => {
   return bookingStore.selectedTickets.map((ticket) => ticket.seat);

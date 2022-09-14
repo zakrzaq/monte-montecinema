@@ -9,10 +9,10 @@ const userStore = useUserStore();
 <template>
   <div class="actions">
     <div class="actions__buttons">
-      <BaseButton type="secondary" @click="userStore.logout">
+      <BaseButton variant="secondary" @click="userStore.logout">
         Log out
       </BaseButton>
-      <BaseButton type="account" :to="{ name: 'UserPage' }">
+      <BaseButton variant="account" :to="{ name: 'UserPage' }">
         My account
       </BaseButton>
     </div>

@@ -201,10 +201,13 @@ const submitForm = async () => {
           </BaseCheckbox>
         </template>
         <div class="register__actions">
-          <BaseButton size="large" type="secondary" :to="{ name: 'LoginPage' }"
+          <BaseButton
+            size="large"
+            variant="secondary"
+            :to="{ name: 'LoginPage' }"
             >Log in instead</BaseButton
           >
-          <BaseButton size="large" type="primary" kind="submit">
+          <BaseButton size="large" variant="primary" kind="submit">
             {{ steps === 1 ? "Next Step" : "Register" }}</BaseButton
           >
         </div>

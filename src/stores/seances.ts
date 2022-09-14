@@ -30,8 +30,6 @@ export const useSeancesStore = defineStore({
           )
             return seance;
         });
-        // .filter((seance) => seance.datetime.includes(state.selectedDate))
-        // .filter((seance) => seance.movie === id);
       };
     },
   },

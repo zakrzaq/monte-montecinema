@@ -20,6 +20,11 @@ const emit = defineEmits<{
   (e: "blur"): void;
 }>();
 
+const eventTarget = (event: Event) => {
+  const target = (event.target as HTMLInputElement).value;
+  return target.length > 1 ? target : parseInt(target);
+};
+
 const selectClasses = computed(() => {
   return [
     "base-select__select",
@@ -27,12 +32,7 @@ const selectClasses = computed(() => {
   ];
 });
 const handleEmit = (event: Event) => {
-  emit(
-    "update:modelValue",
-    (event.target as HTMLInputElement).value.length > 1
-      ? (event.target as HTMLInputElement).value
-      : parseInt((event.target as HTMLInputElement).value)
-  );
+  emit("update:modelValue", eventTarget(event));
 };
 </script>
 

@@ -65,7 +65,7 @@ const showMoviesDropdown = computed(() => {
     >
     <div class="date-selector__buttons">
       <BaseButton
-        type="breadcrumb"
+        variant="breadcrumb"
         :modifier="day.date === seancesStore.selectedDate ? '' : 'outlined'"
         size="large"
         v-for="day in daysList"
@@ -76,7 +76,7 @@ const showMoviesDropdown = computed(() => {
       </BaseButton>
       <BaseButton
         class="date-selector__date-picker"
-        type="breadcrumb"
+        variant="breadcrumb"
         modifier="outlined"
         size="large"
       >

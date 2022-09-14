@@ -25,7 +25,7 @@ const handleLogin = () => {
 <template>
   <div class="actions">
     <div class="actions__buttons">
-      <BaseButton type="secondary" :to="{ name: 'RegisterPage' }">
+      <BaseButton variant="secondary" :to="{ name: 'RegisterPage' }">
         Register
       </BaseButton>
       <BaseButton @click="handleLogin">

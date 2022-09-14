@@ -16,27 +16,23 @@ const storeSelectedTickets = computed(() => {
   return bookingStore.selectedTickets.map((ticket) => ticket.seat);
 });
 const seatValue = computed(() => {
-  return (letter: string, seat: string) => letter + seat;
+  return props.letter + props.seat;
 });
 const isSeatTaken = computed(() => {
-  return (letter: string, seat: string) =>
-    bookingStore.selectedReservation.taken_seats.includes(
-      seatValue.value(letter, seat)
-    );
+  return bookingStore.selectedReservation.taken_seats.includes(seatValue.value);
 });
 const isSeatSelected = computed(() => {
-  return (letter: string, seat: string) =>
-    storeSelectedTickets.value.includes(seatValue.value(letter, seat));
+  return storeSelectedTickets.value.includes(seatValue.value);
 });
 </script>
 
 <template>
   <button
-    :value="seatValue(letter, seat)"
+    :value="seatValue"
     :class="[
       'seat',
-      isSeatTaken(letter, seat) ? 'seat--taken' : '',
-      isSeatSelected(letter, seat) ? 'seat--selected' : '',
+      isSeatTaken ? 'seat--taken' : '',
+      isSeatSelected ? 'seat--selected' : '',
     ]"
     @click="emit('addSeat', ($event.target as HTMLInputElement).value)"
   >

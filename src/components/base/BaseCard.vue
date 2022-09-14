@@ -20,7 +20,7 @@ const props = withDefaults(
 
 <style scoped lang="scss">
 .base-card {
-  width: 600px;
+  width: v-bind(cardWidth);
   background: $snow-white;
   box-shadow: $card-box-shadow;
   border-radius: 24px;
