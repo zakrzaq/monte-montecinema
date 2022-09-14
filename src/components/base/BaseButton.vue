@@ -19,7 +19,7 @@ const props = withDefaults(
   }
 );
 defineEmits<{
-  (e: "click"): void;
+  (e: "click", id: Event): void;
 }>();
 
 const buttonClasses = computed(() => {
