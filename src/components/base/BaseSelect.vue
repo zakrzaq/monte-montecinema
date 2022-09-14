@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed } from "vue";
+
 const props = withDefaults(
   defineProps<{
-    options: string[];
+    options: { id: number | string; title: string }[];
     id?: string | number;
-    modelValue: string;
+    modelValue?: string | number;
     errorMessage?: string;
   }>(),
   {
@@ -14,6 +15,15 @@ const props = withDefaults(
     errorMessage: "",
   }
 );
+const emit = defineEmits<{
+  (e: "update:modelValue", id: string | number): void;
+  (e: "blur"): void;
+}>();
+
+const eventTarget = (event: Event) => {
+  const target = (event.target as HTMLInputElement).value;
+  return target.length > 1 ? target : parseInt(target);
+};
 
 const selectClasses = computed(() => {
   return [
@@ -21,6 +31,9 @@ const selectClasses = computed(() => {
     props.errorMessage ? "base-select__select--error" : "",
   ];
 });
+const handleEmit = (event: Event) => {
+  emit("update:modelValue", eventTarget(event));
+};
 </script>
 
 <template>
@@ -29,20 +42,18 @@ const selectClasses = computed(() => {
       ><slot />
       <select
         class="base-select__select"
-        :modelValue="modelValue"
+        :value="modelValue"
         id="id"
-        @change="
-          $emit('update:modelValue', ($event.target as HTMLInputElement).value)
-        "
+        @change="handleEmit"
         @blur="$emit('blur')"
       >
         <option
           v-for="option in options"
-          :key="option"
+          :key="option.id"
           :class="selectClasses"
-          :value="option"
+          :value="option.id"
         >
-          {{ option }}
+          {{ option.title }}
         </option>
       </select>
     </label>
@@ -68,6 +79,7 @@ const selectClasses = computed(() => {
     height: 56px;
     padding: 1em 1.5em;
     margin-top: 12px;
+    margin-bottom: 5px;
     border: 0;
     border-radius: 0.5em;
     background-color: $athens-gray;

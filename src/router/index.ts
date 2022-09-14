@@ -45,6 +45,11 @@ const router = createRouter({
       component: () => import("@/views/UserPage.vue"),
     },
     {
+      path: "/booking",
+      name: "BookingPage",
+      component: () => import("@/views/BookingPage.vue"),
+    },
+    {
       path: "/404",
       name: "404",
       component: () => import("@/views/NotFoundPage.vue"),

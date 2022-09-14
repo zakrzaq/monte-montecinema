@@ -1,4 +1,4 @@
-export const prettyDate = (dateString: string): string => {
+export const prettyDate = (dateString: string, type?: number): string => {
   const days = [
     "Sunday",
     "Monday",
@@ -11,5 +11,10 @@ export const prettyDate = (dateString: string): string => {
   const day = new Date(dateString);
   const dayName = days[day.getDay()];
   const date = new Date(dateString).toLocaleDateString();
-  return `${dayName}, ${date}`;
+  const hours = new Date(dateString).getHours();
+  let minutes: string | number = new Date(dateString).getMinutes();
+  minutes < 10 ? (minutes = "0" + minutes) : (minutes = minutes);
+  return type === 1
+    ? `${dayName}, ${date} - ${hours}:${minutes}`
+    : `${dayName} ${date}`;
 };

@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { defineEmits } from "vue";
-const emit = defineEmits(["update:modelValue", "blur"]);
+const emit = defineEmits<{
+  (e: "update:modelValue", id: boolean): void;
+  (e: "blur"): void;
+}>();
 const props = withDefaults(
   defineProps<{
     modelValue?: boolean;
