@@ -1,18 +1,23 @@
 import { describe, it, expect } from "vitest";
 import { shallowMount } from "@vue/test-utils";
-
 import MovieCard from "@/components/movies/MovieCard.vue";
+import type { Movie } from "@/types/movie";
 
-const createComponent = () => shallowMount(MovieCard, { props: { movie } });
+const createComponent = () =>
+  shallowMount(MovieCard, {
+    props: { movie },
+  });
 
-const movie = {
+const movie: Movie = {
   id: 1,
   title: "Predator",
   poster_url: "img/predator.png",
+  release_date: "",
   description:
     "A team of commandos on a mission in a Central American jungle find themselves hunted by an extraterrestrial warrior.",
   genre: {
     name: "Action",
+    id: 1,
   },
   length: 87,
 };
