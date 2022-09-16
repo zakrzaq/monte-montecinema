@@ -11,7 +11,6 @@ const seancesStore = useSeancesStore();
 const { selectedDate } = storeToRefs(seancesStore);
 
 onMounted(async () => {
-  // userStore.restoreUserData();
   movieStore.fetchMovieList();
   seancesStore.getCurrentSeances();
 });
