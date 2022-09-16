@@ -3,15 +3,15 @@ import TheHeader from "@/components/TheHeader.vue";
 import { storeToRefs } from "pinia";
 import { useMovieStore } from "@/stores/movies";
 import { useSeancesStore } from "@/stores/seances";
-import { useUserStore } from "@/stores/user";
+// import { useUserStore } from "@/stores/user";
 import { onMounted, watch } from "vue";
 const movieStore = useMovieStore();
 const seancesStore = useSeancesStore();
-const userStore = useUserStore();
+// const userStore = useUserStore();
 const { selectedDate } = storeToRefs(seancesStore);
 
 onMounted(async () => {
-  userStore.restoreUserData();
+  // userStore.restoreUserData();
   movieStore.fetchMovieList();
   seancesStore.getCurrentSeances();
 });

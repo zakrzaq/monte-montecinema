@@ -20,6 +20,7 @@ export const userModel = {
 interface RootState {
   user: User;
   authToken: string | null;
+  fromPath: string | symbol;
 }
 
 export const useUserStore = defineStore("userStore", {
@@ -27,6 +28,7 @@ export const useUserStore = defineStore("userStore", {
     return {
       user: { ...userModel },
       authToken: null,
+      fromPath: "",
     } as RootState;
   },
   getters: {
@@ -36,30 +38,30 @@ export const useUserStore = defineStore("userStore", {
     setUserData({ authToken, user }: { authToken: string; user: User }) {
       this.authToken = authToken;
       this.user = user;
-      localStorage.setItem(TOKEN_STORAGE_KEY, authToken);
-      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+      // localStorage.setItem(TOKEN_STORAGE_KEY, authToken);
+      // localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
     },
     resetUserData() {
       this.authToken = null;
       this.user = { ...userModel };
-      localStorage.removeItem(TOKEN_STORAGE_KEY);
-      localStorage.removeItem(USER_STORAGE_KEY);
+      // localStorage.removeItem(TOKEN_STORAGE_KEY);
+      // localStorage.removeItem(USER_STORAGE_KEY);
     },
-    restoreUserData() {
-      try {
-        const authToken = localStorage.getItem(TOKEN_STORAGE_KEY);
-        const user: User = JSON.parse(
-          localStorage.getItem(USER_STORAGE_KEY) || ""
-        );
-        if (authToken && user) {
-          setAuthHeader(`Bearer ${authToken}`);
-          this.setUserData({ authToken, user });
-        }
-      } catch (error) {
-        console.error(error);
-        this.resetUserData();
-      }
-    },
+    // restoreUserData() {
+    //   try {
+    //     const authToken = localStorage.getItem(TOKEN_STORAGE_KEY);
+    //     const user: User = JSON.parse(
+    //       localStorage.getItem(USER_STORAGE_KEY) || ""
+    //     );
+    //     if (authToken && user) {
+    //       setAuthHeader(`Bearer ${authToken}`);
+    //       this.setUserData({ authToken, user });
+    //     }
+    //   } catch (error) {
+    //     console.error(error);
+    //     this.resetUserData();
+    //   }
+    // },
     async callLogout() {
       if (this.isLoggedIn) await logout();
     },
