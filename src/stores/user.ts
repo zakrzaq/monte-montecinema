@@ -57,6 +57,7 @@ export const useUserStore = defineStore("userStore", {
         this.processResponse(response);
       } catch (err) {
         console.error(err);
+        notify({ type: "error", text: "Unable to login" });
       } finally {
         if (this.isLoggedIn) {
           this.isEmployee
