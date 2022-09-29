@@ -18,6 +18,7 @@ interface RootState {
   user: User;
   authToken: string | null;
   fromPath: string | symbol;
+  deskNumber: string;
 }
 
 export const useUserStore = defineStore("userStore", {
@@ -26,11 +27,15 @@ export const useUserStore = defineStore("userStore", {
       user: { ...userModel },
       authToken: null,
       fromPath: "",
+      deskNumber: '',
     } as RootState;
   },
   getters: {
     isLoggedIn: (state) => !!state.authToken,
     isEmployee: (state) => state.user.role === "employee",
+    selectedDesk: (state) => {
+      return state.user.role === 'employee' ? state.deskNumber : ''
+    }
   },
   actions: {
     setUserData({ authToken, user }: { authToken: string; user: User }) {

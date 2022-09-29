@@ -66,7 +66,7 @@ onMounted(async () => {
             v-for="ticket in upcomingTickets"
             :key="ticket.id"
             :ticket="ticket"
-          ></ReservationItem>
+          />
         </template>
         <NoResults v-else>
           Sorry, we could not find any reservations...
@@ -81,7 +81,7 @@ onMounted(async () => {
             v-for="ticket in pastTickets"
             :key="ticket.id"
             :ticket="ticket"
-          ></ReservationItem>
+          />
         </template>
         <NoResults v-else>
           Sorry, we could not find any reservations...

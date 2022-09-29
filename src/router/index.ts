@@ -57,6 +57,15 @@ const router = createRouter({
       },
     },
     {
+      path: "/work",
+      name: "DoWorkPage",
+      component: () => import("@/views/DoWork.vue"),
+      meta: {
+        requiresAuth: true,
+        requiresEmployee: true,
+      },
+    },
+    {
       path: "/booking",
       name: "BookingPage",
       component: () => import("@/views/BookingPage.vue"),
@@ -74,7 +83,7 @@ router.beforeEach((to, from, next) => {
   const userStore = useUserStore();
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (to.matched.some((record) => record.meta.requiresEmployee)) {
-      userStore.isEmployee ? next() : next({ name: "HomePage" })
+      userStore.isEmployee ? next() : next({ name: "HomePage" });
     }
     userStore.isLoggedIn ? next() : next({ name: "LoginPage" });
   }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router";
-import { useUserStore } from "@/stores/user.js";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -12,7 +12,10 @@ const handleClick = (event: Event) => {
   const deskNumber = (event.target as HTMLInputElement).value;
   if (deskNumber) {
     userStore.deskNumber = deskNumber;
-    router.push({ name: "DoWorkPage" });
+    router.push({
+      name: "DoWorkPage",
+      query: { deskNo: userStore.selectedDesk },
+    });
   }
 };
 </script>
@@ -28,7 +31,7 @@ const handleClick = (event: Event) => {
         class="terminals__desk"
         @click="handleClick"
       >
-        <p class="terminals__no">{{ desk.id }}</p>
+        {{ desk.id }}
       </button>
     </div>
   </div>
@@ -59,19 +62,17 @@ const handleClick = (event: Event) => {
     height: 170px;
     background: $cosmos;
     border: none;
+    @include roboto-mono(normal, 500);
+    font-size: 85px;
+    color: $tuna;
     transition: 0.2s ease-in;
 
     &:hover {
       background-color: $cherry-red;
-      & p {
-        color: $snow-white;
-      }
+      color: $snow-white;
     }
   }
   &__no {
-    @include roboto-mono(normal, 500);
-    font-size: 85px;
-    color: $tuna;
     transition: 0.2s ease-in;
   }
 }
