@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useUserStore } from "@/stores/user";
-import type { RouteLocationNormalized } from "vue-router";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,6 +48,14 @@ const router = createRouter({
       },
     },
     {
+      path: "/empl",
+      name: "EmployeePage",
+      component: () => import("@/views/EmployeePage.vue"),
+      meta: {
+        requiresEmployee: true,
+      },
+    },
+    {
       path: "/booking",
       name: "BookingPage",
       component: () => import("@/views/BookingPage.vue"),
@@ -65,14 +72,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore();
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!userStore.isLoggedIn) {
-      next({ name: "LoginPage" });
-    } else {
-      next();
-    }
-  } else {
-    next();
+    userStore.isLoggedIn ? next() : next({ name: "LoginPage" });
   }
+  next();
 });
 
 export default router;

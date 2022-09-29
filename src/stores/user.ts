@@ -6,9 +6,6 @@ import { removeAuthHeader, setAuthHeader } from "@/api/client";
 import type { User, LoginCredentials, RegisterCredentials } from "@/types/user";
 import type { AxiosResponse } from "axios";
 
-const TOKEN_STORAGE_KEY = "AUTH";
-const USER_STORAGE_KEY = "USER";
-
 export const userModel = {
   email: "",
   password: "",
@@ -33,6 +30,7 @@ export const useUserStore = defineStore("userStore", {
   },
   getters: {
     isLoggedIn: (state) => !!state.authToken,
+    isEmployee: (state) => state.user.role === "employee",
   },
   actions: {
     setUserData({ authToken, user }: { authToken: string; user: User }) {
@@ -57,9 +55,14 @@ export const useUserStore = defineStore("userStore", {
       try {
         const response = await login(credentials);
         this.processResponse(response);
-        router.push({ name: "HomePage" });
       } catch (err) {
         console.error(err);
+      } finally {
+        if (this.isLoggedIn) {
+          this.isEmployee
+            ? router.push({ name: "EmployeePage" })
+            : router.push({ name: "HomePage" });
+        }
       }
     },
     async register(credentials: RegisterCredentials) {
