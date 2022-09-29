@@ -52,6 +52,7 @@ const router = createRouter({
       name: "EmployeePage",
       component: () => import("@/views/EmployeePage.vue"),
       meta: {
+        requiresAuth: true,
         requiresEmployee: true,
       },
     },
@@ -72,6 +73,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore();
   if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (to.matched.some((record) => record.meta.requiresEmployee)) {
+      userStore.isEmployee ? next() : next({ name: "HomePage" })
+    }
     userStore.isLoggedIn ? next() : next({ name: "LoginPage" });
   }
   next();
