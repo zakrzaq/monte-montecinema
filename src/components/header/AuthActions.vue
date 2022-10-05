@@ -10,10 +10,10 @@ const userStore = useUserStore();
   <div class="actions">
     <div class="actions__buttons">
       <BaseButton variant="secondary" @click="userStore.logout">
-        Log out
+        {{ $t("header.actions.logout") }}
       </BaseButton>
       <BaseButton variant="account" :to="{ name: 'UserPage' }">
-        My account
+        {{ $t("header.actions.account") }}
       </BaseButton>
     </div>
     <div class="actions__hamburger">

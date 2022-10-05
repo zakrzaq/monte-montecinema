@@ -2,6 +2,8 @@
 import { ref, computed } from "vue";
 import { useBookingStore } from "@/stores/booking";
 import { postReservation } from "@/api/reservationsService";
+import { useRouter } from "vue-router";
+import { notify } from "@kyvg/vue3-notification";
 import BookingTabs from "@/components/bookings/BookingTabs.vue";
 import BookingHeader from "@/components/bookings/BookingHeader.vue";
 import SeatingGrid from "@/components/bookings/SeatingGrid.vue";
@@ -10,6 +12,7 @@ import BaseSelect from "@/components/base/BaseSelect.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
 import { ticketIds } from "@/api/ticketID";
 const bookingStore = useBookingStore();
+const router = useRouter();
 
 const selectedTab = ref("Choose seats");
 
@@ -32,7 +35,16 @@ const handleBookTickets = async () => {
     seance_id: bookingStore.selectedReservation.id,
     tickets: bookingStore.selectedTickets,
   };
-  await postReservation(selectionData);
+  try {
+    const response = await postReservation(selectionData);
+    router.push({
+      name: "ReservationSuccessPage",
+      query: { reservationId: response.id },
+    });
+  } catch (err) {
+    console.error(err);
+    notify({ type: "error", text: "Unable to book your tickets just now" });
+  }
 };
 const setSelectedTab = (val: string) => {
   selectedTab.value = val;

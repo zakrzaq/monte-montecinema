@@ -20,6 +20,7 @@ export const userModel = {
 interface RootState {
   user: User;
   authToken: string | null;
+  locale: string;
 }
 
 export const useUserStore = defineStore("userStore", {
@@ -27,6 +28,7 @@ export const useUserStore = defineStore("userStore", {
     return {
       user: { ...userModel },
       authToken: null,
+      locale: "en",
     } as RootState;
   },
   getters: {
