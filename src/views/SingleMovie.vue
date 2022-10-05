@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { useTitle } from "@vueuse/core";
 import BreadCrumb from "@/components/BreadCrumb.vue";
 import ScreeningsPage from "@/views/ScreeningsPage.vue";
 import NoResults from "@/components/NoResults.vue";
@@ -9,7 +10,9 @@ import lengthToTime from "@/helpers/lengthToTime";
 const movieStore = useMovieStore();
 const route = useRoute();
 
-const selectedId = computed((): string => route.params.id.toString());
+const selectedId = computed(() => {
+  return route.params.id ? route.params.id.toString() : "";
+});
 const selectedMovie = computed(() => {
   return movieStore.movieList.find(
     (movie) => movie.id.toString() === selectedId.value
@@ -24,6 +27,12 @@ const movieDetails = computed<string>(() => {
     );
   return "";
 });
+const title = computed(() => {
+  return selectedMovie.value
+    ? `Montecinema | ${selectedMovie.value.title}`
+    : "Montecinema";
+});
+useTitle(title);
 </script>
 
 <template>
