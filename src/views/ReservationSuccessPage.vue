@@ -2,12 +2,12 @@
 import { computed, watch, ref } from "vue";
 // import { useBookingStore } from "@/stores/booking";
 // import { useUserStore } from "@/stores/user";
-// import { useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 // import { getSingleReservation } from "@/api/reservationsService";
 // import ReservationItem from "@/components/reservations/ReservationItem.vue";
 // const bookingStore = useBookingStore();
 // const userStore = useUserStore();
-// const route = useRoute();
+const route = useRoute();
 //
 const queryReservation = computed(() => route.query.reservationId);
 const selectedReservation = ref();
