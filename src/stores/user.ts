@@ -27,15 +27,15 @@ export const useUserStore = defineStore("userStore", {
       user: { ...userModel },
       authToken: null,
       fromPath: "",
-      deskNumber: '',
+      deskNumber: "",
     } as RootState;
   },
   getters: {
     isLoggedIn: (state) => !!state.authToken,
     isEmployee: (state) => state.user.role === "employee",
     selectedDesk: (state) => {
-      return state.user.role === 'employee' ? state.deskNumber : ''
-    }
+      return state.user.role === "employee" ? state.deskNumber : "";
+    },
   },
   actions: {
     setUserData({ authToken, user }: { authToken: string; user: User }) {
