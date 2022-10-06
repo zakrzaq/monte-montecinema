@@ -3,13 +3,13 @@ import TheHeader from "@/components/TheHeader.vue";
 import { storeToRefs } from "pinia";
 import { useMovieStore } from "@/stores/movies";
 import { useSeancesStore } from "@/stores/seances";
-import { useUserStore } from "@/stores/user";
+// import { useUserStore } from "@/stores/user";
 import { onMounted, watch } from "vue";
 import { useI18n } from "vue-i18n";
 const t = useI18n();
 const movieStore = useMovieStore();
 const seancesStore = useSeancesStore();
-const userStore = useUserStore();
+// const userStore = useUserStore();
 const { selectedDate } = storeToRefs(seancesStore);
 
 const loadPreviousLocale = () => {
@@ -18,7 +18,6 @@ const loadPreviousLocale = () => {
 };
 
 onMounted(async () => {
-  userStore.restoreUserData();
   movieStore.fetchMovieList();
   seancesStore.getCurrentSeances();
   loadPreviousLocale();

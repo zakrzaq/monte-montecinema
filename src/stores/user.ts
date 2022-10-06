@@ -6,9 +6,6 @@ import { removeAuthHeader, setAuthHeader } from "@/api/client";
 import type { User, LoginCredentials, RegisterCredentials } from "@/types/user";
 import type { AxiosResponse } from "axios";
 
-const TOKEN_STORAGE_KEY = "AUTH";
-const USER_STORAGE_KEY = "USER";
-
 export const userModel = {
   email: "",
   password: "",
@@ -20,6 +17,8 @@ export const userModel = {
 interface RootState {
   user: User;
   authToken: string | null;
+  fromPath: string | symbol;
+  deskNumber: string | number;
   locale: string;
 }
 
@@ -28,39 +27,26 @@ export const useUserStore = defineStore("userStore", {
     return {
       user: { ...userModel },
       authToken: null,
+      fromPath: "",
+      deskNumber: "",
       locale: "en",
     } as RootState;
   },
   getters: {
     isLoggedIn: (state) => !!state.authToken,
+    isEmployee: (state) => !!(state.user.role === "employee"),
+    selectedDesk: (state) => {
+      return state.user.role === "employee" ? `Desk ${state.deskNumber}` : "";
+    },
   },
   actions: {
     setUserData({ authToken, user }: { authToken: string; user: User }) {
       this.authToken = authToken;
       this.user = user;
-      localStorage.setItem(TOKEN_STORAGE_KEY, authToken);
-      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
     },
     resetUserData() {
       this.authToken = null;
       this.user = { ...userModel };
-      localStorage.removeItem(TOKEN_STORAGE_KEY);
-      localStorage.removeItem(USER_STORAGE_KEY);
-    },
-    restoreUserData() {
-      try {
-        const authToken = localStorage.getItem(TOKEN_STORAGE_KEY);
-        const user: User = JSON.parse(
-          localStorage.getItem(USER_STORAGE_KEY) || ""
-        );
-        if (authToken && user) {
-          setAuthHeader(`Bearer ${authToken}`);
-          this.setUserData({ authToken, user });
-        }
-      } catch (error) {
-        console.error(error);
-        this.resetUserData();
-      }
     },
     async callLogout() {
       if (this.isLoggedIn) await logout();
@@ -76,9 +62,15 @@ export const useUserStore = defineStore("userStore", {
       try {
         const response = await login(credentials);
         this.processResponse(response);
-        router.push({ name: "HomePage" });
       } catch (err) {
         console.error(err);
+        notify({ type: "error", text: "Unable to login" });
+      } finally {
+        if (this.isLoggedIn) {
+          this.isEmployee
+            ? router.push({ name: "EmployeePage" })
+            : router.push({ name: "HomePage" });
+        }
       }
     },
     async register(credentials: RegisterCredentials) {
@@ -104,6 +96,7 @@ export const useUserStore = defineStore("userStore", {
         this.callLogout();
         this.resetUserData();
         removeAuthHeader();
+        router.push({ name: "HomePage" });
       } catch (err) {
         console.error(err);
       }

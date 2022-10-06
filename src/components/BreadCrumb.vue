@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { useUserStore } from "@/stores/user";
 import BaseButton from "./base/BaseButton.vue";
 import LeftArrow from "@/assets/icons/long-arrow-left.svg?component";
 import SeparatorIcon from "@/assets/icons/breadcrumb-arrow.svg?component";
@@ -15,6 +17,15 @@ withDefaults(defineProps<Props>(), {
   backPath: "/",
   firstTier: "",
 });
+
+const userStore = useUserStore();
+
+const backText = computed(() => {
+  return userStore.isEmployee ? "Change desk" : "Back";
+});
+const firstTierClass = computed(() => {
+  return userStore.isEmployee ? "text-red" : "";
+});
 </script>
 
 <template>
@@ -26,13 +37,14 @@ withDefaults(defineProps<Props>(), {
       :to="backPath"
     >
       <LeftArrow />
-      <span class="back-text">Back</span>
+      <span class="back-text">{{ backText }}</span>
     </BaseButton>
     <BaseButton
       variant="breadcrumb"
       modifier="noborder"
       size="slim"
       :to="firstTier"
+      :class="firstTierClass"
     >
       {{ firstTitle }}
     </BaseButton>
@@ -89,5 +101,8 @@ withDefaults(defineProps<Props>(), {
       overflow: hidden;
     }
   }
+}
+.text-red {
+  color: $cherry-red;
 }
 </style>

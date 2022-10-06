@@ -1,5 +1,5 @@
 export interface Ticket {
-  id: number;
+  id: number | string;
   price: string;
   seat: string;
   type: string;
@@ -25,6 +25,7 @@ export interface ShowTicket extends Ticket {
   movie: string;
   datetime: string;
   status: string;
+  email: string;
 }
 
 export interface TempTicket {

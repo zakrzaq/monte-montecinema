@@ -33,10 +33,15 @@ withDefaults(
   }
 
   &__content {
+    display: block;
+    max-width: 225px;
     @include roboto(normal, 400);
     font-size: 16px;
     line-height: 19px;
     color: $charade;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 </style>

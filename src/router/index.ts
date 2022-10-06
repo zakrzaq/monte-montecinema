@@ -43,6 +43,27 @@ const router = createRouter({
       path: "/user",
       name: "UserPage",
       component: () => import("@/views/UserPage.vue"),
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/employee",
+      name: "EmployeePage",
+      component: () => import("@/views/EmployeePage.vue"),
+      meta: {
+        requiresAuth: true,
+        requiresEmployee: true,
+      },
+    },
+    {
+      path: "/work",
+      name: "DoWorkPage",
+      component: () => import("@/views/DoWork.vue"),
+      meta: {
+        requiresAuth: true,
+        requiresEmployee: true,
+      },
     },
     {
       path: "/booking",
@@ -63,10 +84,15 @@ const router = createRouter({
   ],
 });
 
-// router.beforeEach((to, from) => {
-//   const userStore = useUserStore();
-
-//   if (!userStore.isLoggedIn && to.name === "LoginPage") return "/login";
-// });
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore();
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (to.matched.some((record) => record.meta.requiresEmployee)) {
+      userStore.isEmployee ? next() : next({ name: "HomePage" });
+    }
+    userStore.isLoggedIn ? next() : next({ name: "LoginPage" });
+  }
+  next();
+});
 
 export default router;

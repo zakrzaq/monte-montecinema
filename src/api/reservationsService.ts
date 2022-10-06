@@ -6,15 +6,12 @@ const userStore = useUserStore();
 export const getSingleReservation = async (id: number) => {
   const response = await defaultClient.get<Reservation>("/reservations", {
     params: { id },
+    headers: { Authorization: `Bearer ${userStore.authToken}` },
   });
   return response.data;
 };
 
-export const getReservations = async (
-  email: string,
-  page = 1,
-  per_page = 25
-) => {
+export const getReservations = async (email = "", page = 1, per_page = 25) => {
   const response = await defaultClient.get<Reservation[]>("/reservations", {
     params: {
       user_email: email,

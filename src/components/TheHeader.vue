@@ -23,19 +23,25 @@ const showHeaderForLoggedUser = computed(() => {
 const showHeaderForNotLoggedUser = computed(() => {
   return !loginView.value && userStore.isLoggedIn;
 });
+const isEmployee = computed(() => {
+  return userStore.isEmployee;
+});
+const brandRoute = computed(() => {
+  return isEmployee.value ? { name: "EmployeePage" } : { name: "HomePage" };
+});
 </script>
 
 <template>
   <header class="header">
-    <RouterLink :to="{ name: 'HomePage' }" class="logo">
+    <RouterLink :to="brandRoute" class="logo">
       <LogoImage />
     </RouterLink>
     <template v-if="showHeaderForLoggedUser">
-      <HeaderLinks />
+      <HeaderLinks v-if="!isEmployee" />
       <HeaderActions />
     </template>
     <template v-else-if="showHeaderForNotLoggedUser">
-      <HeaderLinks />
+      <HeaderLinks v-if="!isEmployee" />
       <AuthActions />
     </template>
     <HeaderBanner v-if="loginView" />
