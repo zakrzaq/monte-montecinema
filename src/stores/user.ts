@@ -96,6 +96,7 @@ export const useUserStore = defineStore("userStore", {
         this.callLogout();
         this.resetUserData();
         removeAuthHeader();
+        router.push({ name: "HomePage" });
       } catch (err) {
         console.error(err);
       }
