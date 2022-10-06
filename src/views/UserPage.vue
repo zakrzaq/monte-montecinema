@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useTitle } from "@vueuse/core";
 
 import UserTabs from "@/components/user/UserTabs.vue";
 import UserDetails from "@/components/user/UserDetails.vue";
 import UserReservations from "@/components/user/UserReservations.vue";
 
+useTitle("Montecinema | Account");
 const selectedTab = ref("Personal details");
 </script>
 

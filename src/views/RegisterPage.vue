@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, type ComputedRef } from "vue";
 import { useUserStore, userModel } from "@/stores/user";
+import { useTitle } from "@vueuse/core";
 import { validateEmail, validateDateOfBirth } from "@/helpers/validate";
 import BaseInput from "@/components/base/BaseInput.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
@@ -9,6 +10,7 @@ import BaseCard from "../components/base/BaseCard.vue";
 import type { RegisterCredentials } from "@/types/user";
 import router from "@/router";
 const userStore = useUserStore();
+useTitle("Montecinema | Register");
 
 const steps = ref(1);
 const title = computed(() => {

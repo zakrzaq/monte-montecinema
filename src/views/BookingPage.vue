@@ -4,6 +4,7 @@ import { useBookingStore } from "@/stores/booking";
 import { postReservation } from "@/api/reservationsService";
 import { useRouter } from "vue-router";
 import { notify } from "@kyvg/vue3-notification";
+import { useTitle } from "@vueuse/core";
 import BookingTabs from "@/components/bookings/BookingTabs.vue";
 import BookingHeader from "@/components/bookings/BookingHeader.vue";
 import SeatingGrid from "@/components/bookings/SeatingGrid.vue";
@@ -14,6 +15,7 @@ import { ticketIds } from "@/api/ticketID";
 const bookingStore = useBookingStore();
 const router = useRouter();
 
+useTitle("Montecinema | Book your tickets");
 const selectedTab = ref("Choose seats");
 
 const selectOptions = computed(() => {

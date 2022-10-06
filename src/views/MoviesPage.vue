@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useTitle } from "@vueuse/core";
 import MovieCard from "@/components/movies/MovieCard.vue";
 import BreadCrumbs from "@/components/BreadCrumb.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
@@ -10,6 +11,8 @@ import { useUiStore } from "@/stores/ui";
 import { computed, ref } from "vue";
 const moviesStore = useMovieStore();
 const uiStore = useUiStore();
+
+useTitle("Montecinema | Movies");
 
 const query = ref("");
 const category = ref("");

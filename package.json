@@ -13,6 +13,7 @@
   "dependencies": {
     "@kyvg/vue3-notification": "^2.4.1",
     "@vuepic/vue-datepicker": "^3.4.6",
+    "@vueuse/core": "^9.3.0",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "normalize.css": "^8.0.1",
