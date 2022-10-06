@@ -49,7 +49,6 @@ onMounted(async () => {
       v-for="ticket in filteredTickets"
       :key="ticket.id"
       :ticket="ticket"
-      :employee="true"
     />
   </div>
   <LoadingSpinner v-else-if="loading" />

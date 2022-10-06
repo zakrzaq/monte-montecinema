@@ -32,7 +32,7 @@ export const useUserStore = defineStore("userStore", {
   },
   getters: {
     isLoggedIn: (state) => !!state.authToken,
-    isEmployee: (state) => state.user.role === "employee",
+    isEmployee: (state) => !!(state.user.role === "employee"),
     selectedDesk: (state) => {
       return state.user.role === "employee" ? state.deskNumber : "";
     },

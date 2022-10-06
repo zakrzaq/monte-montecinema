@@ -1,24 +1,23 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { useUserStore } from "@/stores/user";
 import reservationDatetime from "@/helpers/reservationDatetime";
 import type { ShowTicket } from "@/types/reservations";
 import BaseCell from "@/components/base/BaseCell.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseTag from "@/components/base/BaseTag.vue";
+import BaseSpacer from "@/components/base/BaseSpacer.vue";
 
-const props = withDefaults(
-  defineProps<{
-    ticket?: ShowTicket;
-    employee: boolean;
-  }>(),
-  {
-    employee: false,
-  }
-);
+
+const props = defineProps<{
+  ticket?: ShowTicket;
+}>();
+const userStore = useUserStore();
 
 const reservationLayout = computed(() => {
-  return props.employee ? "reservation-item--employee" : "";
+  return isEmployee.value ? "reservation-item--employee" : "";
 });
+const isEmployee = computed(() => userStore.isEmployee);
 </script>
 
 <template>
@@ -29,7 +28,7 @@ const reservationLayout = computed(() => {
     <BaseCell label="Ticket Type">
       {{ ticket.type }} - ${{ ticket.price.slice(0, -2) }}
     </BaseCell>
-    <BaseCell label="Email" v-if="employee">{{ ticket.email }}</BaseCell>
+    <BaseCell label="Email" v-if="isEmployee">{{ ticket.email }}</BaseCell>
     <BaseTag :value="ticket.status">{{ ticket.status }}</BaseTag>
     <BaseButton
       variant="breadcrumb"
@@ -39,7 +38,11 @@ const reservationLayout = computed(() => {
     >
       Remove
     </BaseButton>
-    <BaseButton variant="primary" modifier="outlined"> Confirm </BaseButton>
+    <BaseSpacer v-else />
+    <BaseButton v-if="isEmployee" variant="primary" modifier="outlined">
+      Confirm
+    </BaseButton>
+    <BaseSpacer v-else />
   </div>
 </template>
 
