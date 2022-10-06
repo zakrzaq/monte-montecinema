@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useTitle } from "@vueuse/core";
 import { useSeancesStore } from "@/stores/seances";
 import { useMovieStore } from "@/stores/movies";
 import { useUiStore } from "@/stores/ui";
@@ -37,6 +38,10 @@ const currentMoviesbyTitle = computed(() => {
     : currentMoviesWithSeances.value.filter(
         (movie) => movie.title === selectedTitle.value
       );
+});
+onMounted(() => {
+  if (route.matched.some((el) => el.path === "/screenings"))
+    useTitle("Montecinema | Screenings");
 });
 </script>
 

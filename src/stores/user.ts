@@ -19,6 +19,7 @@ interface RootState {
   authToken: string | null;
   fromPath: string | symbol;
   deskNumber: string;
+  locale: string;
 }
 
 export const useUserStore = defineStore("userStore", {
@@ -28,6 +29,7 @@ export const useUserStore = defineStore("userStore", {
       authToken: null,
       fromPath: "",
       deskNumber: "",
+      locale: "en",
     } as RootState;
   },
   getters: {

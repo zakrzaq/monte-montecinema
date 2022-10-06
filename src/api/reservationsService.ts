@@ -23,7 +23,12 @@ export const getReservations = async (email = "", page = 1, per_page = 25) => {
 };
 
 export const postReservation = async (reservation: OnlineReservation) => {
-  await defaultClient.post("/reservations/online", reservation, {
-    headers: { Authorization: `Bearer ${userStore.authToken}` },
-  });
+  const response = await defaultClient.post<Reservation>(
+    "/reservations/online",
+    reservation,
+    {
+      headers: { Authorization: `Bearer ${userStore.authToken}` },
+    }
+  );
+  return response.data;
 };

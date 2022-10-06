@@ -1,16 +1,16 @@
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import BaseButton from "@/components/base/BaseButton.vue";
 </script>
 
 <template>
   <div class="hero">
     <div class="hero__content">
-      <h1 class="heading-1">Welcome to the best cinema in Monterail</h1>
-      <p class="paragraph">
-        Best movies, best experiences, best people. And all that doesn’t exist.
-        Yikes.
-      </p>
-      <BaseButton to="#" size="large">Book a ticket</BaseButton>
+      <h1 class="heading-1">{{ $t("heroSection.title") }}</h1>
+      <p class="paragraph">{{ $t("heroSection.long") }}</p>
+      <BaseButton to="#" size="large">{{
+        $t("heroSection.button")
+      }}</BaseButton>
     </div>
     <div class="hero__image">
       <img

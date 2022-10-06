@@ -6,9 +6,11 @@ import { comingSoon } from "@/data/coming-soon";
 <template>
   <div class="comming">
     <div class="comming__header">
-      <h2 class="heading-2">COMMING SOON</h2>
-      <h2 class="heading-2--red">
-        <RouterLink :to="{ name: 'MoviesPage' }"> SEE ALL </RouterLink>
+      <h2 class="heading-2">{{ $t("commingSoon.commingSoon") }}</h2>
+      <h2 class="heading-2 heading-2--red">
+        <RouterLink :to="{ name: 'MoviesPage' }">{{
+          $t("commingSoon.seeAll")
+        }}</RouterLink>
       </h2>
     </div>
     <div class="comming__movies">
@@ -33,6 +35,7 @@ import { comingSoon } from "@/data/coming-soon";
 
     .heading-2 {
       color: $tuna;
+      text-transform: uppercase;
     }
 
     .heading-2--red {

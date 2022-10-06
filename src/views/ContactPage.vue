@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { useTitle } from "@vueuse/core";
 import ContactCard from "@/components/contact/ContactCard.vue";
 import BreadCrumb from "@/components/BreadCrumb.vue";
+
+useTitle("Montecinema | Contact");
 </script>
 
 <template>
