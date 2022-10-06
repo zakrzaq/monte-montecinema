@@ -48,13 +48,13 @@ const isEmployee = computed(() => userStore.isEmployee);
 <style scoped lang="scss">
 .reservation-item {
   display: grid;
-  grid-template-columns: 2fr 0.5fr 2fr 0.75fr 1fr 1fr;
+  grid-template-columns: 2fr 0.5fr 2fr 0.75fr 100px 100px;
   gap: 10px;
   width: 100%;
   align-items: center;
 
   &--employee {
-    grid-template-columns: 1.75fr 0.5fr 2fr 0.75fr 1fr 0.7fr 0.7fr 0.7fr;
+    grid-template-columns: 1.75fr 0.5fr 2fr 0.75fr 1fr 100px 120px 120px;
   }
 
   :deep(.button) {

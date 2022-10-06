@@ -3,6 +3,7 @@ import { ref, computed, onMounted } from "vue";
 import { getReservations } from "@/api/reservationsService";
 import createTicketList from "@/helpers/createTicketList";
 import { useUserStore } from "@/stores/user";
+import { useTitle } from "@vueuse/core";
 import BreadCrumb from "@/components/BreadCrumb.vue";
 import NoResults from "@/components/NoResults.vue";
 import ReservationItem from "@/components/reservations/ReservationItem.vue";
@@ -10,6 +11,7 @@ import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import type { ShowTicket } from "@/types/reservations";
 
 const userStore = useUserStore();
+useTitle("Montecinema | Reservations overview");
 
 const ticketList = ref();
 const loading = ref(false);
@@ -21,7 +23,7 @@ const deskNumberBreadcrumb = computed(() => {
 const filteredTickets = computed(() => {
   return query.value
     ? ticketList.value.filter((item: ShowTicket) => {
-        item.email.toLowerCase().includes(query.value);
+        return item.email.toLowerCase().includes(query.value);
       })
     : ticketList.value;
 });

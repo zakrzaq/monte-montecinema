@@ -1,16 +1,27 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { useUserStore } from "@/stores/user";
+import { useI18n } from "vue-i18n";
 import BaseButton from "@/components/base/BaseButton.vue";
 import Hamburger from "@/assets/icons/hamburger.svg?component";
+import LocalePicker from "@/components/header/LocalePicker.vue";
 
 const userStore = useUserStore();
+const { t } = useI18n();
+
+const loginButtonLabel = computed(() => {
+  return userStore.isLoggedIn
+    ? t("header.actions.logout")
+    : t("header.actions.login");
+});
 </script>
 
 <template>
   <div class="actions">
     <div class="actions__buttons">
+      <LocalePicker />
       <BaseButton variant="secondary" @click="userStore.logout">
-        {{ $t("header.actions.logout") }}
+        {{ loginButtonLabel }}
       </BaseButton>
       <BaseButton variant="account" :to="{ name: 'UserPage' }">
         {{ $t("header.actions.account") }}
