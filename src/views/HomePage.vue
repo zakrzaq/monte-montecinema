@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useUiStore } from "@/stores/ui";
+import { useTitle } from "@vueuse/core";
 import HeroSection from "@/components/home/HeroSection.vue";
 import ComingSoon from "@/components/home/ComingSoon.vue";
 import AddressCard from "@/components/contact/AddressCard.vue";
 import ScreeningPage from "@/views/ScreeningsPage.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 
+useTitle("Montecinema | Home");
 const uiStore = useUiStore();
 </script>
 

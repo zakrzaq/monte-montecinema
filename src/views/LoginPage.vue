@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useUserStore } from "@/stores/user";
+import { useTitle } from "@vueuse/core";
 import validateEmail from "@/helpers/validateEmail";
 import BaseInput from "@/components/base/BaseInput.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
@@ -8,6 +9,7 @@ import BaseCard from "../components/base/BaseCard.vue";
 import touchAll from "@/helpers/touchAll";
 import type { LoginCredentials } from "@/types/user";
 const userStore = useUserStore();
+useTitle("Montecinema | Log in");
 
 const loginFormData = ref<LoginCredentials>({
   email: "",
