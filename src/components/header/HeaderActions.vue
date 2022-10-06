@@ -2,14 +2,19 @@
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
+import { useI18n } from "vue-i18n";
 import BaseButton from "@/components/base/BaseButton.vue";
 import Hamburger from "@/assets/icons/hamburger.svg?component";
+import LocalePicker from "@/components/header/LocalePicker.vue";
 
 const userStore = useUserStore();
 const router = useRouter();
+const { t } = useI18n();
 
 const loginButtonLabel = computed(() => {
-  return userStore.isLoggedIn ? "Logout" : "Login";
+  return userStore.isLoggedIn
+    ? t("header.actions.logout")
+    : t("header.actions.login");
 });
 
 const handleLogin = () => {
@@ -25,8 +30,9 @@ const handleLogin = () => {
 <template>
   <div class="actions">
     <div class="actions__buttons">
+      <LocalePicker />
       <BaseButton variant="secondary" :to="{ name: 'RegisterPage' }">
-        Register
+        {{ $t("header.actions.register") }}
       </BaseButton>
       <BaseButton @click="handleLogin">
         {{ loginButtonLabel }}

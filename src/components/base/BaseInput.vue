@@ -116,6 +116,7 @@ const inputClasses = computed(() => {
   }
   &__label {
     position: relative;
+    display: block;
     color: $bitter-sweet;
     text-transform: uppercase;
     font-weight: bold;

@@ -3,13 +3,19 @@
 <template>
   <ul class="navbar">
     <li class="navbar__item">
-      <RouterLink :to="{ name: 'MoviesPage' }">Movies</RouterLink>
+      <RouterLink :to="{ name: 'MoviesPage' }">{{
+        $t("header.links.one")
+      }}</RouterLink>
     </li>
     <li class="navbar__item">
-      <RouterLink :to="{ name: 'ScreeningsPage' }">Screenings</RouterLink>
+      <RouterLink :to="{ name: 'ScreeningsPage' }">{{
+        $t("header.links.two")
+      }}</RouterLink>
     </li>
     <li class="navbar__item">
-      <RouterLink :to="{ name: 'ContactPage' }">Contact us</RouterLink>
+      <RouterLink :to="{ name: 'ContactPage' }">{{
+        $t("header.links.three")
+      }}</RouterLink>
     </li>
   </ul>
 </template>

@@ -50,6 +50,11 @@ const router = createRouter({
       component: () => import("@/views/BookingPage.vue"),
     },
     {
+      path: "/success",
+      name: "ReservationSuccessPage",
+      component: () => import("@/views/ReservationSuccessPage.vue"),
+    },
+    {
       path: "/404",
       name: "404",
       component: () => import("@/views/NotFoundPage.vue"),
