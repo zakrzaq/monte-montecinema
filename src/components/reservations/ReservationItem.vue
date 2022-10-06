@@ -8,7 +8,6 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import BaseTag from "@/components/base/BaseTag.vue";
 import BaseSpacer from "@/components/base/BaseSpacer.vue";
 
-
 const props = defineProps<{
   ticket?: ShowTicket;
 }>();
@@ -50,6 +49,7 @@ const isEmployee = computed(() => userStore.isEmployee);
 .reservation-item {
   display: grid;
   grid-template-columns: 2fr 0.5fr 2fr 0.75fr 1fr 1fr;
+  gap: 10px;
   width: 100%;
   align-items: center;
 
