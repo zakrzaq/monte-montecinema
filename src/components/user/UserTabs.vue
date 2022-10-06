@@ -1,13 +1,18 @@
 <script setup lang="ts">
+import { useUserStore } from "@/stores/user";
 import { computed, ref } from "vue";
 
 const emit = defineEmits<{
   (e: "selected", id: string): void;
 }>();
 
-const tabs = ["Personal details", "Reservations"];
+const userStore = useUserStore();
+const tabsList = ["Personal details", "Reservations"];
 const selectedIndex = ref(0);
-const selectedTab = computed(() => tabs[selectedIndex.value]);
+const selectedTab = computed(() => tabsList[selectedIndex.value]);
+const tabs = computed(() => {
+  return userStore.isEmployee ? ["Personal details"] : tabsList;
+});
 
 const handleClick = (index: number) => {
   selectedIndex.value = index;
