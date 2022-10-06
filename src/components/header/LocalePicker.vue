@@ -13,7 +13,7 @@ const locales = computed(() => {
 });
 
 const handleLocaleChange = () => {
-  localStorage.setItem("LOCALE", t.locale.value);
+  localStorage.setItem(import.meta.env.VITE_LSKEY_LOCALE, t.locale.value);
 };
 </script>
 
