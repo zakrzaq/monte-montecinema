@@ -23,6 +23,9 @@ const userStore = useUserStore();
 const backText = computed(() => {
   return userStore.isEmployee ? "Change desk" : "Back";
 });
+const firstTierClass = computed(() => {
+  return userStore.isEmployee ? "text-red" : "";
+});
 </script>
 
 <template>
@@ -41,6 +44,7 @@ const backText = computed(() => {
       modifier="noborder"
       size="slim"
       :to="firstTier"
+      :class="firstTierClass"
     >
       {{ firstTitle }}
     </BaseButton>
@@ -97,5 +101,8 @@ const backText = computed(() => {
       overflow: hidden;
     }
   }
+}
+.text-red {
+  color: $cherry-red;
 }
 </style>

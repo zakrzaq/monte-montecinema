@@ -36,7 +36,7 @@ export const useUserStore = defineStore("userStore", {
     isLoggedIn: (state) => !!state.authToken,
     isEmployee: (state) => !!(state.user.role === "employee"),
     selectedDesk: (state) => {
-      return state.user.role === "employee" ? state.deskNumber : "";
+      return state.user.role === "employee" ? `Desk ${state.deskNumber}` : "";
     },
   },
   actions: {

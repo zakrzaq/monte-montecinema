@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useUserStore } from "@/stores/user";
 import { useTitle } from "@vueuse/core";
 import { useSeancesStore } from "@/stores/seances";
 import { useMovieStore } from "@/stores/movies";
@@ -15,6 +16,7 @@ import type { MovieWithSeances } from "@/types/seance";
 const seancesStore = useSeancesStore();
 const movieStore = useMovieStore();
 const uiStore = useUiStore();
+const userStore = useUserStore();
 const route = useRoute();
 
 const props = defineProps<{
@@ -39,6 +41,10 @@ const currentMoviesbyTitle = computed(() => {
         (movie) => movie.title === selectedTitle.value
       );
 });
+const showEmployeeBreadcrumbs = computed(() => {
+  return route.path === "/screenings" && userStore.isEmployee ? true : false;
+});
+
 onMounted(() => {
   if (route.matched.some((el) => el.path === "/screenings"))
     useTitle("Montecinema | Screenings");
@@ -47,7 +53,12 @@ onMounted(() => {
 
 <template>
   <div class="screenings-page">
-    <BreadCrumb first-title="Screenings" v-if="route.path === '/screenings'" />
+    <BreadCrumb
+      v-if="showEmployeeBreadcrumbs"
+      :first-title="userStore.selectedDesk"
+      second-title="Create a reservation"
+    />
+    <BreadCrumb v-else first-title="Screenings" />
     <h1 class="screenings-page__title heading-1">
       Screenings:<br /><span class="gray">{{
         prettyDate(seancesStore.selectedDate)

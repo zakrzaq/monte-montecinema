@@ -71,7 +71,8 @@ const handleEmit = (event: Event) => {
     text-transform: uppercase;
     font-size: 14px;
     line-height: 18px;
-    margin: 12px 0;
+    margin-top: 12px;
+    margin-bottom: 5px;
   }
   &__select {
     display: block;

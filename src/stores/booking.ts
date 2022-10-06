@@ -6,6 +6,7 @@ interface RootState {
   selectedSeance: Seance;
   selectedReservation: CompleteSeance;
   selectedTickets: TempTicket[] | [];
+  madeReservationId: number;
 }
 
 export const useBookingStore = defineStore({
@@ -15,12 +16,14 @@ export const useBookingStore = defineStore({
       selectedSeance: {},
       selectedReservation: {},
       selectedTickets: [],
+      madeReservationId: 0,
     } as RootState;
   },
   getters: {},
   actions: {
     clearSelectedTickets() {
       this.selectedTickets = [];
+      this.madeReservationId = 0;
     },
   },
   persist: {

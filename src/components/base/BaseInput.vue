@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import EyeIcon from "@/assets/icons/eye.svg?component";
+import SearchIcon from "@/assets/icons/search.svg?component";
 
 const props = withDefaults(
   defineProps<{
@@ -65,6 +66,9 @@ const inputClasses = computed(() => {
         @click="toggleViewPassword"
       >
         <EyeIcon />
+      </button>
+      <button v-if="type === 'search'" type="button" class="base-input__button">
+        <SearchIcon />
       </button>
     </label>
     <div class="base-input__message"><slot name="message"></slot></div>

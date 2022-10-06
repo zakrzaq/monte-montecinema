@@ -6,6 +6,7 @@ const userStore = useUserStore();
 export const getSingleReservation = async (id: number) => {
   const response = await defaultClient.get<Reservation>("/reservations", {
     params: { id },
+    headers: { Authorization: `Bearer ${userStore.authToken}` },
   });
   return response.data;
 };
