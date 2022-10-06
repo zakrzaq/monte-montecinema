@@ -43,7 +43,8 @@ const handleBookTickets = async () => {
   };
   try {
     const response = await postReservation(selectionData);
-    bookingStore.madeReservationId = response.id 
+    bookingStore.madeReservationId = response.id;
+    bookingStore.customerEmail = customerEmail.value;
     router.push({ name: "ReservationSuccessPage" });
   } catch (err) {
     console.error(err);
@@ -125,7 +126,7 @@ const setSelectedTab = (val: string) => {
           size="large"
           variant="secondary"
           modifier="outlined"
-          :disabled="!termsConditions"
+          :disabled="userStore.isEmployee && !termsConditions"
           @click="handleBookTickets"
         >
           Book tickets

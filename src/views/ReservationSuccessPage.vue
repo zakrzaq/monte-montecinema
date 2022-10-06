@@ -17,6 +17,9 @@ useTitle("Moneterail | Your reservation");
 const selectedMovie = computed(() => {
   return movieStore.movieById(bookingStore.selectedReservation.movie) || {title: ''}
 })
+const reservationEmail = computed(() => {
+  return bookingStore.customerEmail ? bookingStore.customerEmail : userStore.user.email
+})
 const bookedTickets = computed(() => {
   return bookingStore.selectedTickets.map((ticket) => {
     return {
@@ -25,7 +28,7 @@ const bookedTickets = computed(() => {
       status: 'Confirmed',
       datetime: bookingStore.selectedReservation.datetime,
       movie: selectedMovie.value.title,
-      email: 'sample@email.com',
+      email: reservationEmail.value,
       price: getTicketById(ticket.ticket_type_id)?.price || '',
       type: getTicketById(ticket.ticket_type_id)?.type || '',
       }
