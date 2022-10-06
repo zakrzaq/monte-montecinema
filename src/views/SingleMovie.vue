@@ -11,7 +11,7 @@ const movieStore = useMovieStore();
 const route = useRoute();
 
 const selectedId = computed(() => {
-  return route.params.id ? route.params.id.toString() : "";
+  return route.params.id.toString() || "";
 });
 const selectedMovie = computed(() => {
   return movieStore.movieList.find(
