@@ -48,7 +48,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/empl",
+      path: "/employee",
       name: "EmployeePage",
       component: () => import("@/views/EmployeePage.vue"),
       meta: {

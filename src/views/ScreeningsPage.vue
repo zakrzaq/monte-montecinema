@@ -42,7 +42,7 @@ const currentMoviesbyTitle = computed(() => {
       );
 });
 const showEmployeeBreadcrumbs = computed(() => {
-  return route.path === "/screenings" && userStore.isEmployee ? true : false;
+  return route.path === "/screenings" && userStore.isEmployee;
 });
 
 onMounted(() => {

@@ -18,7 +18,7 @@ interface RootState {
   user: User;
   authToken: string | null;
   fromPath: string | symbol;
-  deskNumber: string;
+  deskNumber: string | number;
   locale: string;
 }
 

@@ -10,13 +10,12 @@ useTitle("Montecinema | Employee Desk");
 
 const desks = ref([{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]);
 
-const handleClick = (event: Event) => {
-  const deskNumber = (event.target as HTMLInputElement).value;
+const handleClick = (desk: number) => {
+  const deskNumber = desk;
   if (deskNumber) {
     userStore.deskNumber = deskNumber;
     router.push({
       name: "DoWorkPage",
-      query: { deskNo: userStore.selectedDesk },
     });
   }
 };
@@ -31,7 +30,7 @@ const handleClick = (event: Event) => {
         :key="desk.id"
         :value="desk.id"
         class="terminals__desk"
-        @click="handleClick"
+        @click="handleClick(desk.id)"
       >
         {{ desk.id }}
       </button>
