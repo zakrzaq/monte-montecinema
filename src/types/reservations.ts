@@ -1,5 +1,5 @@
 export interface Ticket {
-  id: number;
+  id: number | string;
   price: string;
   seat: string;
   type: string;

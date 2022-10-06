@@ -38,7 +38,12 @@ const isEmployee = computed(() => userStore.isEmployee);
       Remove
     </BaseButton>
     <BaseSpacer v-else />
-    <BaseButton v-if="isEmployee" variant="primary" modifier="outlined">
+    <BaseButton
+      v-if="isEmployee"
+      variant="primary"
+      modifier="outlined"
+      size="medium"
+    >
       Confirm
     </BaseButton>
     <BaseSpacer v-else />
